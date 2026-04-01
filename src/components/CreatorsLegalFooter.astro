@@ -1,0 +1,75 @@
+---
+import { MAIN_SLOWORK_ORIGIN } from '../constants/site';
+
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+const currentYear = new Date().getFullYear();
+
+const translations = {
+  es: {
+    rights: 'Todos los derechos reservados.',
+    privacy: 'Política de Privacidad',
+    contact: 'Contacto',
+    cookies: 'Política de Cookies',
+    legal: 'Aviso Legal',
+    terms: 'Términos y Condiciones',
+  },
+  en: {
+    rights: 'All rights reserved.',
+    privacy: 'Privacy Policy',
+    contact: 'Contact',
+    cookies: 'Cookies Policy',
+    legal: 'Legal Notice',
+    terms: 'Terms & Conditions',
+  },
+} as const;
+
+const t = translations[lang];
+
+const langPath = (path: string) => `${MAIN_SLOWORK_ORIGIN}/${lang}${path}`;
+const contactHref = `${MAIN_SLOWORK_ORIGIN}/${lang}/#contact`;
+---
+
+<footer class="mt-auto w-full bg-primary py-8 font-sans text-white/90">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="flex flex-col items-center justify-center text-center">
+      <div class="text-xs leading-loose sm:text-sm md:text-base">
+        <span>© {currentYear} Slowork. {t.rights}</span>
+
+        <span class="mx-2 hidden text-secondary/90 sm:inline">|</span>
+
+        <div class="flex flex-wrap justify-center gap-1 sm:inline-block">
+          <a
+            href={langPath('/privacy-policy/')}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-1 py-2 touch-manipulation transition-colors hover:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            >{t.privacy}</a>
+          <span class="mx-1 hidden sm:inline">|</span>
+
+          <a
+            href={contactHref}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-1 py-2 touch-manipulation transition-colors hover:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            >{t.contact}</a>
+
+          <span class="mx-1 hidden sm:inline">|</span>
+          <a
+            href={langPath('/cookies-policy/')}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-1 py-2 touch-manipulation transition-colors hover:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            >{t.cookies}</a>
+          <span class="mx-1 hidden sm:inline">|</span>
+          <a
+            href={langPath('/legal-notice/')}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-1 py-2 touch-manipulation transition-colors hover:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            >{t.legal}</a>
+          <span class="mx-1 hidden sm:inline">|</span>
+          <a
+            href={langPath('/terms-and-conditions/')}
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-1 py-2 touch-manipulation transition-colors hover:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            >{t.terms}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

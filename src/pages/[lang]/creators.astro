@@ -1,0 +1,121 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
+import VideoFacade from '../../components/VideoFacade.astro';
+import { MAIN_SLOWORK_ORIGIN, manifestoYoutubeId } from '../../constants/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('creators');
+  return items.map((entry) => ({
+    params: { lang: entry.data.locale },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'creators'>;
+}
+
+const { entry } = Astro.props;
+const lang = Astro.params.lang as 'en' | 'es';
+
+const { title, subheadline } = entry.data;
+
+const ui = {
+  en: {
+    cta: 'Join the creators program',
+    pageTitle: `${title} | Slowork`,
+    videoAlt: 'Manifiesto Slowork — video preview',
+    playLabel: 'Play video: Slowork Manifesto',
+    iframeTitle: 'Slowork Manifesto',
+  },
+  es: {
+    cta: 'Únete al programa de creadores',
+    pageTitle: `${title} | Slowork`,
+    videoAlt: 'Manifiesto Slowork — vista previa del vídeo',
+    playLabel: 'Reproducir vídeo: Manifiesto Slowork',
+    iframeTitle: 'Manifiesto Slowork',
+  },
+} as const;
+
+const t = ui[lang];
+
+const path = `/${lang}/creators/`;
+const baseForUrl = Astro.site ?? Astro.url.origin;
+const canonicalURL = new URL(path, baseForUrl).href;
+const esCreatorsURL = new URL('/es/creators/', baseForUrl).href;
+const enCreatorsURL = new URL('/en/creators/', baseForUrl).href;
+
+const alternates = [
+  { hreflang: 'es', href: esCreatorsURL },
+  { hreflang: 'en', href: enCreatorsURL },
+  { hreflang: 'x-default', href: esCreatorsURL },
+] as const;
+
+const ctaHref = `${MAIN_SLOWORK_ORIGIN}/${lang}/#contact`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: title,
+  description: subheadline,
+  url: canonicalURL,
+  provider: {
+    '@type': 'Organization',
+    name: 'Slowork',
+    url: MAIN_SLOWORK_ORIGIN,
+  },
+  areaServed: {
+    '@type': 'Place',
+    name: 'Worldwide',
+  },
+  availableLanguage: ['en', 'es'],
+  serviceType: 'Content creator program',
+};
+---
+
+<BaseLayout title={t.pageTitle} lang={lang}>
+  <Fragment slot="head">
+    <meta name="description" content={subheadline} />
+    <link rel="canonical" href={canonicalURL} />
+    {alternates.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="flex min-h-dvh flex-col bg-base-100 text-base-content">
+    <main
+      class="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-10 px-6 py-12 md:gap-12 md:py-16"
+    >
+      <header class="flex w-full flex-col items-center gap-6 text-center">
+        <h1 class="max-w-3xl font-bold text-primary text-balance">
+          {title}
+        </h1>
+        <p class="max-w-2xl text-lg text-base-content/85 text-balance md:text-xl">
+          {subheadline}
+        </p>
+        <a
+          href={ctaHref}
+          class="btn btn-secondary min-h-12 px-8 text-base font-semibold shadow-md transition-transform duration-200 hover:scale-105 focus-visible:scale-105 active:scale-95"
+        >
+          {t.cta}
+        </a>
+      </header>
+
+      <section class="w-full" aria-label={t.iframeTitle}>
+        <VideoFacade
+          youtubeId={manifestoYoutubeId}
+          alt={t.videoAlt}
+          iframeTitle={t.iframeTitle}
+          playLabel={t.playLabel}
+        />
+      </section>
+    </main>
+
+    <CreatorsLegalFooter lang={lang} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,85 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+import defaultPoster from '../assets/slowork-manifesto-video-poster.png';
+
+interface Props {
+  /** ID de YouTube (solo el valor de `v=` en youtube.com/watch?v=…), vídeo «Manifiesto Slowork». */
+  youtubeId: string;
+  /** Sustituye el poster por uno de alta resolución cuando lo tengas en `src/assets`. */
+  poster?: ImageMetadata;
+  alt?: string;
+  iframeTitle?: string;
+  playLabel?: string;
+}
+
+const {
+  youtubeId,
+  poster = defaultPoster,
+  alt = 'Vídeo: Manifiesto Slowork — previsualización',
+  iframeTitle = 'Manifiesto Slowork',
+  playLabel = 'Reproducir vídeo: Manifiesto Slowork',
+} = Astro.props;
+
+const facadeId = `vf-${crypto.randomUUID()}`;
+const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`;
+---
+
+<div
+  id={facadeId}
+  class="video-facade relative aspect-video w-full max-w-4xl overflow-hidden rounded-box bg-base-300 shadow-lg"
+>
+  <div class="video-facade__embed absolute inset-0 z-0" hidden></div>
+  <button
+    type="button"
+    class="video-facade__trigger group absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-left outline-none ring-primary transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
+    aria-label={playLabel}
+  >
+    <Image
+      src={poster}
+      alt={alt}
+      class="pointer-events-none h-full w-full object-cover"
+      widths={[640, 960, 1280]}
+      sizes="(max-width: 768px) 100vw, 896px"
+      loading="lazy"
+      decoding="async"
+      fetchpriority="low"
+    />
+    <span
+      class="pointer-events-none absolute flex h-16 w-16 items-center justify-center rounded-full bg-secondary/95 text-secondary-content shadow-md transition group-hover:scale-105 group-focus-visible:scale-105"
+      aria-hidden="true"
+    >
+      <svg class="ml-1 h-8 w-8" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M8 5v14l11-7L8 5z"></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<script define:vars={{ facadeId, embedSrc, iframeTitle }}>
+  (() => {
+    const root = document.getElementById(facadeId);
+    if (!root) return;
+    const trigger = root.querySelector('.video-facade__trigger');
+    const host = root.querySelector('.video-facade__embed');
+    if (!trigger || !host) return;
+
+    trigger.addEventListener('click', () => {
+      if (host.dataset.loaded === '1') return;
+      host.dataset.loaded = '1';
+      trigger.hidden = true;
+      host.hidden = false;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = embedSrc;
+      iframe.title = iframeTitle;
+      iframe.loading = 'lazy';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 h-full w-full border-0';
+      host.appendChild(iframe);
+    });
+  })();
+</script>
