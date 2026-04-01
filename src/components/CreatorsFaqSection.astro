@@ -1,0 +1,33 @@
+---
+import type { CreatorFaqItem } from '../models/creator-landing-content.model';
+
+interface Props {
+  heading: string;
+  items: CreatorFaqItem[];
+}
+
+const { heading, items } = Astro.props;
+---
+
+<section
+  class="w-full border-t border-primary/10 pt-10 md:pt-12"
+  aria-labelledby="creators-faq-heading"
+>
+  <h2 id="creators-faq-heading" class="mb-6 text-xl font-bold text-primary md:text-2xl">
+    {heading}
+  </h2>
+  <div class="join join-vertical w-full rounded-box border border-primary/10 bg-base-100 shadow-sm">
+    {
+      items.map((item) => (
+        <details class="collapse collapse-arrow join-item border-0 border-b border-primary/10 bg-transparent last:border-b-0">
+          <summary class="collapse-title px-4 py-4 text-left text-base font-semibold text-primary text-balance">
+            {item.question}
+          </summary>
+          <div class="collapse-content px-4 pb-4 text-sm leading-relaxed text-base-content/85 text-pretty">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+</section>

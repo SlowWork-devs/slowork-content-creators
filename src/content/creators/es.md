@@ -41,6 +41,28 @@ creditRates:
   shortVideo: 5
   longFormVideo: 15
   blogPost: 8
+faqItems:
+  - question: ¿Los creadores de Slowork cobran en efectivo?
+    answer: >-
+      No. Los creadores ganan créditos Slowork, no un pago en efectivo por publicación. Los créditos se canjean dentro de la plataforma y pueden cubrir hasta el 50% de una transacción.
+  - question: ¿Qué plataformas puedo usar?
+    answer: >-
+      En el programa de creadores están admitidos actualmente Instagram, TikTok y YouTube.
+  - question: ¿Cómo gano créditos en el programa de creadores de Slowork?
+    answer: >-
+      Ganas créditos publicando contenido en las plataformas admitidas, enviándolo a revisión y consiguiendo que se apruebe según calidad, alineación y storytelling.
+  - question: ¿Qué tipo de contenido aprueba Slowork?
+    answer: >-
+      Slowork aprueba contenido que refleje su estilo de vida: calma, foco, naturaleza, comunidad y trabajo remoto con intención. No se aprueban promos genéricas, spam ni contenido de bajo esfuerzo.
+  - question: ¿Puedo unirme si no soy nómada digital a tiempo completo?
+    answer: >-
+      En muchos casos sí. Lo importante no es la etiqueta, sino que tu contenido y tu forma de vida encajen de verdad con el ethos de Slowork.
+  - question: ¿Qué pasa si borro contenido ya aprobado?
+    answer: >-
+      Si el contenido aprobado se elimina antes de tres meses, los créditos asignados pueden retirarse.
+  - question: ¿Necesito una audiencia muy grande?
+    answer: >-
+      No. La alineación, el storytelling y la calidad del contenido importan más que el número de seguidores.
 ---
 
 ## ¿Qué es Slowork?
@@ -110,11 +132,6 @@ Si tu perfil encaja, revisaremos tu solicitud.
 Las personas seleccionadas pueden recibir acceso anticipado, guías de contenido, onboarding al sistema de créditos y futuras oportunidades de colaboración.
 
 No hace falta ser nómada digital a tiempo completo. Solo necesitas crear contenido que encaje de verdad en este mundo.
-
-## Preguntas frecuentes
-
-**¿Necesito una audiencia muy grande?**  
-No. La alineación, el storytelling y la calidad del contenido importan más que el número de seguidores.
 
 ## Si tu contenido ya refleja esta forma de vida, puede que encajes
 

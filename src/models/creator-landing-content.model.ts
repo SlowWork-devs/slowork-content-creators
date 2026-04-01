@@ -14,5 +14,12 @@ export const creatorWhyProgramSchema = z.object({
   closing: z.string(),
 });
 
+/** Pregunta / respuesta para FAQ (SEO + acordeón). */
+export const creatorFaqItemSchema = z.object({
+  question: z.string(),
+  answer: z.string(),
+});
+
 export type CreatorBenefitBlock = z.infer<typeof creatorBenefitBlockSchema>;
 export type CreatorWhyProgram = z.infer<typeof creatorWhyProgramSchema>;
+export type CreatorFaqItem = z.infer<typeof creatorFaqItemSchema>;

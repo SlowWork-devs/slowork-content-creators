@@ -40,6 +40,28 @@ creditRates:
   shortVideo: 5
   longFormVideo: 15
   blogPost: 8
+faqItems:
+  - question: Do Slowork creators get paid?
+    answer: >-
+      No. Creators earn Slowork credits, not cash per post. Credits are redeemed inside the platform and may cover up to 50% of a transaction.
+  - question: Which platforms can I use?
+    answer: >-
+      Instagram, TikTok and YouTube are currently supported in the creator program.
+  - question: How do I earn credits in the Slowork creator program?
+    answer: >-
+      You earn credits by publishing content on supported platforms, submitting it for review, and having it approved based on quality, alignment and storytelling.
+  - question: What kind of content does Slowork approve?
+    answer: >-
+      Slowork approves content that reflects its lifestyle—calm, focus, nature, community and intentional remote work. Generic promotion, spammy posts and low-effort content are not approved.
+  - question: Can I join if I am not a full-time digital nomad?
+    answer: >-
+      Potentially yes. What matters is not the label but whether your content and lifestyle genuinely align with the Slowork ethos.
+  - question: What happens if I delete approved content?
+    answer: >-
+      If approved content is deleted within three months, the assigned credits may be removed.
+  - question: Do I need a large audience?
+    answer: >-
+      No. Alignment, storytelling and content quality matter more than follower count.
 ---
 
 ## What is Slowork?
@@ -109,11 +131,6 @@ If your profile feels aligned, we will review your application.
 Selected creators may receive early access, content guidelines, onboarding into the credit system and future collaboration opportunities.
 
 You do not need to be a full-time digital nomad. You just need to create content that genuinely fits this world.
-
-## FAQ
-
-**Do I need a large audience?**  
-No. Alignment, storytelling and content quality matter more than follower count.
 
 ## If your content already reflects this way of life, you may be a fit
 

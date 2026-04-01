@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 
+import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
 import VideoFacade from '../../components/VideoFacade.astro';
 import { MAIN_SLOWORK_ORIGIN, manifestoYoutubeId } from '../../constants/site';
@@ -22,7 +23,8 @@ interface Props {
 const { entry } = Astro.props;
 const lang = Astro.params.lang as 'en' | 'es';
 
-const { title, heroMicrocopy, subheadline, seoDescription, benefitBlocks, whyProgram } = entry.data;
+const { title, heroMicrocopy, subheadline, seoDescription, benefitBlocks, whyProgram, faqItems } =
+  entry.data;
 const heroMicrocopyTrimmed = heroMicrocopy?.trim() ?? '';
 
 const subheadlineParagraphs = subheadline
@@ -35,19 +37,23 @@ const { Content } = await render(entry);
 const ui = {
   en: {
     cta: 'Apply to join the creators program',
-    benefitsHeading: 'Why become a Slowork creator',
     pageTitle: `${title} | Slowork`,
-    videoAlt: 'Manifiesto Slowork — video preview',
+    videoAlt:
+      'Slowork manifesto video — calm, intentional storytelling rooted in nature and community',
     playLabel: 'Play video: Slowork Manifesto',
     iframeTitle: 'Slowork Manifesto',
+    videoMoodLine: 'Feeling: calm, intentional, real.',
+    faqHeading: 'Frequently asked questions',
   },
   es: {
     cta: 'Solicitar unirme al programa de creadores',
-    benefitsHeading: 'Por qué unirte como creador Slowork',
     pageTitle: `${title} | Slowork`,
-    videoAlt: 'Manifiesto Slowork — vista previa del vídeo',
+    videoAlt:
+      'Vídeo del manifiesto Slowork — narrativa calmada e intencionada, naturaleza y comunidad',
     playLabel: 'Reproducir vídeo: Manifiesto Slowork',
     iframeTitle: 'Manifiesto Slowork',
+    videoMoodLine: 'Sensación: calma, intención, autenticidad.',
+    faqHeading: 'Preguntas frecuentes',
   },
 } as const;
 
@@ -67,6 +73,11 @@ const alternates = [
 
 const ctaHref = `${MAIN_SLOWORK_ORIGIN}/${lang}/#contact`;
 
+const creditOfferDescription =
+  lang === 'es'
+    ? '1 crédito Slowork equivale a 1 USD de valor en la plataforma. Los créditos no son retirables en efectivo; desbloquean estancias y experiencias dentro de Slowork.'
+    : '1 Slowork Credit equals 1 USD in platform value. Credits are not withdrawable cash; they unlock stays and experiences on Slowork.';
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -84,6 +95,26 @@ const jsonLd = {
   },
   availableLanguage: ['en', 'es'],
   serviceType: 'Content creator program',
+  offers: {
+    '@type': 'Offer',
+    name: lang === 'es' ? 'Créditos para creadores Slowork' : 'Slowork creator credits',
+    description: creditOfferDescription,
+    price: '1.00',
+    priceCurrency: 'USD',
+  },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
 };
 ---
 
@@ -95,56 +126,75 @@ const jsonLd = {
       <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
     ))}
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   </Fragment>
 
   <div class="flex min-h-dvh flex-col bg-base-100 text-base-content">
     <main
-      class="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-10 px-6 py-12 md:gap-12 md:py-16"
+      class="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-14 px-6 py-12 md:gap-16 md:py-20"
     >
-      <header class="flex w-full flex-col items-center gap-6 text-center">
+      <header class="flex w-full flex-col items-center gap-7 text-center md:gap-8">
         <h1 class="max-w-3xl font-bold text-primary text-balance">
           {title}
         </h1>
-        <div class="max-w-2xl space-y-4 text-lg text-base-content/85 text-balance md:text-xl">
-          {subheadlineParagraphs.map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
-        </div>
         <a
           href={ctaHref}
-          class="btn btn-secondary min-h-12 px-8 text-base font-semibold shadow-md transition-transform duration-200 hover:scale-105 focus-visible:scale-105 active:scale-95"
+          class="btn btn-secondary creators-cta min-h-12 px-8 text-base font-semibold shadow-md"
         >
           {t.cta}
         </a>
         {heroMicrocopyTrimmed ? (
-          <p class="max-w-xl text-sm text-base-content/65 text-balance">{heroMicrocopyTrimmed}</p>
+          <p class="max-w-xl text-sm font-medium leading-relaxed text-base-content/70 text-balance md:text-[0.9375rem]">
+            {heroMicrocopyTrimmed}
+          </p>
         ) : null}
       </header>
 
-      <section class="w-full" aria-label={t.iframeTitle}>
+      <section
+        class="w-full border-t border-primary/[0.08] pt-12 md:pt-14"
+        aria-label={lang === 'es' ? 'Introducción' : 'Introduction'}
+      >
+        <div class="mx-auto max-w-2xl space-y-5 text-lg text-base-content/85 text-balance md:space-y-6 md:text-xl">
+          {subheadlineParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+
+      <section
+        class="w-full border-t border-primary/[0.06] pt-10 md:pt-12"
+        aria-label={lang === 'es' ? 'En esencia' : 'At a glance'}
+      >
+        <ul class="mx-auto grid max-w-3xl grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 md:gap-x-8 md:gap-y-9">
+          {benefitBlocks.map((block, index) => (
+            <li class="flex gap-3 text-left">
+              <span
+                class="mt-0.5 shrink-0 font-mono text-[0.65rem] font-semibold tabular-nums text-primary/35 select-none"
+                aria-hidden="true"
+              >
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-bold leading-snug text-primary text-balance md:text-[0.9375rem]">
+                  {block.title}
+                </p>
+                <p class="mt-1.5 text-xs leading-relaxed text-base-content/55 text-balance md:text-[0.8125rem]">
+                  {block.text}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="flex w-full flex-col items-center" aria-label={t.iframeTitle}>
         <VideoFacade
           youtubeId={manifestoYoutubeId}
           alt={t.videoAlt}
           iframeTitle={t.iframeTitle}
           playLabel={t.playLabel}
+          moodLine={t.videoMoodLine}
         />
-      </section>
-
-      <section
-        class="w-full border-t border-primary/10 pt-10 md:pt-12"
-        aria-labelledby="benefits-heading"
-      >
-        <h2 id="benefits-heading" class="mb-8 text-center text-xl font-bold text-primary md:text-2xl">
-          {t.benefitsHeading}
-        </h2>
-        <ul class="grid gap-6 sm:grid-cols-2">
-          {benefitBlocks.map((block) => (
-            <li class="rounded-box border border-primary/15 bg-base-100 p-5 shadow-sm">
-              <h3 class="font-semibold text-primary">{block.title}</h3>
-              <p class="mt-2 text-sm text-base-content/85 leading-relaxed">{block.text}</p>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section
@@ -172,6 +222,8 @@ const jsonLd = {
       >
         <Content />
       </article>
+
+      <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
     </main>
 
     <CreatorsLegalFooter lang={lang} />
