@@ -51,11 +51,13 @@
   --color-primary: #2d4f1e;
   --color-secondary: #ffd700;
   --color-base-100: #f0f4f0;
+  /* Instrument Sans cargada con display=swap vía Google Fonts (BaseLayout) */
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   html {
-    @apply bg-base-100 text-base-content;
+    @apply bg-base-100 font-sans text-base-content;
   }
 
   h1 {
