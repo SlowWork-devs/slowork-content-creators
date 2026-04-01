@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@source "../**/*.{astro,html,js,ts,tsx}";
+
+@plugin "daisyui" {
+  themes: slowork-creators --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "slowork-creators";
+  default: true;
+  color-scheme: light;
+
+  --color-primary: #2d4f1e;
+  --color-secondary: #ffd700;
+  --color-base-100: #f0f4f0;
+
+  --color-base-200: #e3ebe3;
+  --color-base-300: #d6e0d6;
+  --color-base-content: #1e3318;
+
+  --color-primary-content: #f0f4f0;
+  --color-secondary-content: #2d4f1e;
+
+  --color-accent: #4a7c38;
+  --color-accent-content: #f0f4f0;
+
+  --color-neutral: #3d5236;
+  --color-neutral-content: #f0f4f0;
+
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+  --color-success: #22c55e;
+  --color-success-content: #052e16;
+  --color-warning: #f59e0b;
+  --color-warning-content: #422006;
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@theme {
+  --color-primary: #2d4f1e;
+  --color-secondary: #ffd700;
+  --color-base-100: #f0f4f0;
+}
+
+@layer base {
+  html {
+    @apply bg-base-100 text-base-content;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    text-wrap: balance;
+  }
+}
