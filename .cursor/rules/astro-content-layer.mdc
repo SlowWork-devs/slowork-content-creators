@@ -1,0 +1,10 @@
+---
+description: Astro 6 Content Layer — usar getCollection, no Astro.glob para markdown de colecciones
+alwaysApply: true
+---
+
+# Content Layer (colecciones)
+
+- Las entradas viven en `src/content/creators/*.md` y están definidas en `src/content.config.ts` (`defineCollection` + loader `glob` de `astro/loaders`).
+- **Consumo en páginas/layouts:** `getCollection`, `getEntry` y `render` desde `astro:content` (tipos `CollectionEntry<...>`).
+- **No uses `Astro.glob()`** para cargar markdown u otros ficheros que pertenezcan a una colección; es el API antiguo y no pasa por el esquema Zod ni el Content Layer.
