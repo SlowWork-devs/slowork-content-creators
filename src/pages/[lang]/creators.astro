@@ -37,20 +37,26 @@ const { Content } = await render(entry);
 const ui = {
   en: {
     cta: 'Apply to join the creators program',
+    ctaAria:
+      'Apply to the Slowork creators program — opens the contact section on slowork.app in this window',
     pageTitle: `${title} | Slowork`,
     videoAlt:
       'Slowork manifesto video — calm, intentional storytelling rooted in nature and community',
-    playLabel: 'Play video: Slowork Manifesto',
+    playLabel:
+      'Play the Slowork manifesto video — loads the YouTube player in this frame when activated',
     iframeTitle: 'Slowork Manifesto',
     videoMoodLine: 'Feeling: calm, intentional, real.',
     faqHeading: 'Frequently asked questions',
   },
   es: {
     cta: 'Solicitar unirme al programa de creadores',
+    ctaAria:
+      'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
     pageTitle: `${title} | Slowork`,
     videoAlt:
       'Vídeo del manifiesto Slowork — narrativa calmada e intencionada, naturaleza y comunidad',
-    playLabel: 'Reproducir vídeo: Manifiesto Slowork',
+    playLabel:
+      'Reproducir el vídeo del manifiesto Slowork — carga el reproductor de YouTube en este espacio al activarlo',
     iframeTitle: 'Manifiesto Slowork',
     videoMoodLine: 'Sensación: calma, intención, autenticidad.',
     faqHeading: 'Preguntas frecuentes',
@@ -78,43 +84,46 @@ const creditOfferDescription =
     ? '1 crédito Slowork equivale a 1 USD de valor en la plataforma. Los créditos no son retirables en efectivo; desbloquean estancias y experiencias dentro de Slowork.'
     : '1 Slowork Credit equals 1 USD in platform value. Credits are not withdrawable cash; they unlock stays and experiences on Slowork.';
 
-const jsonLd = {
+/** Un solo JSON-LD reduce parseo en el hilo principal frente a varias etiquetas script. */
+const structuredJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: title,
-  description: seoDescription,
-  url: canonicalURL,
-  provider: {
-    '@type': 'Organization',
-    name: 'Slowork',
-    url: MAIN_SLOWORK_ORIGIN,
-  },
-  areaServed: {
-    '@type': 'Place',
-    name: 'Worldwide',
-  },
-  availableLanguage: ['en', 'es'],
-  serviceType: 'Content creator program',
-  offers: {
-    '@type': 'Offer',
-    name: lang === 'es' ? 'Créditos para creadores Slowork' : 'Slowork creator credits',
-    description: creditOfferDescription,
-    price: '1.00',
-    priceCurrency: 'USD',
-  },
-};
-
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
+  '@graph': [
+    {
+      '@type': 'Service',
+      name: title,
+      description: seoDescription,
+      url: canonicalURL,
+      provider: {
+        '@type': 'Organization',
+        name: 'Slowork',
+        url: MAIN_SLOWORK_ORIGIN,
+      },
+      areaServed: {
+        '@type': 'Place',
+        name: 'Worldwide',
+      },
+      availableLanguage: ['en', 'es'],
+      serviceType: 'Content creator program',
+      offers: {
+        '@type': 'Offer',
+        name: lang === 'es' ? 'Créditos para creadores Slowork' : 'Slowork creator credits',
+        description: creditOfferDescription,
+        price: '1.00',
+        priceCurrency: 'USD',
+      },
     },
-  })),
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+  ],
 };
 ---
 
@@ -125,8 +134,7 @@ const faqJsonLd = {
     {alternates.map((alt) => (
       <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
     ))}
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredJsonLd)} />
   </Fragment>
 
   <div class="flex min-h-dvh flex-col bg-base-100 text-base-content">
@@ -140,6 +148,7 @@ const faqJsonLd = {
         <a
           href={ctaHref}
           class="btn btn-secondary creators-cta min-h-12 px-8 text-base font-semibold shadow-md"
+          aria-label={t.ctaAria}
         >
           {t.cta}
         </a>
@@ -194,6 +203,7 @@ const faqJsonLd = {
           iframeTitle={t.iframeTitle}
           playLabel={t.playLabel}
           moodLine={t.videoMoodLine}
+          posterPriority
         />
       </section>
 

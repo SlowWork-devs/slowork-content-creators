@@ -14,6 +14,8 @@ interface Props {
   playLabel?: string;
   /** Línea de intención visual (v2): calm, intentional, real — debajo del facade. */
   moodLine?: string;
+  /** LCP / above-the-fold: poster con eager + fetchpriority high (p. ej. creators sin imagen hero). */
+  posterPriority?: boolean;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   iframeTitle = 'Manifiesto Slowork',
   playLabel = 'Reproducir vídeo: Manifiesto Slowork',
   moodLine,
+  posterPriority = false,
 } = Astro.props;
 
 const facadeId = `vf-${crypto.randomUUID()}`;
@@ -46,9 +49,9 @@ const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1
         class="pointer-events-none h-full w-full object-cover scale-[1.02] motion-safe:transition-transform motion-safe:duration-[2.8s] motion-safe:ease-out group-hover:scale-100"
         widths={[640, 960, 1280]}
         sizes="(max-width: 768px) 100vw, 896px"
-        loading="lazy"
+        loading={posterPriority ? 'eager' : 'lazy'}
         decoding="async"
-        fetchpriority="low"
+        fetchpriority={posterPriority ? 'high' : 'low'}
       />
       <!-- Naturaleza + calidez / comunidad: capas muy suaves sobre el poster -->
       <div
