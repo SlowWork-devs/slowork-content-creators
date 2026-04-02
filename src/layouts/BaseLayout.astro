@@ -31,7 +31,9 @@ const ogDescription = seoDescription ?? title;
 
 const ogImageOverride = import.meta.env.PUBLIC_OG_IMAGE?.trim() ?? '';
 const ogImageUrl = ogImageOverride
-  ? ogImageOverride
+  ? ogImageOverride.startsWith('http://') || ogImageOverride.startsWith('https://')
+    ? ogImageOverride
+    : new URL(ogImageOverride, siteBase).href
   : new URL(ogImagePath, siteBase).href;
 
 const ogUrl = canonicalUrl ?? siteBase.href;
