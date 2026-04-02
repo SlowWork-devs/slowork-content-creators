@@ -82,6 +82,14 @@
     @apply bg-base-100 font-sans text-base-content;
   }
 
+  /**
+   * Cuerpo de página: color por defecto = primario SloWork (#013333).
+   * Las utilidades `text-*` en hijos siguen sobrescribiendo; evita grises implícitos del UA.
+   */
+  main {
+    color: var(--color-primary);
+  }
+
   h1,
   h2,
   h3 {
@@ -137,6 +145,11 @@
   .btn.btn-secondary:not(.btn-disabled):active,
   .btn.btn-secondary:not(.btn-disabled):focus-visible {
     color: var(--color-secondary-content);
+  }
+
+  .btn.btn-secondary:not(.btn-disabled):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .creators-story {
