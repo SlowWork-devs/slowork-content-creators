@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/poppins-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/poppins-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 @source "../**/*.{astro,html,js,ts,tsx}";
@@ -11,22 +27,22 @@
   default: true;
   color-scheme: light;
 
-  --color-primary: #2d4f1e;
-  --color-secondary: #ffd700;
-  --color-base-100: #f0f4f0;
+  /* Alineado con paleta SloWork (landing principal) */
+  --color-primary: #013333;
+  --color-secondary: #e0bb44;
+  --color-base-100: #e2e8e5;
+  --color-base-200: #d6deda;
+  --color-base-300: #cbd5d0;
+  --color-base-content: #013333;
 
-  --color-base-200: #e3ebe3;
-  --color-base-300: #d6e0d6;
-  --color-base-content: #1e3318;
+  --color-primary-content: #e2e8e5;
+  --color-secondary-content: #013333;
 
-  --color-primary-content: #f0f4f0;
-  --color-secondary-content: #2d4f1e;
+  --color-accent: #779ed3;
+  --color-accent-content: #ffffff;
 
-  --color-accent: #4a7c38;
-  --color-accent-content: #f0f4f0;
-
-  --color-neutral: #3d5236;
-  --color-neutral-content: #f0f4f0;
+  --color-neutral: #0f2424;
+  --color-neutral-content: #e2e8e5;
 
   --color-info: #3b82f6;
   --color-info-content: #ffffff;
@@ -48,16 +64,28 @@
 }
 
 @theme {
-  --color-primary: #2d4f1e;
-  --color-secondary: #ffd700;
-  --color-base-100: #f0f4f0;
-  /* Instrument Sans cargada con display=swap vía Google Fonts (BaseLayout) */
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #013333;
+  --color-secondary: #e0bb44;
+  --color-light-green: #ddeee5;
+  --color-bg-landing: #e2e8e5;
+  --color-soft-blue: #779ed3;
+
+  --color-base-100: var(--color-bg-landing);
+  --color-base-content: var(--color-primary);
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Poppins", ui-sans-serif, sans-serif;
 }
 
 @layer base {
   html {
     @apply bg-base-100 font-sans text-base-content;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading font-bold;
   }
 
   h1 {
@@ -98,7 +126,7 @@
   }
 }
 
-/* Storytelling (v2 §2), CTA oro + glow — componentes página creators */
+/* Storytelling (v2 §2), CTA acento secondary — componentes página creators */
 @layer components {
   .creators-story {
     line-height: 1.72;
@@ -119,35 +147,35 @@
   }
 
   .btn.btn-secondary.creators-cta {
-    background-color: #ffd700; /* exact brand gold */
-    border-color: #d4b400;
-    color: #2d4f1e;
+    background-color: var(--color-secondary);
+    border-color: color-mix(in srgb, var(--color-secondary) 72%, #000);
+    color: var(--color-secondary-content);
     transition-property: transform, filter, background-color, border-color, box-shadow;
     transition-duration: 280ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 2px rgb(45 79 30 / 0.06);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary) 12%, transparent);
   }
 
   .btn.btn-secondary.creators-cta:hover {
-    background-color: #ffdf33;
-    border-color: #c9a800;
+    background-color: color-mix(in srgb, var(--color-secondary) 92%, #fff);
+    border-color: color-mix(in srgb, var(--color-secondary) 55%, #000);
     filter: brightness(1.02);
     box-shadow:
-      0 0 0 1px rgb(255 215 0 / 0.35),
-      0 10px 36px -6px rgb(255 215 0 / 0.42),
-      0 4px 14px -4px rgb(45 79 30 / 0.12);
+      0 0 0 1px color-mix(in srgb, var(--color-secondary) 35%, transparent),
+      0 10px 36px -6px color-mix(in srgb, var(--color-secondary) 42%, transparent),
+      0 4px 14px -4px color-mix(in srgb, var(--color-primary) 14%, transparent);
   }
 
   .btn.btn-secondary.creators-cta:focus-visible {
-    outline: 2px solid #2d4f1e;
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
     box-shadow:
-      0 0 0 3px rgb(255 215 0 / 0.25),
-      0 8px 28px -8px rgb(255 215 0 / 0.35);
+      0 0 0 3px color-mix(in srgb, var(--color-secondary) 28%, transparent),
+      0 8px 28px -8px color-mix(in srgb, var(--color-secondary) 35%, transparent);
   }
 
   .btn.btn-secondary.creators-cta:active {
     transform: scale(0.95);
-    box-shadow: 0 1px 3px rgb(45 79 30 / 0.1);
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--color-primary) 12%, transparent);
   }
 }
