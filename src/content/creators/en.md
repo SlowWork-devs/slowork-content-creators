@@ -10,7 +10,7 @@ subheadline: |
 
   That is why we are building Slowork: a platform for discovering remote-ready stays in meaningful environments, with community, experiences and a slower rhythm built in.
 seoDescription: >-
-  Slowork's creators program for people whose content reflects a better way of living and working - rooted in nature, focus, community and freedom. Not just another brand deal.
+  Join the Slowork Creators Program. Document a lifestyle rooted in nature and intentional remote work. Earn credits for meaningful stays and experiences..
 benefitBlocks:
   - title: Create with meaning
     text: Make content that reflects a real philosophy, not just another campaign.

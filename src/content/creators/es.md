@@ -10,7 +10,7 @@ subheadline: |
 
   Por eso estamos construyendo Slowork: una plataforma para descubrir estancias listas para el remoto en entornos significativos, con comunidad, experiencias y un ritmo más pausado integrado.
 seoDescription: >-
-  Programa de creadores Slowork: trabajo remoto con sentido, naturaleza, comunidad y libertad. Para quienes ya muestran una forma mejor de vivir y trabajar—no solo otro patrocinio.
+  Únete al programa Slowork Creators. Documenta un estilo de vida arraigado en la naturaleza y el trabajo remoto intencional. Gana créditos para estancias y experiencias significativas.
 benefitBlocks:
   - title: Crear con sentido
     text: Haz contenido que refleje una filosofía real, no solo otra campaña.
