@@ -1,0 +1,71 @@
+---
+/**
+ * Selector EN | ES según pathname. Enlaces <a> relativos para crawl; labels según idioma de página.
+ */
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const active: 'en' | 'es' = pathname.includes('/en/creators') ? 'en' : 'es';
+
+const enHref = '/en/creators/';
+const esHref = '/es/creators/';
+
+const aria = {
+  en: {
+    nav: 'Language',
+    switchEn: 'Switch to English',
+    switchEs: 'Switch to Spanish',
+  },
+  es: {
+    nav: 'Idioma',
+    switchEn: 'Cambiar a inglés',
+    switchEs: 'Cambiar a español',
+  },
+} as const;
+
+const a = aria[lang];
+
+const linkClassInactive =
+  'opacity-60 transition-opacity duration-200 ease-out hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100 rounded-sm';
+
+const spanClassActive =
+  'font-semibold underline decoration-secondary decoration-2 underline-offset-[0.22em]';
+---
+
+<nav aria-label={a.nav} class="font-sans text-sm font-medium tracking-wide">
+  <ul class="m-0 flex list-none flex-wrap items-center gap-x-3 gap-y-1 p-0">
+    <li class="leading-none">
+      {
+        active === 'en' ? (
+          <span class={spanClassActive} aria-current="true">
+            EN
+          </span>
+        ) : (
+          <a href={enHref} class={linkClassInactive} aria-label={a.switchEn}>
+            EN
+          </a>
+        )
+      }
+    </li>
+    <li class="leading-none" aria-hidden="true">
+      <span class="text-base-content/25 select-none">·</span>
+    </li>
+    <li class="leading-none">
+      {
+        active === 'es' ? (
+          <span class={spanClassActive} aria-current="true">
+            ES
+          </span>
+        ) : (
+          <a href={esHref} class={linkClassInactive} aria-label={a.switchEs}>
+            ES
+          </a>
+        )
+      }
+    </li>
+  </ul>
+</nav>
