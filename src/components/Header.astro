@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 
 import logoImg from '../assets/logo-slowork.png';
-import { MAIN_SLOWORK_ORIGIN } from '../constants/site';
 import LanguagePicker from './LanguagePicker.astro';
 
 interface Props {
@@ -11,10 +10,13 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const homeHref = `${MAIN_SLOWORK_ORIGIN}/${lang}/`;
+/** Inicio de esta landing (mismo origen), no el sitio principal Slowork. */
+const creatorsTopHref = `/${lang}/creators/`;
 
 const logoAria =
-  lang === 'es' ? 'Slowork — ir al sitio principal' : 'Slowork — go to main website';
+  lang === 'es'
+    ? 'Slowork — ir al inicio de esta página'
+    : 'Slowork — go to top of this page';
 
 /** Alt descriptivo para SEO e indexación de imagen; el enlace lleva aria-label de acción. */
 const logoAlt = lang === 'es' ? 'Logotipo de Slowork' : 'Slowork logo';
@@ -28,7 +30,7 @@ const logoAlt = lang === 'es' ? 'Logotipo de Slowork' : 'Slowork logo';
     class="pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-6"
   >
     <a
-      href={homeHref}
+      href={creatorsTopHref}
       class="flex min-h-11 min-w-11 shrink-0 touch-manipulation items-center rounded-sm transition-opacity duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
       aria-label={logoAria}
     >
