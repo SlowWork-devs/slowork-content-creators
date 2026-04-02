@@ -24,27 +24,27 @@ const rowsWithCredits = rows.map((row) => ({
 }));
 ---
 
-<div class="credit-table mt-8 w-full max-w-2xl">
+<div class="credit-table mt-8 w-full min-w-0 max-w-2xl">
   <ul
-    class="divide-y divide-primary/[0.12] rounded-xl border border-primary/[0.14] bg-base-200/50 px-1 shadow-[0_4px_22px_-10px_rgba(1,51,51,0.14),0_1px_3px_rgba(1,51,51,0.06)] ring-1 ring-primary/[0.08]"
+    class="divide-y divide-primary/10 rounded-xl border border-primary/10 bg-base-200/50 px-2 shadow-[0_2px_16px_-8px_rgba(1,51,51,0.05)] ring-1 ring-primary/10 sm:px-1 sm:shadow-[0_4px_22px_-10px_rgba(1,51,51,0.14),0_1px_3px_rgba(1,51,51,0.06)] sm:ring-primary/10"
     role="list"
   >
     {
       rowsWithCredits.map((row) => (
-        <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-4 first:pt-5 last:pb-5 md:px-5 md:py-[1.125rem]">
-          <span class="max-w-[min(100%,20rem)] text-[0.9375rem] leading-snug text-base-content/88 md:text-base">
+        <li class="flex flex-col gap-2 px-5 py-4 first:pt-5 last:pb-5 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4 sm:gap-y-1 sm:px-5 md:py-[1.125rem]">
+          <span class="min-w-0 text-[0.9375rem] leading-snug text-primary sm:max-w-[min(100%,20rem)] md:text-base">
             {row.label}
           </span>
-          <span class="flex shrink-0 items-baseline gap-2 tabular-nums">
+          <span class="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5 tabular-nums sm:shrink-0 sm:justify-end">
             <span class="text-lg font-semibold text-primary md:text-xl">{row.credits}</span>
-            <span class="text-sm font-medium text-base-content/45 md:text-base">{creditsUnitLabel}</span>
-            <span class="text-sm text-base-content/40 md:text-base">(${row.credits})</span>
+            <span class="text-sm font-medium text-primary/90 md:text-base">{creditsUnitLabel}</span>
+            <span class="text-sm text-primary/90 md:text-base">(${row.credits})</span>
           </span>
         </li>
       ))
     }
   </ul>
-  <p class="mt-6 max-w-xl text-xs leading-relaxed text-base-content/45 md:text-[0.8125rem]">
+  <p class="mt-6 max-w-xl text-xs leading-relaxed text-primary md:text-[0.8125rem]">
     {footnote}
   </p>
 </div>
