@@ -2,7 +2,6 @@
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 
-import CreatorOnboardingTimeline from '../../components/CreatorOnboardingTimeline.astro';
 import CreditTable from '../../components/CreditTable.astro';
 import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
@@ -43,8 +42,9 @@ const ui = {
   en: {
     cta: 'Apply to join the creators program',
     ctaAria: 'Apply to the Slowork creators program — opens the contact section on slowork.app in this window',
-    pageTitle: `${title} | Slowork`,
-    videoAlt: 'Slowork manifesto video — calm, intentional storytelling rooted in nature and community',
+    pageTitle: 'Slowork Creators | A different way of living and working',
+    videoAlt:
+      'Slowork manifesto video — remote work app, nature workspace and intentional lifestyle storytelling',
     playLabel: 'Play the Slowork manifesto video — loads the YouTube player in this frame when activated',
     iframeTitle: 'Slowork Manifesto',
     videoMoodLine: 'Feeling: calm, intentional, real.',
@@ -137,8 +137,9 @@ const ui = {
   es: {
     cta: 'Solicitar unirme al programa de creadores',
     ctaAria: 'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
-    pageTitle: `${title} | Slowork`,
-    videoAlt: 'Vídeo del manifiesto Slowork — narrativa calmada e intencionada, naturaleza y comunidad',
+    pageTitle: 'Slowork Creators | Una forma distinta de vivir y trabajar',
+    videoAlt:
+      'Vídeo del manifiesto Slowork — app de trabajo remoto, espacios en naturaleza y estilo de vida intencional',
     playLabel: 'Reproducir el vídeo del manifiesto Slowork — carga el reproductor de YouTube en este espacio al activarlo',
     iframeTitle: 'Manifiesto Slowork',
     videoMoodLine: 'Sensación: calma, intención, autenticidad.',
@@ -251,34 +252,20 @@ const creditOfferDescription =
     ? '1 crédito Slowork equivale a 1 USD de valor en la plataforma. Los créditos no son retirables en efectivo; desbloquean estancias y experiencias dentro de Slowork.'
     : '1 Slowork Credit equals 1 USD in platform value. Credits are not withdrawable cash; they unlock stays and experiences on Slowork.';
 
-// Add the new FAQ question
-const fullFaqItems = [
-  ...faqItems,
-  {
-    question: lang === 'es' ? '¿Necesito una gran audiencia?' : 'Do I need a large audience?',
-    answer: lang === 'es' ? 'No. La alineación y la calidad importan más que el número de seguidores.' : 'No, alignment and quality matter more than follower count.'
-  }
-];
+const programName =
+  lang === 'es' ? 'Programa Slowork Creators' : 'Slowork Creators Program';
 
 const structuredJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Service',
-      name: title,
-      description: seoDescription,
+      '@type': 'SoftwareApplication',
+      name: programName,
+      description: `${seoDescription} ${creditOfferDescription}`.trim(),
       url: canonicalURL,
-      provider: {
-        '@type': 'Organization',
-        name: 'Slowork',
-        url: MAIN_SLOWORK_ORIGIN,
-      },
-      areaServed: {
-        '@type': 'Place',
-        name: 'Worldwide',
-      },
-      availableLanguage: ['en', 'es'],
-      serviceType: 'Content creator program',
+      applicationCategory: 'LifestyleApplication',
+      operatingSystem: 'Web',
+      inLanguage: lang,
       offers: {
         '@type': 'Offer',
         name: lang === 'es' ? 'Créditos para creadores Slowork' : 'Slowork creator credits',
@@ -286,10 +273,15 @@ const structuredJsonLd = {
         price: '1.00',
         priceCurrency: 'USD',
       },
+      provider: {
+        '@type': 'Organization',
+        name: 'Slowork',
+        url: MAIN_SLOWORK_ORIGIN,
+      },
     },
     {
       '@type': 'FAQPage',
-      mainEntity: fullFaqItems.map((item) => ({
+      mainEntity: faqItems.map((item) => ({
         '@type': 'Question',
         name: item.question,
         acceptedAnswer: {
@@ -384,19 +376,27 @@ const getBgClass = (index: number) => {
               {t.whatIsBody.map(p => <p>{p}</p>)}
             </div>
           </div>
-          <div class="flex justify-center md:justify-end perspective-1000">
-            <div class="mockup-phone border-primary/10 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 bg-base-100">
-              <div class="camera"></div> 
+          <figure class="m-0 flex justify-center md:justify-end perspective-1000">
+            <div
+              class="mockup-phone border-primary/10 shadow-2xl transform rotate-3 transition-transform duration-500 hover:rotate-0 bg-base-100"
+              role="img"
+              aria-label={
+                lang === 'es'
+                  ? 'Mockup de la app Slowork — trabajo remoto, estancias naturaleza y espacios para teletrabajar'
+                  : 'Slowork app mockup — remote work app, nature stays and workspace discovery for digital nomads'
+              }
+            >
+              <div class="camera"></div>
               <div class="display">
                 <div class="artboard artboard-demo phone-1 bg-base-200 flex flex-col items-center justify-center p-6 text-center">
                   <div class="w-full h-48 bg-primary/5 rounded-xl mb-6 animate-pulse"></div>
                   <div class="w-3/4 h-4 bg-primary/10 rounded mb-3"></div>
                   <div class="w-1/2 h-4 bg-primary/10 rounded"></div>
-                  <p class="mt-8 text-primary/40 font-medium text-sm">Explore Screen UI</p>
+                  <p class="mt-8 text-primary font-medium text-sm">Explore Screen UI</p>
                 </div>
               </div>
             </div>
-          </div>
+          </figure>
         </div>
       </section>
 
@@ -513,7 +513,7 @@ const getBgClass = (index: number) => {
                   <div class="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary font-mono text-sm font-bold mb-4">
                     {idx + 1}
                   </div>
-                  <span class="text-sm font-medium text-primary/80 max-w-[100px]">{step}</span>
+                  <h3 class="m-0 max-w-[100px] text-sm font-medium text-primary">{step}</h3>
                 </div>
                 {idx < t.howItWorksSteps.length - 1 && (
                   <div class="hidden md:block w-8 h-px bg-primary/20"></div>
@@ -587,11 +587,8 @@ const getBgClass = (index: number) => {
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(11)}`}>
         <div class="max-w-3xl mx-auto flex flex-col items-center text-center">
           <SectionEyebrow num={12} text="FAQ" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-16 text-balance">
-            {t.faqHeading}
-          </h2>
           <div class="w-full text-left">
-            <CreatorsFaqSection heading="" items={fullFaqItems} />
+            <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
           </div>
         </div>
       </section>
