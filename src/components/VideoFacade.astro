@@ -35,12 +35,12 @@ const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1
 <div class="video-facade-root w-full max-w-4xl">
   <div
     id={facadeId}
-    class="video-facade relative aspect-video w-full overflow-hidden rounded-2xl bg-base-300 shadow-[0_14px_44px_-14px_rgba(1,51,51,0.24),0_4px_14px_-4px_rgba(1,51,51,0.10)] ring-1 ring-primary/22"
+    class="video-facade relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/10 bg-base-300 shadow-[0_14px_44px_-14px_rgba(1,51,51,0.24),0_4px_14px_-4px_rgba(1,51,51,0.10)] ring-1 ring-primary/10"
   >
     <div class="video-facade__embed absolute inset-0 z-0" hidden></div>
     <button
       type="button"
-      class="video-facade__trigger group absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-left outline-none ring-primary transition-shadow duration-300 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
+      class="video-facade__trigger group absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-left outline-none transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
       aria-label={playLabel}
     >
       <Image
@@ -83,7 +83,7 @@ const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1
   </div>
   {
     moodLine?.trim() ? (
-      <p class="mt-4 text-center text-sm font-medium leading-snug tracking-wide text-base-content/55 text-balance md:text-[0.9375rem]">
+      <p class="mt-4 text-center text-sm font-normal leading-snug tracking-wide text-primary text-balance md:text-[0.9375rem]">
         {moodLine.trim()}
       </p>
     ) : null
