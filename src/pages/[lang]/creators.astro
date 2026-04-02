@@ -7,6 +7,7 @@ import CreditTable from '../../components/CreditTable.astro';
 import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
 import Header from '../../components/Header.astro';
+import SectionEyebrow from '../../components/SectionEyebrow.astro';
 import VideoFacade from '../../components/VideoFacade.astro';
 import type { CreatorCreditRates } from '../../models/creator-credits.model';
 import { MAIN_SLOWORK_ORIGIN, manifestoYoutubeId } from '../../constants/site';
@@ -38,18 +39,13 @@ const subheadlineParagraphs = subheadline
   .map((p) => p.trim())
   .filter(Boolean);
 
-const { Content } = await render(entry);
-
 const ui = {
   en: {
     cta: 'Apply to join the creators program',
-    ctaAria:
-      'Apply to the Slowork creators program — opens the contact section on slowork.app in this window',
+    ctaAria: 'Apply to the Slowork creators program — opens the contact section on slowork.app in this window',
     pageTitle: `${title} | Slowork`,
-    videoAlt:
-      'Slowork manifesto video — calm, intentional storytelling rooted in nature and community',
-    playLabel:
-      'Play the Slowork manifesto video — loads the YouTube player in this frame when activated',
+    videoAlt: 'Slowork manifesto video — calm, intentional storytelling rooted in nature and community',
+    playLabel: 'Play the Slowork manifesto video — loads the YouTube player in this frame when activated',
     iframeTitle: 'Slowork Manifesto',
     videoMoodLine: 'Feeling: calm, intentional, real.',
     faqHeading: 'Frequently asked questions',
@@ -68,32 +64,82 @@ const ui = {
       {
         num: '01',
         title: 'Apply',
-        description:
-          'Send your application—we read every profile with care, not as a volume funnel.',
+        description: 'Send your application—we read every profile with care, not as a volume funnel.',
       },
       {
         num: '02',
         title: 'Review',
-        description:
-          'We assess alignment, storytelling and quality against the Slowork creator brief.',
+        description: 'We assess alignment, storytelling and quality against the Slowork creator brief.',
       },
       {
         num: '03',
         title: 'Onboarding',
-        description:
-          'Selected creators get early access, content guidelines and onboarding into the credit system.',
+        description: 'Selected creators get early access, content guidelines and onboarding into the credit system.',
       },
     ],
+    // New UI text for the 13 points
+    storyHeading: 'Remote work was supposed to feel freer than this',
+    storyBody: [
+      'Somewhere along the way, remote work became just another version of the same lifestyle. Same stress. Same noise. Same burnout. Just with a laptop.',
+      'Slowork was created as a response to that. We believe remote work should feel more human—more connected to place, more connected to people, more aligned with the way you actually want to live.'
+    ],
+    whatIsHeading: 'What is Slowork?',
+    whatIsBody: [
+      'Slowork is not just another booking app.',
+      'It is a platform for remote workers and digital nomads who want more than good WiFi. They want places that support deep work. Natural environments that improve how they feel. Experiences that help them disconnect well. And a sense of community while they travel.',
+      'In practical terms, Slowork helps people discover remote-ready stays, organise their trip, explore experiences nearby and connect with others through the app.',
+      'It is a platform, yes. But more importantly, it is a lifestyle proposition.'
+    ],
+    notTypicalHeading: 'This is not a typical travel creator program',
+    notTypicalBody: [
+      'Most creator programs are built around campaigns, deliverables and transactional promotion. This one is different.',
+      'Slowork is not looking for creators who can post the most. We are looking for creators who can represent something meaningful.',
+      'This program exists to build a layer of organic, aspirational content around a different way of living and working remotely, one shaped by nature, focus, creativity, wellbeing and community.',
+      'If your content is driven by forced promotion, fast ads or generic travel aesthetics, this probably will not fit.',
+      'If your content feels thoughtful, visual, intentional and aligned with a slower rhythm of life, you are exactly who this was designed for.'
+    ],
+    whyBecomeHeading: 'Why become a Slowork creator',
+    whyBecomeIntro: 'Because not every collaboration helps you create work you are proud of. Slowork creators are not here just to promote a product. They are here to document a lifestyle people already aspire to.',
+    whoForHeading: 'Who this program is for',
+    whoForBody: [
+      'We are currently looking for creators in spaces like travel, lifestyle, digital nomad, remote work, intentional living and wellbeing.',
+      'Follower count is not the main filter. What matters more is whether your content feels relevant, visually strong and genuinely aligned with the Slowork world.',
+      'We are especially interested in creators who create in English or subtitle in English, already document meaningful environments, know how to tell stories—not just post aesthetics—and create content native to Instagram, TikTok or YouTube.'
+    ],
+    greatContentHeading: 'What great Slowork content looks like',
+    greatContentIntro: 'We are not looking for content that sells hard. We are looking for content that makes people feel something.',
+    contentWeWant: {
+      title: 'Content we want',
+      items: ['Aspirational POVs', 'Remote work in nature', 'City vs nature contrasts', 'Slow routines', 'Meaningful storytelling', 'Reflections about work, life and environment']
+    },
+    contentNotApproved: {
+      title: 'Content that won’t be approved',
+      items: ['Direct app promotion', 'Generic travel montages', 'Spammy content', 'Low-effort posts', 'Giveaway-style content', 'Money-first messaging']
+    },
+    howItWorksHeading: 'How the creators program works',
+    howItWorksIntro: 'The system is intentionally simple.',
+    howItWorksSteps: ['Create content', 'Mention Slowork clearly', 'Submit it for review', 'We review it manually', 'Earn credits'],
+    creditsNote: 'Credits feel like access, not payment',
+    whyBuiltHeading: 'Why we built this program',
+    whyBuiltBody: [
+      'Slowork is in its early stage. Right now, the goal is not scale. It is clarity, visibility and identity.',
+      'This is storytelling before growth.'
+    ],
+    whatNextHeading: 'What happens after you apply',
+    whatNextBody: [
+      'We read every profile with care, not as a volume funnel. We assess alignment, storytelling and quality against the Slowork creator brief.',
+      'Selected creators get early access, content guidelines and onboarding into the credit system.',
+      'You do not need to be a full-time digital nomad.'
+    ],
+    finalCtaHeading: 'If your content already reflects this way of life, you may be a fit',
+    finalCtaBody: 'Slowork is being built right now. The creators who join early will not just promote it—they will help define what it becomes. Create content that feels aligned. Earn your way into the experience. Help represent a better version of remote work.',
   },
   es: {
     cta: 'Solicitar unirme al programa de creadores',
-    ctaAria:
-      'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
+    ctaAria: 'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
     pageTitle: `${title} | Slowork`,
-    videoAlt:
-      'Vídeo del manifiesto Slowork — narrativa calmada e intencionada, naturaleza y comunidad',
-    playLabel:
-      'Reproducir el vídeo del manifiesto Slowork — carga el reproductor de YouTube en este espacio al activarlo',
+    videoAlt: 'Vídeo del manifiesto Slowork — narrativa calmada e intencionada, naturaleza y comunidad',
+    playLabel: 'Reproducir el vídeo del manifiesto Slowork — carga el reproductor de YouTube en este espacio al activarlo',
     iframeTitle: 'Manifiesto Slowork',
     videoMoodLine: 'Sensación: calma, intención, autenticidad.',
     faqHeading: 'Preguntas frecuentes',
@@ -112,22 +158,75 @@ const ui = {
       {
         num: '01',
         title: 'Solicitar',
-        description:
-          'Envías tu solicitud; leemos cada perfil con calma, sin tratarlo como un embudo masivo.',
+        description: 'Envías tu solicitud; leemos cada perfil con calma, sin tratarlo como un embudo masivo.',
       },
       {
         num: '02',
         title: 'Revisión',
-        description:
-          'Valoramos alineación, narrativa y calidad frente al brief de creadores Slowork.',
+        description: 'Valoramos alineación, narrativa y calidad frente al brief de creadores Slowork.',
       },
       {
         num: '03',
         title: 'Onboarding',
-        description:
-          'Si encajas, acceso anticipado, guías de contenido y entrada al sistema de créditos.',
+        description: 'Si encajas, acceso anticipado, guías de contenido y entrada al sistema de créditos.',
       },
     ],
+    // New UI text for the 13 points (Spanish translations)
+    storyHeading: 'El trabajo remoto debía sentirse más libre que esto',
+    storyBody: [
+      'En algún momento, el trabajo remoto se convirtió en otra versión del mismo estilo de vida. Mismo estrés. Mismo ruido. Mismo agotamiento. Solo que con un portátil.',
+      'Slowork nació como respuesta a eso. Creemos que el trabajo remoto debería sentirse más humano: más conectado al lugar, a las personas y a la forma en que realmente quieres vivir.'
+    ],
+    whatIsHeading: '¿Qué es Slowork?',
+    whatIsBody: [
+      'Slowork no es solo otra app de reservas.',
+      'Es una plataforma para trabajadores remotos y nómadas digitales que buscan algo más que buen WiFi. Buscan lugares que favorezcan el trabajo profundo. Entornos naturales que mejoren cómo se sienten. Experiencias que les ayuden a desconectar bien. Y un sentido de comunidad mientras viajan.',
+      'En la práctica, Slowork ayuda a descubrir alojamientos preparados para el trabajo remoto, organizar el viaje, explorar experiencias cercanas y conectar con otros a través de la app.',
+      'Es una plataforma, sí. Pero sobre todo, es una propuesta de estilo de vida.'
+    ],
+    notTypicalHeading: 'Este no es el típico programa de creadores de viajes',
+    notTypicalBody: [
+      'La mayoría de los programas de creadores se basan en campañas, entregables y promoción transaccional. Este es diferente.',
+      'Slowork no busca a los creadores que más publiquen. Buscamos creadores que puedan representar algo con significado.',
+      'Este programa existe para construir una capa de contenido orgánico y aspiracional en torno a una forma diferente de vivir y trabajar en remoto, moldeada por la naturaleza, el enfoque, la creatividad, el bienestar y la comunidad.',
+      'Si tu contenido se basa en promoción forzada, anuncios rápidos o estética de viajes genérica, probablemente esto no encaje.',
+      'Si tu contenido se siente reflexivo, visual, intencional y alineado con un ritmo de vida más pausado, eres exactamente para quien se diseñó esto.'
+    ],
+    whyBecomeHeading: 'Por qué ser creador Slowork',
+    whyBecomeIntro: 'Porque no todas las colaboraciones te ayudan a crear un trabajo del que te sientas orgulloso. Los creadores de Slowork no están aquí solo para promocionar un producto. Están aquí para documentar un estilo de vida al que la gente ya aspira.',
+    whoForHeading: 'Para quién es este programa',
+    whoForBody: [
+      'Actualmente buscamos creadores en áreas como viajes, estilo de vida, nómadas digitales, trabajo remoto, vida intencional y bienestar.',
+      'El número de seguidores no es el filtro principal. Lo que más importa es si tu contenido se siente relevante, visualmente fuerte y genuinamente alineado con el mundo Slowork.',
+      'Nos interesan especialmente los creadores que crean en inglés o subtitulan en inglés, que ya documentan entornos significativos, saben contar historias (no solo publicar estética) y crean contenido nativo para Instagram, TikTok o YouTube.'
+    ],
+    greatContentHeading: 'Cómo es el gran contenido Slowork',
+    greatContentIntro: 'No buscamos contenido que venda agresivamente. Buscamos contenido que haga sentir algo a la gente.',
+    contentWeWant: {
+      title: 'Contenido que queremos',
+      items: ['Puntos de vista aspiracionales', 'Trabajo remoto en la naturaleza', 'Contrastes ciudad vs naturaleza', 'Rutinas pausadas', 'Narrativa con significado', 'Reflexiones sobre trabajo, vida y entorno']
+    },
+    contentNotApproved: {
+      title: 'Contenido que no se aprobará',
+      items: ['Promoción directa de la app', 'Montajes de viajes genéricos', 'Contenido spam', 'Publicaciones de bajo esfuerzo', 'Contenido tipo sorteo', 'Mensajes centrados en dinero']
+    },
+    howItWorksHeading: 'Cómo funciona el programa de creadores',
+    howItWorksIntro: 'El sistema es intencionadamente sencillo.',
+    howItWorksSteps: ['Crea contenido', 'Menciona a Slowork claramente', 'Envíalo para revisión', 'Lo revisamos manualmente', 'Gana créditos'],
+    creditsNote: 'Los créditos se sienten como acceso, no como pago',
+    whyBuiltHeading: 'Por qué creamos este programa',
+    whyBuiltBody: [
+      'Slowork está en su etapa inicial. Ahora mismo, el objetivo no es la escala. Es la claridad, la visibilidad y la identidad.',
+      'Esto es narrativa antes que crecimiento.'
+    ],
+    whatNextHeading: 'Qué pasa después de aplicar',
+    whatNextBody: [
+      'Leemos cada perfil con cuidado, no como un embudo masivo. Evaluamos la alineación, la narrativa y la calidad frente al brief de creadores de Slowork.',
+      'Los creadores seleccionados obtienen acceso anticipado, pautas de contenido y entrada al sistema de créditos.',
+      'No necesitas ser un nómada digital a tiempo completo.'
+    ],
+    finalCtaHeading: 'Si tu contenido ya refleja esta forma de vida, podrías encajar',
+    finalCtaBody: 'Slowork se está construyendo ahora mismo. Los creadores que se unan pronto no solo lo promocionarán: ayudarán a definir en qué se convierte. Crea contenido que se sienta alineado. Gánate tu lugar en la experiencia. Ayuda a representar una mejor versión del trabajo remoto.',
   },
 } as const;
 
@@ -152,7 +251,15 @@ const creditOfferDescription =
     ? '1 crédito Slowork equivale a 1 USD de valor en la plataforma. Los créditos no son retirables en efectivo; desbloquean estancias y experiencias dentro de Slowork.'
     : '1 Slowork Credit equals 1 USD in platform value. Credits are not withdrawable cash; they unlock stays and experiences on Slowork.';
 
-/** Un solo JSON-LD reduce parseo en el hilo principal frente a varias etiquetas script. */
+// Add the new FAQ question
+const fullFaqItems = [
+  ...faqItems,
+  {
+    question: lang === 'es' ? '¿Necesito una gran audiencia?' : 'Do I need a large audience?',
+    answer: lang === 'es' ? 'No. La alineación y la calidad importan más que el número de seguidores.' : 'No, alignment and quality matter more than follower count.'
+  }
+];
+
 const structuredJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -182,7 +289,7 @@ const structuredJsonLd = {
     },
     {
       '@type': 'FAQPage',
-      mainEntity: faqItems.map((item) => ({
+      mainEntity: fullFaqItems.map((item) => ({
         '@type': 'Question',
         name: item.question,
         acceptedAnswer: {
@@ -192,6 +299,11 @@ const structuredJsonLd = {
       })),
     },
   ],
+};
+
+// Helper for alternating backgrounds
+const getBgClass = (index: number) => {
+  return index % 2 === 0 ? 'bg-(--color-bg-landing)' : 'bg-[color-mix(in_srgb,var(--color-bg-landing),white_15%)]';
 };
 ---
 
@@ -204,134 +316,306 @@ const structuredJsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredJsonLd)} />
   </Fragment>
 
-  <div class="relative flex min-h-dvh flex-col bg-base-100 text-base-content">
+  <div class="relative flex min-h-dvh flex-col text-base-content bg-(--color-bg-landing)">
     <Header lang={lang} />
-    <main
-      class="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-16 px-6 pb-16 pt-28 md:gap-20 md:pb-24 md:pt-32 lg:pb-28 lg:pt-36"
-    >
-      <div class="flex w-full flex-col items-center gap-7 text-center md:gap-8">
-        <h1 class="max-w-3xl font-bold text-primary text-balance">
-          {title}
-        </h1>
-        <a
-          href={ctaHref}
-          class="btn btn-secondary creators-cta min-h-12 px-8 text-base font-semibold shadow-md"
-          aria-label={t.ctaAria}
-        >
-          {t.cta}
-        </a>
-        {heroMicrocopyTrimmed ? (
-          <p class="max-w-xl text-sm font-medium leading-relaxed text-primary/90 text-balance md:text-[0.9375rem]">
-            {heroMicrocopyTrimmed}
+    
+    <main class="flex w-full flex-col">
+      
+      {/* 01 / HERO */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 flex flex-col items-center justify-center text-center ${getBgClass(0)}`}>
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-8 pt-20">
+          <SectionEyebrow num={1} text="HERO" />
+          <h1 class="font-bold text-primary text-balance tracking-[-0.02em]">
+            {title}
+          </h1>
+          <p class="max-w-2xl text-lg md:text-xl text-primary/90 text-balance leading-relaxed">
+            {subheadlineParagraphs[0]}
           </p>
-        ) : null}
-      </div>
-
-      <section
-        class="w-full border-t border-primary/10 pt-14 md:pt-16 lg:pt-20"
-        aria-label={lang === 'es' ? 'Introducción' : 'Introduction'}
-      >
-        <div
-          class="creators-story mx-auto max-w-2xl space-y-6 text-lg text-primary/95 text-balance md:space-y-7 md:text-xl"
-        >
-          {subheadlineParagraphs.map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
+          <div class="flex flex-col items-center gap-4 mt-4">
+            <a
+              href={ctaHref}
+              class="btn btn-secondary creators-cta min-h-12 px-10 text-base font-semibold shadow-md rounded-full"
+              aria-label={t.ctaAria}
+            >
+              {t.cta}
+            </a>
+            {heroMicrocopyTrimmed && (
+              <p class="max-w-md text-sm font-medium text-primary/70 text-balance">
+                {heroMicrocopyTrimmed}
+              </p>
+            )}
+          </div>
+          
+          <div class="w-full max-w-5xl mt-12 md:mt-20 rounded-2xl overflow-hidden shadow-2xl">
+            <VideoFacade
+              youtubeId={manifestoYoutubeId}
+              alt={t.videoAlt}
+              iframeTitle={t.iframeTitle}
+              playLabel={t.playLabel}
+              moodLine={t.videoMoodLine}
+              posterPriority
+            />
+          </div>
         </div>
       </section>
 
-      <section
-        class="creators-reveal w-full border-t border-primary/10 pt-14 md:pt-16"
-        aria-label={lang === 'es' ? 'En esencia' : 'At a glance'}
-      >
-        <ul class="mx-auto grid max-w-3xl grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 md:gap-x-8 md:gap-y-9">
-          {benefitBlocks.map((block, index) => (
-            <li class="flex gap-3 text-left">
-              <span
-                class="mt-0.5 shrink-0 font-mono text-[0.65rem] font-semibold tabular-nums text-primary/35 select-none"
-                aria-hidden="true"
-              >
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <div class="min-w-0">
-                <p class="text-sm font-bold leading-snug text-primary text-balance md:text-[0.9375rem]">
-                  {block.title}
-                </p>
-                <p class="mt-1.5 text-xs leading-relaxed text-primary/90 text-balance md:text-[0.8125rem]">
-                  {block.text}
-                </p>
+      {/* 02 / STORY */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(1)}`}>
+        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+          <SectionEyebrow num={2} text="STORY" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+            {t.storyHeading}
+          </h2>
+          <div class="space-y-6 text-lg md:text-xl text-primary/80 leading-relaxed text-balance">
+            {t.storyBody.map(p => <p>{p}</p>)}
+          </div>
+        </div>
+      </section>
+
+      {/* 03 / WHAT IS SLOWORK */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(2)}`}>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div class="flex flex-col items-start text-left">
+            <SectionEyebrow num={3} text="WHAT IS SLOWORK" />
+            <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+              {t.whatIsHeading}
+            </h2>
+            <div class="space-y-6 text-lg text-primary/80 leading-relaxed">
+              {t.whatIsBody.map(p => <p>{p}</p>)}
+            </div>
+          </div>
+          <div class="flex justify-center md:justify-end perspective-1000">
+            <div class="mockup-phone border-primary/10 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 bg-base-100">
+              <div class="camera"></div> 
+              <div class="display">
+                <div class="artboard artboard-demo phone-1 bg-base-200 flex flex-col items-center justify-center p-6 text-center">
+                  <div class="w-full h-48 bg-primary/5 rounded-xl mb-6 animate-pulse"></div>
+                  <div class="w-3/4 h-4 bg-primary/10 rounded mb-3"></div>
+                  <div class="w-1/2 h-4 bg-primary/10 rounded"></div>
+                  <p class="mt-8 text-primary/40 font-medium text-sm">Explore Screen UI</p>
+                </div>
               </div>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section
-        class="flex w-full flex-col items-center py-6 md:py-10"
-        aria-label={t.iframeTitle}
-      >
-        <VideoFacade
-          youtubeId={manifestoYoutubeId}
-          alt={t.videoAlt}
-          iframeTitle={t.iframeTitle}
-          playLabel={t.playLabel}
-          moodLine={t.videoMoodLine}
-          posterPriority
-        />
+      {/* 04 / NOT A TYPICAL PROGRAM */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(3)}`}>
+        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+          <SectionEyebrow num={4} text="PROGRAM" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+            {t.notTypicalHeading}
+          </h2>
+          <div class="space-y-6 text-lg text-primary/80 leading-relaxed text-balance">
+            {t.notTypicalBody.map(p => <p>{p}</p>)}
+          </div>
+        </div>
       </section>
 
-      <section
-        class="w-full border-t border-primary/10 pt-14 md:pt-16"
-        aria-labelledby="why-program-heading"
-      >
-        <h2 id="why-program-heading" class="text-xl font-bold text-primary md:text-2xl">
-          {whyProgram.heading}
-        </h2>
-        <p class="mt-4 max-w-3xl text-base text-primary/95 leading-relaxed">
-          {whyProgram.intro}
-        </p>
-        <ul class="mt-4 list-inside list-disc space-y-2 text-base text-primary/95">
-          {whyProgram.aims.map((aim) => (
-            <li>{aim}</li>
-          ))}
-        </ul>
-        <p class="mt-6 max-w-3xl font-medium text-primary leading-relaxed">
-          {whyProgram.closing}
-        </p>
+      {/* 05 / WHY BECOME A CREATOR */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(4)}`}>
+        <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+          <SectionEyebrow num={5} text="BENEFITS" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+            {t.whyBecomeHeading}
+          </h2>
+          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance">
+            {t.whyBecomeIntro}
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 text-left w-full">
+            {benefitBlocks.map((block, index) => (
+              <div class="flex flex-col gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary w-8 h-8">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+                <h3 class="text-lg font-bold text-primary tracking-[-0.01em]">{block.title}</h3>
+                <p class="text-primary/70 leading-relaxed text-sm md:text-base">{block.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <article
-        class="w-full max-w-none border-t border-primary/10 pt-14 md:pt-16 [&_h2]:mt-10 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-primary [&_h2]:first:mt-0 [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-primary/95 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:text-primary/95 [&_strong]:font-semibold [&_strong]:text-primary"
-      >
-        <Content />
-      </article>
-
-      <section
-        class="creators-reveal w-full border-t border-primary/10 pt-14 md:pt-20"
-        aria-labelledby="credits-visual-heading"
-      >
-        <h2 id="credits-visual-heading" class="text-xl font-bold text-primary md:text-2xl">
-          {t.creditsHeading}
-        </h2>
-        <CreditTable
-          rates={creditRates}
-          rows={[...t.creditRows]}
-          creditsUnitLabel={t.creditsUnitLabel}
-          footnote={t.creditsFootnote}
-        />
+      {/* 06 / WHO THIS IS FOR */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(5)}`}>
+        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+          <SectionEyebrow num={6} text="AUDIENCE" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+            {t.whoForHeading}
+          </h2>
+          <div class="space-y-6 text-lg text-primary/80 leading-relaxed text-balance">
+            {t.whoForBody.map(p => <p>{p}</p>)}
+          </div>
+        </div>
       </section>
 
-      <section
-        class="creators-reveal w-full border-t border-primary/10 pt-14 md:pt-20"
-        aria-labelledby="onboarding-visual-heading"
-      >
-        <h2 id="onboarding-visual-heading" class="text-xl font-bold text-primary md:text-2xl">
-          {t.onboardingHeading}
-        </h2>
-        <CreatorOnboardingTimeline steps={[...t.onboardingSteps]} />
+      {/* 07 / WHAT GREAT CONTENT LOOKS LIKE */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(6)}`}>
+        <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+          <SectionEyebrow num={7} text="CONTENT" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+            {t.greatContentHeading}
+          </h2>
+          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance">
+            {t.greatContentIntro}
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full text-left">
+            <div class="bg-primary/5 rounded-3xl p-8 md:p-12">
+              <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><path d="M20 6 9 17l-5-5"/></svg>
+                {t.contentWeWant.title}
+              </h3>
+              <ul class="space-y-4">
+                {t.contentWeWant.items.map(item => (
+                  <li class="flex items-start gap-3 text-primary/80">
+                    <span class="text-success mt-1">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="bg-primary/5 rounded-3xl p-8 md:p-12">
+              <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-error"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                {t.contentNotApproved.title}
+              </h3>
+              <ul class="space-y-4">
+                {t.contentNotApproved.items.map(item => (
+                  <li class="flex items-start gap-3 text-primary/80">
+                    <span class="text-error mt-1">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
+      {/* 08 / HOW IT WORKS */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(7)}`}>
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+          <SectionEyebrow num={8} text="PROCESS" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+            {t.howItWorksHeading}
+          </h2>
+          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance">
+            {t.howItWorksIntro}
+          </p>
+          
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 w-full">
+            {t.howItWorksSteps.map((step, idx) => (
+              <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <div class="flex flex-col items-center text-center">
+                  <div class="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary font-mono text-sm font-bold mb-4">
+                    {idx + 1}
+                  </div>
+                  <span class="text-sm font-medium text-primary/80 max-w-[100px]">{step}</span>
+                </div>
+                {idx < t.howItWorksSteps.length - 1 && (
+                  <div class="hidden md:block w-8 h-px bg-primary/20"></div>
+                )}
+                {idx < t.howItWorksSteps.length - 1 && (
+                  <div class="md:hidden h-8 w-px bg-primary/20 my-2"></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 09 / CREDITS SYSTEM */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(8)}`}>
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+          <SectionEyebrow num={9} text="CREDITS" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+            {t.creditsHeading}
+          </h2>
+          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance font-medium">
+            {t.creditsNote}
+          </p>
+          
+          <div class="w-full max-w-2xl text-left bg-primary/5 rounded-3xl p-8 md:p-12">
+            <CreditTable
+              rates={creditRates}
+              rows={[...t.creditRows]}
+              creditsUnitLabel={t.creditsUnitLabel}
+              footnote={t.creditsFootnote}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 10 / WHY WE BUILT THIS */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(9)}`}>
+        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+          <SectionEyebrow num={10} text="VISION" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+            {t.whyBuiltHeading}
+          </h2>
+          <div class="space-y-6 text-lg text-primary/80 leading-relaxed text-balance">
+            {t.whyBuiltBody.map((p, idx) => (
+              <p class={idx === t.whyBuiltBody.length - 1 ? "font-bold text-primary text-xl mt-8" : ""}>{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 11 / WHAT HAPPENS NEXT */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(10)}`}>
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+          <SectionEyebrow num={11} text="NEXT STEPS" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-16 text-balance">
+            {t.whatNextHeading}
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            {t.whatNextBody.map((text, idx) => (
+              <div class="bg-primary/5 rounded-2xl p-8">
+                <span class="text-secondary font-mono text-sm font-bold block mb-4">0{idx + 1}</span>
+                <p class="text-primary/80 leading-relaxed">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 12 / FAQ */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(11)}`}>
+        <div class="max-w-3xl mx-auto flex flex-col items-center text-center">
+          <SectionEyebrow num={12} text="FAQ" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-16 text-balance">
+            {t.faqHeading}
+          </h2>
+          <div class="w-full text-left">
+            <CreatorsFaqSection heading="" items={fullFaqItems} />
+          </div>
+        </div>
+      </section>
+
+      {/* 13 / FINAL CTA */}
+      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(12)}`}>
+        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+          <SectionEyebrow num={13} text="JOIN US" />
+          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+            {t.finalCtaHeading}
+          </h2>
+          <p class="text-lg text-primary/80 leading-relaxed mb-12 text-balance">
+            {t.finalCtaBody}
+          </p>
+          <a
+            href={ctaHref}
+            class="btn btn-secondary creators-cta min-h-12 px-10 text-base font-semibold shadow-md rounded-full"
+            aria-label={t.ctaAria}
+          >
+            {t.cta}
+          </a>
+        </div>
+      </section>
+
     </main>
 
     <CreatorsLegalFooter lang={lang} />
