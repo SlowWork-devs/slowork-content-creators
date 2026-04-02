@@ -2,10 +2,13 @@
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 
+import CreatorOnboardingTimeline from '../../components/CreatorOnboardingTimeline.astro';
+import CreditTable from '../../components/CreditTable.astro';
 import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
 import Header from '../../components/Header.astro';
 import VideoFacade from '../../components/VideoFacade.astro';
+import type { CreatorCreditRates } from '../../models/creator-credits.model';
 import { MAIN_SLOWORK_ORIGIN, manifestoYoutubeId } from '../../constants/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -24,8 +27,10 @@ interface Props {
 const { entry } = Astro.props;
 const lang = Astro.params.lang as 'en' | 'es';
 
-const { title, heroMicrocopy, subheadline, seoDescription, benefitBlocks, whyProgram, faqItems } =
+const { title, heroMicrocopy, subheadline, seoDescription, benefitBlocks, whyProgram, faqItems, creditRates } =
   entry.data;
+
+type CreditRow = { key: keyof CreatorCreditRates; label: string };
 const heroMicrocopyTrimmed = heroMicrocopy?.trim() ?? '';
 
 const subheadlineParagraphs = subheadline
@@ -48,6 +53,37 @@ const ui = {
     iframeTitle: 'Slowork Manifesto',
     videoMoodLine: 'Feeling: calm, intentional, real.',
     faqHeading: 'Frequently asked questions',
+    creditsHeading: 'How credits work',
+    creditsUnitLabel: 'Credits',
+    creditsFootnote: '1 Credit = 1 USD. Not redeemable for cash.',
+    creditRows: [
+      { key: 'story', label: 'Instagram Story' },
+      { key: 'carousel', label: 'Carousel (Instagram or similar)' },
+      { key: 'reel', label: 'Reel / short vertical video (Instagram, TikTok)' },
+      { key: 'longFormVideo', label: 'Long-form video (e.g. YouTube, typically 40+ min)' },
+      { key: 'blogPost', label: 'Blog article' },
+    ] satisfies CreditRow[],
+    onboardingHeading: 'What happens after you apply',
+    onboardingSteps: [
+      {
+        num: '01',
+        title: 'Apply',
+        description:
+          'Send your application—we read every profile with care, not as a volume funnel.',
+      },
+      {
+        num: '02',
+        title: 'Review',
+        description:
+          'We assess alignment, storytelling and quality against the Slowork creator brief.',
+      },
+      {
+        num: '03',
+        title: 'Onboarding',
+        description:
+          'Selected creators get early access, content guidelines and onboarding into the credit system.',
+      },
+    ],
   },
   es: {
     cta: 'Solicitar unirme al programa de creadores',
@@ -61,6 +97,37 @@ const ui = {
     iframeTitle: 'Manifiesto Slowork',
     videoMoodLine: 'Sensación: calma, intención, autenticidad.',
     faqHeading: 'Preguntas frecuentes',
+    creditsHeading: 'Cómo funcionan los créditos',
+    creditsUnitLabel: 'Créditos',
+    creditsFootnote: '1 crédito = 1 USD. No canjeable en efectivo.',
+    creditRows: [
+      { key: 'story', label: 'Historia de Instagram' },
+      { key: 'carousel', label: 'Carrusel (Instagram o similar)' },
+      { key: 'reel', label: 'Reel / vídeo corto vertical (Instagram, TikTok)' },
+      { key: 'longFormVideo', label: 'Vídeo largo (p. ej. YouTube, típicamente +40 min)' },
+      { key: 'blogPost', label: 'Artículo de blog' },
+    ] satisfies CreditRow[],
+    onboardingHeading: 'Qué pasa después de aplicar',
+    onboardingSteps: [
+      {
+        num: '01',
+        title: 'Solicitar',
+        description:
+          'Envías tu solicitud; leemos cada perfil con calma, sin tratarlo como un embudo masivo.',
+      },
+      {
+        num: '02',
+        title: 'Revisión',
+        description:
+          'Valoramos alineación, narrativa y calidad frente al brief de creadores Slowork.',
+      },
+      {
+        num: '03',
+        title: 'Onboarding',
+        description:
+          'Si encajas, acceso anticipado, guías de contenido y entrada al sistema de créditos.',
+      },
+    ],
   },
 } as const;
 
@@ -128,9 +195,8 @@ const structuredJsonLd = {
 };
 ---
 
-<BaseLayout title={t.pageTitle} lang={lang}>
+<BaseLayout title={t.pageTitle} lang={lang} seoDescription={seoDescription} canonicalUrl={canonicalURL}>
   <Fragment slot="head">
-    <meta name="description" content={seoDescription} />
     <link rel="canonical" href={canonicalURL} />
     {alternates.map((alt) => (
       <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
@@ -239,6 +305,31 @@ const structuredJsonLd = {
       >
         <Content />
       </article>
+
+      <section
+        class="creators-reveal w-full border-t border-primary/10 pt-14 md:pt-20"
+        aria-labelledby="credits-visual-heading"
+      >
+        <h2 id="credits-visual-heading" class="text-xl font-bold text-primary md:text-2xl">
+          {t.creditsHeading}
+        </h2>
+        <CreditTable
+          rates={creditRates}
+          rows={[...t.creditRows]}
+          creditsUnitLabel={t.creditsUnitLabel}
+          footnote={t.creditsFootnote}
+        />
+      </section>
+
+      <section
+        class="creators-reveal w-full border-t border-primary/10 pt-14 md:pt-20"
+        aria-labelledby="onboarding-visual-heading"
+      >
+        <h2 id="onboarding-visual-heading" class="text-xl font-bold text-primary md:text-2xl">
+          {t.onboardingHeading}
+        </h2>
+        <CreatorOnboardingTimeline steps={[...t.onboardingSteps]} />
+      </section>
 
       <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
     </main>

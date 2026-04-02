@@ -1,0 +1,50 @@
+---
+import type { CreatorCreditRates } from '../models/creator-credits.model';
+
+type CreditKey = keyof CreatorCreditRates;
+
+interface Row {
+  key: CreditKey;
+  label: string;
+}
+
+interface Props {
+  rates: CreatorCreditRates;
+  rows: Row[];
+  /** Etiqueta junto al número (p. ej. "Credits" / "Créditos"). */
+  creditsUnitLabel: string;
+  footnote: string;
+}
+
+const { rates, rows, creditsUnitLabel, footnote } = Astro.props;
+
+const rowsWithCredits = rows.map((row) => ({
+  ...row,
+  credits: rates[row.key],
+}));
+---
+
+<div class="credit-table mt-8 w-full max-w-2xl">
+  <ul
+    class="divide-y divide-primary/[0.12] rounded-xl border border-primary/[0.1] bg-base-100/40 px-1"
+    role="list"
+  >
+    {
+      rowsWithCredits.map((row) => (
+        <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-4 first:pt-5 last:pb-5 md:px-5 md:py-[1.125rem]">
+          <span class="max-w-[min(100%,20rem)] text-[0.9375rem] leading-snug text-base-content/88 md:text-base">
+            {row.label}
+          </span>
+          <span class="flex shrink-0 items-baseline gap-2 tabular-nums">
+            <span class="text-lg font-semibold text-primary md:text-xl">{row.credits}</span>
+            <span class="text-sm font-medium text-base-content/45 md:text-base">{creditsUnitLabel}</span>
+            <span class="text-sm text-base-content/40 md:text-base">(${row.credits})</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-6 max-w-xl text-xs leading-relaxed text-base-content/45 md:text-[0.8125rem]">
+    {footnote}
+  </p>
+</div>

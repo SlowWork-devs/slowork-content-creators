@@ -119,20 +119,6 @@ El sistema es deliberadamente sencillo.
 4. Lo revisamos manualmente  
 5. Ganas créditos  
 
-## Cómo funcionan los créditos
-
-Los creadores Slowork no cobran en efectivo por publicación. Ganan créditos que desbloquean la experiencia.
-
-Cada crédito tiene un valor interno de 1 USD, pero no son retirables. Los créditos se entienden como acceso, no como pago: están pensados para acercarte al estilo de vida que representas.
-
-## Qué pasa después de aplicar
-
-Si tu perfil encaja, revisaremos tu solicitud.
-
-Las personas seleccionadas pueden recibir acceso anticipado, guías de contenido, onboarding al sistema de créditos y futuras oportunidades de colaboración.
-
-No hace falta ser nómada digital a tiempo completo. Solo necesitas crear contenido que encaje de verdad en este mundo.
-
 ## Si tu contenido ya refleja esta forma de vida, puede que encajes
 
 Slowork se está construyendo ahora. Las personas que se unen pronto no solo lo promocionarán: ayudarán a definir lo que será.

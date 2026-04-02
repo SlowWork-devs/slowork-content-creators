@@ -118,20 +118,6 @@ The system is intentionally simple.
 4. We review it manually  
 5. Earn credits  
 
-## How credits work
-
-Slowork creators do not earn cash per post. They earn credits that unlock the experience.
-
-Each credit has an internal value of $1 USD, but credits are not withdrawable. Credits feel like access, not payment—they are meant to bring you closer to the lifestyle you are representing.
-
-## What happens after you apply
-
-If your profile feels aligned, we will review your application.
-
-Selected creators may receive early access, content guidelines, onboarding into the credit system and future collaboration opportunities.
-
-You do not need to be a full-time digital nomad. You just need to create content that genuinely fits this world.
-
 ## If your content already reflects this way of life, you may be a fit
 
 Slowork is being built right now. The creators who join early will not just promote it—they will help define what it becomes.

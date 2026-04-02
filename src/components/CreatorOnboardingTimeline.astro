@@ -1,0 +1,37 @@
+---
+interface Step {
+  num: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol
+  class="creator-onboarding-timeline mt-10 flex w-full max-w-4xl flex-col gap-14 md:mt-14 md:grid md:grid-cols-3 md:items-start md:gap-x-6 md:gap-y-0 lg:gap-x-10"
+  role="list"
+>
+  {
+    steps.map((step) => (
+      <li class="flex gap-5 md:flex-col md:items-center md:gap-5 md:text-center">
+        <span
+          class="pointer-events-none w-14 shrink-0 text-right font-sans text-5xl font-bold leading-none tabular-nums text-primary/[0.14] md:w-auto md:text-center md:text-6xl lg:text-7xl"
+          aria-hidden="true"
+        >
+          {step.num}
+        </span>
+        <div class="min-w-0 flex-1 space-y-2 border-l border-primary/[0.1] pl-5 md:border-l-0 md:pl-0 md:pt-1">
+          <h3 class="text-lg font-semibold tracking-tight text-primary md:text-xl">{step.title}</h3>
+          <p class="text-sm leading-relaxed text-base-content/65 md:max-w-[16rem] md:text-[0.9375rem]">
+            {step.description}
+          </p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
