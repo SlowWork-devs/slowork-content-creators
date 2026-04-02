@@ -128,6 +128,17 @@
 
 /* Storytelling (v2 §2), CTA acento secondary — componentes página creators */
 @layer components {
+  /* Secondary (#e0bb44): texto #013333 en todos los estados (WCAG sobre amarillo) */
+  .btn.btn-secondary:not(.btn-disabled) {
+    color: var(--color-secondary-content);
+  }
+
+  .btn.btn-secondary:not(.btn-disabled):hover,
+  .btn.btn-secondary:not(.btn-disabled):active,
+  .btn.btn-secondary:not(.btn-disabled):focus-visible {
+    color: var(--color-secondary-content);
+  }
+
   .creators-story {
     line-height: 1.72;
   }
