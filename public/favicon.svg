@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" aria-hidden="true">
   <defs>
     <filter id="f" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#1e3318" flood-opacity="0.25"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#011a1a" flood-opacity="0.28"/>
     </filter>
   </defs>
-  <rect width="100" height="100" rx="20" fill="#f0f4f0"/>
+  <rect width="100" height="100" rx="20" fill="#e2e8e5"/>
   <g filter="url(#f)">
     <path
-      fill="#2d4f1e"
+      fill="#013333"
       fill-rule="evenodd"
-      stroke="#f0f4f0"
+      stroke="#e2e8e5"
       stroke-width="1.5"
       d="M50 18a22 22 0 1 0 0 44 22 22 0 0 0 0-44Zm0 12a10 10 0 1 1 0 20 10 10 0 0 1 0-20Z"
     />
     <path
-      fill="#2d4f1e"
-      stroke="#f0f4f0"
+      fill="#013333"
+      stroke="#e2e8e5"
       stroke-width="1.5"
       d="M50 66c8 7 9 11 9 14a9 9 0 0 1-18 0c0-3 1-7 9-14Z"
     />

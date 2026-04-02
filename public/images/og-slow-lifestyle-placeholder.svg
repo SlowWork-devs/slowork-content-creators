@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Slow lifestyle placeholder">
   <defs>
     <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#e8efe8"/>
-      <stop offset="55%" stop-color="#d6e6d4"/>
-      <stop offset="100%" stop-color="#c5d9c0"/>
+      <stop offset="0%" stop-color="#e8ece9"/>
+      <stop offset="50%" stop-color="#ddeee5"/>
+      <stop offset="100%" stop-color="#d0ddd6"/>
     </linearGradient>
     <linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffe566"/>
-      <stop offset="100%" stop-color="#ffd700"/>
+      <stop offset="0%" stop-color="#f0d878"/>
+      <stop offset="100%" stop-color="#e0bb44"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#sky)"/>
   <circle cx="900" cy="160" r="72" fill="url(#sun)" opacity="0.92"/>
-  <path fill="#2d4f1e" opacity="0.22" d="M0 420 Q200 360 400 400 T800 380 T1200 340 V630 H0 Z"/>
-  <path fill="#2d4f1e" opacity="0.35" d="M0 460 Q280 400 520 440 T1000 400 T1200 420 V630 H0 Z"/>
-  <path fill="#2d4f1e" opacity="0.5" d="M0 520 Q320 470 600 510 T1200 480 V630 H0 Z"/>
-  <text x="72" y="120" fill="#2d4f1e" font-family="Instrument Sans, system-ui, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.02em">
+  <path fill="#013333" opacity="0.18" d="M0 420 Q200 360 400 400 T800 380 T1200 340 V630 H0 Z"/>
+  <path fill="#013333" opacity="0.28" d="M0 460 Q280 400 520 440 T1000 400 T1200 420 V630 H0 Z"/>
+  <path fill="#013333" opacity="0.42" d="M0 520 Q320 470 600 510 T1200 480 V630 H0 Z"/>
+  <text x="72" y="120" fill="#013333" font-family="Poppins, system-ui, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.02em">
     SloWork
   </text>
-  <text x="72" y="178" fill="#3d5236" font-family="Instrument Sans, system-ui, sans-serif" font-size="22" font-weight="600" opacity="0.85">
+  <text x="72" y="178" fill="#013333" font-family="Poppins, system-ui, sans-serif" font-size="22" font-weight="600" opacity="0.78">
     Creators · slow lifestyle (placeholder share image)
   </text>
 </svg>
