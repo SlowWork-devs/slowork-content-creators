@@ -25,9 +25,9 @@ const { steps } = Astro.props;
         >
           {step.num}
         </span>
-        <div class="min-w-0 flex-1 space-y-2 border-l border-primary/[0.1] pl-5 md:border-l-0 md:pl-0 md:pt-1">
+        <div class="min-w-0 flex-1 space-y-2 border-l border-primary/10 pl-5 md:border-l-0 md:pl-0 md:pt-1">
           <h3 class="text-lg font-semibold tracking-tight text-primary md:text-xl">{step.title}</h3>
-          <p class="text-sm leading-relaxed text-base-content/65 md:max-w-[16rem] md:text-[0.9375rem]">
+          <p class="text-sm leading-relaxed text-primary/90 md:max-w-[16rem] md:text-[0.9375rem]">
             {step.description}
           </p>
         </div>
