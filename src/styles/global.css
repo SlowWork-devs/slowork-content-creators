@@ -66,29 +66,88 @@
   }
 }
 
-/* CTA creators: oro exacto + feedback táctil al pulsar (Daisy puede variar secondary) */
+/*
+ * Scroll reveal (solo CSS): fade-in + leve translateY al entrar en viewport.
+ * Degradación: sin soporte de view timeline, el bloque se ve igual (sin opacity inicial).
+ */
+@supports (animation-timeline: view()) {
+  @keyframes creators-reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(0.6rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .creators-reveal {
+    animation: creators-reveal-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .creators-reveal {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Storytelling (v2 §2), CTA oro + glow — componentes página creators */
 @layer components {
+  .creators-story {
+    line-height: 1.72;
+  }
+
+  .creators-story p {
+    line-height: 1.78;
+  }
+
+  @media (width >= 768px) {
+    .creators-story {
+      line-height: 1.75;
+    }
+
+    .creators-story p {
+      line-height: 1.82;
+    }
+  }
+
   .btn.btn-secondary.creators-cta {
     background-color: #ffd700; /* exact brand gold */
     border-color: #d4b400;
     color: #2d4f1e;
-    transition-property: transform, filter, background-color, border-color;
-    transition-duration: 200ms;
+    transition-property: transform, filter, background-color, border-color, box-shadow;
+    transition-duration: 280ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgb(45 79 30 / 0.06);
   }
 
   .btn.btn-secondary.creators-cta:hover {
     background-color: #ffdf33;
     border-color: #c9a800;
     filter: brightness(1.02);
+    box-shadow:
+      0 0 0 1px rgb(255 215 0 / 0.35),
+      0 10px 36px -6px rgb(255 215 0 / 0.42),
+      0 4px 14px -4px rgb(45 79 30 / 0.12);
   }
 
   .btn.btn-secondary.creators-cta:focus-visible {
     outline: 2px solid #2d4f1e;
     outline-offset: 2px;
+    box-shadow:
+      0 0 0 3px rgb(255 215 0 / 0.25),
+      0 8px 28px -8px rgb(255 215 0 / 0.35);
   }
 
   .btn.btn-secondary.creators-cta:active {
     transform: scale(0.95);
+    box-shadow: 0 1px 3px rgb(45 79 30 / 0.1);
   }
 }
