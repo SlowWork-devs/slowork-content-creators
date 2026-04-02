@@ -7,23 +7,31 @@ interface Props {
 }
 
 const { heading, items } = Astro.props;
+const headingId = 'creators-faq-heading';
 ---
 
 <section
   class="creators-reveal w-full border-t border-primary/10 pt-14 md:pt-16"
-  aria-labelledby="creators-faq-heading"
+  aria-labelledby={heading.trim() ? headingId : undefined}
 >
-  <h2 id="creators-faq-heading" class="mb-8 text-xl font-bold text-primary md:text-2xl">
-    {heading}
-  </h2>
+  {
+    heading.trim() ? (
+      <h2
+        id={headingId}
+        class="mx-auto mb-8 max-w-3xl text-center text-2xl font-bold tracking-[-0.02em] text-primary text-balance md:text-4xl"
+      >
+        {heading.trim()}
+      </h2>
+    ) : null
+  }
   <div class="join join-vertical w-full rounded-box border border-primary/10 bg-base-100 shadow-sm">
     {
       items.map((item) => (
         <details class="collapse collapse-arrow join-item border-0 border-b border-primary/10 bg-transparent last:border-b-0">
-          <summary class="collapse-title px-4 py-4 text-left text-base font-semibold text-primary text-balance">
-            {item.question}
+          <summary class="collapse-title px-4 py-4 text-left text-balance [&::-webkit-details-marker]:hidden">
+            <h3 class="m-0 block w-full text-base font-semibold text-primary">{item.question}</h3>
           </summary>
-          <div class="collapse-content px-4 pb-4 text-sm leading-relaxed text-primary/95 text-pretty">
+          <div class="collapse-content px-4 pb-4 text-sm leading-relaxed text-primary text-pretty">
             <p>{item.answer}</p>
           </div>
         </details>
