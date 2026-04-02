@@ -1,12 +1,42 @@
 ---
 import '../styles/global.css';
 
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+
 interface Props {
   title?: string;
   lang?: string;
+  /** Descripción SEO y Open Graph (p. ej. `seoDescription` del Content Layer). */
+  seoDescription?: string;
+  /** URL canónica absoluta para `og:url`. */
+  canonicalUrl?: string;
+  /**
+   * Ruta pública de la imagen OG (p. ej. `/images/og-slow-lifestyle-placeholder.svg`).
+   * Para redes que prefieren JPG 1200×630, sustituye el archivo o usa `PUBLIC_OG_IMAGE`.
+   */
+  ogImagePath?: string;
 }
 
-const { title = 'SloWork Content Creators', lang = 'es' } = Astro.props;
+const {
+  title = 'SloWork Content Creators',
+  lang = 'es',
+  seoDescription,
+  canonicalUrl,
+  ogImagePath = '/images/og-slow-lifestyle-placeholder.svg',
+} = Astro.props;
+
+const siteBase = Astro.site ?? Astro.url;
+const ogTitle = title;
+const ogDescription = seoDescription ?? title;
+
+const ogImageOverride = import.meta.env.PUBLIC_OG_IMAGE?.trim() ?? '';
+const ogImageUrl = ogImageOverride
+  ? ogImageOverride
+  : new URL(ogImagePath, siteBase).href;
+
+const ogUrl = canonicalUrl ?? siteBase.href;
+const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+const ogLocaleAlternate = lang === 'es' ? 'en_US' : 'es_ES';
 ---
 
 <!doctype html>
@@ -14,10 +44,26 @@ const { title = 'SloWork Content Creators', lang = 'es' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {seoDescription ? <meta name="description" content={seoDescription} /> : null}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlternate} />
+    <meta property="og:site_name" content="SloWork" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,6 +73,7 @@ const { title = 'SloWork Content Creators', lang = 'es' } = Astro.props;
     <slot name="head" />
   </head>
   <body>
+    <GoogleAnalytics />
     <slot />
   </body>
 </html>
