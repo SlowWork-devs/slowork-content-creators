@@ -40,14 +40,14 @@ const subheadlineParagraphs = subheadline
 
 const ui = {
   en: {
-    cta: 'Apply to join the creators program',
+    cta: 'Apply as a creator',
     ctaAria: 'Apply to the Slowork creators program — opens the contact section on slowork.app in this window',
     pageTitle: 'Slowork Creators | A different way of living and working',
     videoAlt:
       'Slowork manifesto video — remote work app, nature workspace and intentional lifestyle storytelling',
     playLabel: 'Play the Slowork manifesto video — loads the YouTube player in this frame when activated',
     iframeTitle: 'Slowork Manifesto',
-    videoMoodLine: 'Feeling: calm, intentional, real.',
+    videoMoodLine: 'Watch now to see how it works',
     faqHeading: 'Frequently asked questions',
     creditsHeading: 'How credits work',
     creditsUnitLabel: 'Credits',
@@ -80,8 +80,9 @@ const ui = {
     // New UI text for the 13 points
     storyHeading: 'Remote work was supposed to feel freer than this',
     storyBody: [
-      'Somewhere along the way, remote work became just another version of the same lifestyle. Same stress. Same noise. Same burnout. Just with a laptop.',
-      'Slowork was created as a response to that. We believe remote work should feel more human—more connected to place, more connected to people, more aligned with the way you actually want to live.'
+      'Somewhere along the way, remote work became the same old lifestyle. Same stress. Same burnout. Just with a laptop.',
+      'Slowork was built as a response to that.',
+      'We believe remote work should feel more human — more connected to place, to people, and to the way you actually want to live.',
     ],
     whatIsHeading: 'What is Slowork?',
     whatIsBody: [
@@ -99,7 +100,7 @@ const ui = {
       'If your content feels thoughtful, visual, intentional and aligned with a slower rhythm of life, you are exactly who this was designed for.'
     ],
     whyBecomeHeading: 'Why become a Slowork creator',
-    whyBecomeIntro: 'Because not every collaboration helps you create work you are proud of. Slowork creators are not here just to promote a product. They are here to document a lifestyle people already aspire to.',
+    whyBecomeIntro: '',
     whoForHeading: 'Who this program is for',
     whoForBody: [
       'We are currently looking for creators in spaces like travel, lifestyle, digital nomad, remote work, intentional living and wellbeing.',
@@ -142,7 +143,7 @@ const ui = {
       'Vídeo del manifiesto Slowork — app de trabajo remoto, espacios en naturaleza y estilo de vida intencional',
     playLabel: 'Reproducir el vídeo del manifiesto Slowork — carga el reproductor de YouTube en este espacio al activarlo',
     iframeTitle: 'Manifiesto Slowork',
-    videoMoodLine: 'Sensación: calma, intención, autenticidad.',
+    videoMoodLine: 'Echa un vistazo para ver cómo funciona',
     faqHeading: 'Preguntas frecuentes',
     creditsHeading: 'Cómo funcionan los créditos',
     creditsUnitLabel: 'Créditos',
@@ -194,7 +195,7 @@ const ui = {
       'Si tu contenido se siente reflexivo, visual, intencional y alineado con un ritmo de vida más pausado, eres exactamente para quien se diseñó esto.'
     ],
     whyBecomeHeading: 'Por qué ser creador Slowork',
-    whyBecomeIntro: 'Porque no todas las colaboraciones te ayudan a crear un trabajo del que te sientas orgulloso. Los creadores de Slowork no están aquí solo para promocionar un producto. Están aquí para documentar un estilo de vida al que la gente ya aspira.',
+    whyBecomeIntro: '',
     whoForHeading: 'Para quién es este programa',
     whoForBody: [
       'Actualmente buscamos creadores en áreas como viajes, estilo de vida, nómadas digitales, trabajo remoto, vida intencional y bienestar.',
@@ -313,32 +314,34 @@ const getBgClass = (index: number) => {
     
     <main class="flex w-full flex-col">
       
-      {/* 01 / HERO */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 flex flex-col items-center justify-center text-center ${getBgClass(0)}`}>
-        <div class="max-w-4xl mx-auto flex flex-col items-center gap-8 pt-20">
-          <SectionEyebrow num={1} text="HERO" />
-          <h1 class="font-bold text-primary text-balance tracking-[-0.02em]">
-            {title}
-          </h1>
-          <p class="max-w-2xl text-lg md:text-xl text-primary/90 text-balance leading-relaxed">
-            {subheadlineParagraphs[0]}
-          </p>
-          <div class="flex flex-col items-center gap-4 mt-4">
-            <a
-              href={ctaHref}
-              class="btn btn-secondary creators-cta min-h-12 px-10 text-base font-semibold shadow-md rounded-full"
-              aria-label={t.ctaAria}
-            >
-              {t.cta}
-            </a>
-            {heroMicrocopyTrimmed && (
-              <p class="max-w-md text-sm font-medium text-primary/70 text-balance">
-                {heroMicrocopyTrimmed}
-              </p>
-            )}
+      {/* 01 / HERO — horizontal desktop, compact type, left-weighted */}
+      <section class={`creators-reveal w-full py-16 md:py-20 lg:py-24 px-6 md:px-10 ${getBgClass(0)}`}>
+        <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 pt-14 md:pt-16 lg:grid-cols-2 lg:gap-12 xl:max-w-7xl xl:gap-14">
+          <div class="flex min-w-0 w-full flex-col gap-5 lg:max-w-lg xl:max-w-xl">
+            <SectionEyebrow num={1} text="HERO" />
+            <h1 class="text-3xl font-bold leading-[1.12] tracking-[-0.02em] text-primary text-balance sm:text-[2rem] md:text-[2.15rem] lg:text-[2.25rem] xl:text-[2.4rem]">
+              {title}
+            </h1>
+            <p class="text-base leading-relaxed text-primary/90 text-balance md:text-lg">
+              {subheadlineParagraphs[0]}
+            </p>
+            <div class="mt-1 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <a
+                href={ctaHref}
+                class="btn btn-secondary creators-cta inline-flex min-h-11 shrink-0 px-8 text-sm font-semibold shadow-md sm:text-base rounded-full"
+                aria-label={t.ctaAria}
+              >
+                {t.cta}
+              </a>
+              {heroMicrocopyTrimmed && (
+                <p class="text-sm font-medium text-primary/70 text-balance sm:max-w-[16rem]">
+                  {heroMicrocopyTrimmed}
+                </p>
+              )}
+            </div>
           </div>
-          
-          <div class="w-full max-w-5xl mt-12 md:mt-20 rounded-2xl overflow-hidden shadow-2xl">
+
+          <div class="w-full min-w-0 rounded-xl shadow-xl lg:rounded-2xl lg:shadow-2xl">
             <VideoFacade
               youtubeId={manifestoYoutubeId}
               alt={t.videoAlt}
@@ -353,7 +356,7 @@ const getBgClass = (index: number) => {
 
       {/* 02 / STORY */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(1)}`}>
-        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
           <SectionEyebrow num={2} text="STORY" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.storyHeading}
@@ -367,7 +370,7 @@ const getBgClass = (index: number) => {
       {/* 03 / WHAT IS SLOWORK */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(2)}`}>
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div class="flex flex-col items-start text-left">
+          <div class="flex min-w-0 w-full flex-col">
             <SectionEyebrow num={3} text="WHAT IS SLOWORK" />
             <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
               {t.whatIsHeading}
@@ -388,7 +391,7 @@ const getBgClass = (index: number) => {
             >
               <div class="camera"></div>
               <div class="display">
-                <div class="artboard artboard-demo phone-1 bg-base-200 flex flex-col items-center justify-center p-6 text-center">
+                <div class="artboard artboard-demo phone-1 bg-base-200 flex flex-col items-center justify-center p-6">
                   <div class="w-full h-48 bg-primary/5 rounded-xl mb-6 animate-pulse"></div>
                   <div class="w-3/4 h-4 bg-primary/10 rounded mb-3"></div>
                   <div class="w-1/2 h-4 bg-primary/10 rounded"></div>
@@ -402,7 +405,7 @@ const getBgClass = (index: number) => {
 
       {/* 04 / NOT A TYPICAL PROGRAM */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(3)}`}>
-        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
           <SectionEyebrow num={4} text="PROGRAM" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.notTypicalHeading}
@@ -415,16 +418,18 @@ const getBgClass = (index: number) => {
 
       {/* 05 / WHY BECOME A CREATOR */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(4)}`}>
-        <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+        <div class="mx-auto flex w-full max-w-5xl flex-col items-stretch">
           <SectionEyebrow num={5} text="BENEFITS" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+          <h2
+            class={`text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] text-balance ${t.whyBecomeIntro.trim() ? 'mb-6' : 'mb-16'}`}
+          >
             {t.whyBecomeHeading}
           </h2>
-          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance">
-            {t.whyBecomeIntro}
-          </p>
+          {t.whyBecomeIntro.trim() ? (
+            <p class="mx-auto mb-16 w-full max-w-2xl text-lg text-primary/80 text-balance">{t.whyBecomeIntro}</p>
+          ) : null}
           
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 text-left w-full">
+          <div class="grid w-full grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
             {benefitBlocks.map((block, index) => (
               <div class="flex flex-col gap-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary w-8 h-8">
@@ -440,7 +445,7 @@ const getBgClass = (index: number) => {
 
       {/* 06 / WHO THIS IS FOR */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(5)}`}>
-        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
           <SectionEyebrow num={6} text="AUDIENCE" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.whoForHeading}
@@ -453,16 +458,16 @@ const getBgClass = (index: number) => {
 
       {/* 07 / WHAT GREAT CONTENT LOOKS LIKE */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(6)}`}>
-        <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+        <div class="mx-auto flex w-full max-w-5xl flex-col items-stretch">
           <SectionEyebrow num={7} text="CONTENT" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+          <h2 class="text-center text-2xl font-bold tracking-[-0.02em] text-primary text-balance md:text-4xl mb-6">
             {t.greatContentHeading}
           </h2>
-          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance">
+          <p class="mx-auto mb-16 w-full max-w-2xl text-lg text-primary/80 text-balance">
             {t.greatContentIntro}
           </p>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full text-left">
+          <div class="grid w-full grid-cols-1 gap-12 md:grid-cols-2">
             <div class="bg-primary/5 rounded-3xl p-8 md:p-12">
               <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><path d="M20 6 9 17l-5-5"/></svg>
@@ -497,23 +502,23 @@ const getBgClass = (index: number) => {
 
       {/* 08 / HOW IT WORKS */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(7)}`}>
-        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+        <div class="mx-auto flex w-full max-w-4xl flex-col items-stretch">
           <SectionEyebrow num={8} text="PROCESS" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
             {t.howItWorksHeading}
           </h2>
-          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance">
+          <p class="mx-auto mb-16 w-full max-w-2xl text-lg text-primary/80 text-balance">
             {t.howItWorksIntro}
           </p>
           
-          <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 w-full">
+          <div class="flex w-full flex-col items-stretch justify-center gap-4 md:flex-row md:gap-8">
             {t.howItWorksSteps.map((step, idx) => (
-              <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                <div class="flex flex-col items-center text-center">
-                  <div class="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary font-mono text-sm font-bold mb-4">
+              <div class="flex flex-col items-stretch gap-4 md:flex-row md:items-stretch md:gap-8">
+                <div class="flex w-full min-w-0 flex-col items-stretch md:max-w-[7rem]">
+                  <div class="mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 font-mono text-sm font-bold text-primary">
                     {idx + 1}
                   </div>
-                  <h3 class="m-0 max-w-[100px] text-sm font-medium text-primary">{step}</h3>
+                  <h3 class="m-0 text-sm font-medium text-primary">{step}</h3>
                 </div>
                 {idx < t.howItWorksSteps.length - 1 && (
                   <div class="hidden md:block w-8 h-px bg-primary/20"></div>
@@ -529,16 +534,16 @@ const getBgClass = (index: number) => {
 
       {/* 09 / CREDITS SYSTEM */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(8)}`}>
-        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+        <div class="mx-auto flex w-full max-w-4xl flex-col items-stretch">
           <SectionEyebrow num={9} text="CREDITS" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
             {t.creditsHeading}
           </h2>
-          <p class="max-w-2xl text-lg text-primary/80 mb-16 text-balance font-medium">
+          <p class="mx-auto mb-16 w-full max-w-2xl text-lg font-medium text-primary/80 text-balance">
             {t.creditsNote}
           </p>
           
-          <div class="w-full max-w-2xl text-left bg-primary/5 rounded-3xl p-8 md:p-12">
+          <div class="w-full max-w-2xl rounded-3xl bg-primary/5 p-8 md:p-12">
             <CreditTable
               rates={creditRates}
               rows={[...t.creditRows]}
@@ -551,7 +556,7 @@ const getBgClass = (index: number) => {
 
       {/* 10 / WHY WE BUILT THIS */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(9)}`}>
-        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
           <SectionEyebrow num={10} text="VISION" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.whyBuiltHeading}
@@ -566,13 +571,13 @@ const getBgClass = (index: number) => {
 
       {/* 11 / WHAT HAPPENS NEXT */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(10)}`}>
-        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+        <div class="mx-auto flex w-full max-w-4xl flex-col items-stretch">
           <SectionEyebrow num={11} text="NEXT STEPS" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-16 text-balance">
             {t.whatNextHeading}
           </h2>
           
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
             {t.whatNextBody.map((text, idx) => (
               <div class="bg-primary/5 rounded-2xl p-8">
                 <span class="text-secondary font-mono text-sm font-bold block mb-4">0{idx + 1}</span>
@@ -585,9 +590,9 @@ const getBgClass = (index: number) => {
 
       {/* 12 / FAQ */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(11)}`}>
-        <div class="max-w-3xl mx-auto flex flex-col items-center text-center">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
           <SectionEyebrow num={12} text="FAQ" />
-          <div class="w-full text-left">
+          <div class="w-full">
             <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
           </div>
         </div>
@@ -595,7 +600,7 @@ const getBgClass = (index: number) => {
 
       {/* 13 / FINAL CTA */}
       <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(12)}`}>
-        <div class="max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
           <SectionEyebrow num={13} text="JOIN US" />
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.finalCtaHeading}
