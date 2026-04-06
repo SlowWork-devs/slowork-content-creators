@@ -40,7 +40,7 @@ const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1
     <div class="video-facade__embed absolute inset-0 z-0" hidden></div>
     <button
       type="button"
-      class="video-facade__trigger group absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-left outline-none transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
+      class="video-facade__trigger group absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 outline-none transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
       aria-label={playLabel}
     >
       <Image
@@ -83,7 +83,7 @@ const embedSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1
   </div>
   {
     moodLine?.trim() ? (
-      <p class="mt-4 text-center text-sm font-normal leading-snug tracking-wide text-primary opacity-100 text-balance md:text-[0.9375rem]">
+      <p class="mt-4 w-full text-center text-sm font-normal leading-snug tracking-wide text-primary opacity-100 text-balance md:text-[0.9375rem]">
         {moodLine.trim()}
       </p>
     ) : null
