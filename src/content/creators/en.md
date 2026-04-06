@@ -1,8 +1,6 @@
 ---
 locale: en
-title: 'A content creator program for people who represent a better way of living and working'
-heroMicrocopy: >-
-  For travel, lifestyle, remote work and digital nomad creators creating in English or with English subtitles.
+title: 'A creator program for people who live and work differently'
 subheadline: |
   Slowork is building a new vision of remote work, one rooted in nature, focus, community and freedom. Our creators program is for people whose content already reflects that world, not just people looking for another brand deal.
 
@@ -85,12 +83,6 @@ This program exists to build a layer of organic, aspirational content around a d
 If your content is driven by forced promotion, fast ads or generic travel aesthetics, this probably will not fit.
 
 If your content feels thoughtful, visual, intentional and aligned with a slower rhythm of life, you are exactly who this was designed for.
-
-## Why become a Slowork creator
-
-Because not every collaboration helps you create work you are proud of.
-
-Slowork creators are not here just to promote a product. They are here to document a lifestyle people already aspire to.
 
 ## Who this program is for
 

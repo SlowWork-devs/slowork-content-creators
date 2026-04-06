@@ -1,8 +1,6 @@
 ---
 locale: es
 title: 'Un programa para creadores que representan una mejor forma de vivir y trabajar'
-heroMicrocopy: >-
-  Para creadores de viajes, estilo de vida, trabajo remoto y nómadas digitales que crean en inglés o con subtítulos en inglés.
 subheadline: |
   Slowork construye una nueva visión del trabajo remoto, arraigada en la naturaleza, el foco, la comunidad y la libertad. Nuestro programa va dirigido a quienes ya reflejan ese mundo en su contenido, no solo a quienes buscan otro acuerdo con una marca.
 
@@ -86,12 +84,6 @@ Este programa existe para crear una capa de contenido orgánico y aspiracional e
 Si tu contenido se mueve por la promoción forzada, anuncios rápidos o estéticas de viaje genéricas, probablemente no encaje.
 
 Si tu contenido se siente reflexivo, visual, intencionado y alineado con un ritmo de vida más pausado, eres justo a quien va dirigido.
-
-## Por qué unirte como creador Slowork
-
-Porque no toda colaboración te ayuda a crear trabajo del que te sientas orgulloso.
-
-Los creadores Slowork no están aquí solo para promocionar un producto. Están aquí para documentar un estilo de vida al que mucha gente ya aspira.
 
 ## A quién va dirigido este programa
 
