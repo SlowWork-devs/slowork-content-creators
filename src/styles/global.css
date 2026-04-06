@@ -84,10 +84,16 @@
 
   /**
    * Cuerpo de página: color por defecto = primario SloWork (#013333).
-   * Las utilidades `text-*` en hijos siguen sobrescribiendo; evita grises implícitos del UA.
+   * Justificación solo en párrafos (<p>), no en títulos ni otros bloques.
    */
   main {
     color: var(--color-primary);
+  }
+
+  main p,
+  footer p {
+    text-align: justify;
+    hyphens: auto;
   }
 
   h1,
@@ -136,6 +142,11 @@
 
 /* Storytelling (v2 §2), CTA acento secondary — componentes página creators */
 @layer components {
+  /* Evitar justify en CTAs de una línea (interletras incómodas) */
+  .btn {
+    text-align: center;
+  }
+
   /* Secondary (#e0bb44): texto #013333 en todos los estados (WCAG sobre amarillo) */
   .btn.btn-secondary:not(.btn-disabled) {
     color: var(--color-secondary-content);
