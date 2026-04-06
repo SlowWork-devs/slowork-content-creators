@@ -3,7 +3,7 @@
 ## **1\. Hero**
 
 **H1**  
- **A content creator program for people who represent a better way of living and working**
+ **A creator program for people who live and work differently**
 
 **Subheadline**  
  Slowork is building a new vision of remote work, one rooted in nature, focus, community and freedom.  
@@ -11,9 +11,6 @@
 
 **Primary CTA**  
  **Apply to join the creators program**
-
-**Secondary microcopy**  
- For travel, lifestyle, remote work and digital nomad creators creating in English or with English subtitles.
 
 **Visual idea (Hero)**
 
@@ -96,12 +93,6 @@ If your content feels thoughtful, visual, intentional and aligned with a slower 
 
 **H2**  
  **Why become a Slowork creator**
-
-**Body copy**  
- Because not every collaboration helps you create work you are proud of.
-
-Slowork creators are not here just to promote a product.  
- They are here to document a lifestyle people already aspire to.
 
 ### **Benefit blocks**
 
