@@ -27,8 +27,7 @@ interface Props {
 const { entry } = Astro.props;
 const lang = Astro.params.lang as 'en' | 'es';
 
-const { title, heroMicrocopy, subheadline, seoDescription, benefitBlocks, whyProgram, faqItems, creditRates } =
-  entry.data;
+const { title, heroMicrocopy, subheadline, seoDescription, benefitBlocks, faqItems, creditRates } = entry.data;
 
 type CreditRow = { key: keyof CreatorCreditRates; label: string };
 const heroMicrocopyTrimmed = heroMicrocopy?.trim() ?? '';
@@ -40,8 +39,9 @@ const subheadlineParagraphs = subheadline
 
 const ui = {
   en: {
-    cta: 'Apply as a creator',
-    ctaAria: 'Apply to the Slowork creators program — opens the contact section on slowork.app in this window',
+    cta: 'Apply to join the creators program',
+    ctaAria:
+      'Apply to join the Slowork creators program — opens the contact section on slowork.app in this window',
     pageTitle: 'Slowork Creators | A different way of living and working',
     videoAlt:
       'Slowork manifesto video — remote work app, nature workspace and intentional lifestyle storytelling',
@@ -87,57 +87,92 @@ const ui = {
     whatIsHeading: 'What is Slowork?',
     whatIsBody: [
       'Slowork is not just another booking app.',
-      'It is a platform for remote workers and digital nomads who want more than good WiFi. They want places that support deep work. Natural environments that improve how they feel. Experiences that help them disconnect well. And a sense of community while they travel.',
-      'In practical terms, Slowork helps people discover remote-ready stays, organise their trip, explore experiences nearby and connect with others through the app.',
-      'It is a platform, yes. But more importantly, it is a lifestyle proposition.'
+      "It's a platform for remote workers who want more than good WiFi — places that support deep work, natural environments that improve how you feel, experiences that help you disconnect, and a real sense of community while you travel.",
+      'In practical terms: discover remote-ready stays, organise your trip, explore local experiences and connect with others through the app.',
+      'A platform, yes. But more importantly — a lifestyle proposition.',
     ],
-    notTypicalHeading: 'This is not a typical travel creator program',
+    notTypicalHeading: 'This is not a typical creator program',
     notTypicalBody: [
-      'Most creator programs are built around campaigns, deliverables and transactional promotion. This one is different.',
-      'Slowork is not looking for creators who can post the most. We are looking for creators who can represent something meaningful.',
-      'This program exists to build a layer of organic, aspirational content around a different way of living and working remotely, one shaped by nature, focus, creativity, wellbeing and community.',
-      'If your content is driven by forced promotion, fast ads or generic travel aesthetics, this probably will not fit.',
-      'If your content feels thoughtful, visual, intentional and aligned with a slower rhythm of life, you are exactly who this was designed for.'
+      'Most programs are built around campaigns, deliverables and transactional promotion. This one is different.',
+      "We're not looking for creators who post the most. We're looking for creators who can represent something meaningful.",
+      "If your content is driven by fast ads and generic travel aesthetics — this probably won't fit.",
+      "If your content feels thoughtful, visual and intentional — you're exactly who this was designed for.",
     ],
     whyBecomeHeading: 'Why become a Slowork creator',
-    whyBecomeIntro: '',
+    whyBecomeIntro:
+      "Not every collaboration helps you create work you're proud of. Slowork creators don't just promote a product — they document a lifestyle people already aspire to.",
     whoForHeading: 'Who this program is for',
     whoForBody: [
-      'We are currently looking for creators in spaces like travel, lifestyle, digital nomad, remote work, intentional living and wellbeing.',
-      'Follower count is not the main filter. What matters more is whether your content feels relevant, visually strong and genuinely aligned with the Slowork world.',
-      'We are especially interested in creators who create in English or subtitle in English, already document meaningful environments, know how to tell stories—not just post aesthetics—and create content native to Instagram, TikTok or YouTube.'
+      'Creators in spaces like: travel · lifestyle · digital nomad · remote work · intentional living · wellbeing',
+      'Follower count is not the main filter.',
+      'What matters: content that feels relevant, visually strong and genuinely aligned with the Slowork world.',
+      "We're especially looking for creators who create in English or subtitle in English, already document meaningful environments, tell stories — not just post aesthetics — and are native to Instagram, TikTok or YouTube.",
     ],
     greatContentHeading: 'What great Slowork content looks like',
-    greatContentIntro: 'We are not looking for content that sells hard. We are looking for content that makes people feel something.',
+    greatContentIntro:
+      "We're not looking for content that sells hard. We're looking for content that makes people feel something.",
     contentWeWant: {
       title: 'Content we want',
-      items: ['Aspirational POVs', 'Remote work in nature', 'City vs nature contrasts', 'Slow routines', 'Meaningful storytelling', 'Reflections about work, life and environment']
+      items: [
+        'Aspirational POVs',
+        'Remote work in nature',
+        'City vs nature contrasts',
+        'Slow routines',
+        'Meaningful storytelling',
+        'Reflections on work, life and environment',
+      ],
     },
     contentNotApproved: {
-      title: 'Content that won’t be approved',
-      items: ['Direct app promotion', 'Generic travel montages', 'Spammy content', 'Low-effort posts', 'Giveaway-style content', 'Money-first messaging']
+      title: "Content that won't be approved",
+      items: [
+        'Direct app promotion',
+        'Generic travel montages',
+        'Spammy or low-effort content',
+        'Giveaway formats',
+        'Money-first messaging',
+      ],
     },
-    howItWorksHeading: 'How the creators program works',
+    howItWorksHeading: 'How it works',
     howItWorksIntro: 'The system is intentionally simple.',
-    howItWorksSteps: ['Create content', 'Mention Slowork clearly', 'Submit it for review', 'We review it manually', 'Earn credits'],
-    creditsNote: 'Credits feel like access, not payment',
-    whyBuiltHeading: 'Why we built this program',
-    whyBuiltBody: [
-      'Slowork is in its early stage. Right now, the goal is not scale. It is clarity, visibility and identity.',
-      'This is storytelling before growth.'
+    howItWorksSteps: [
+      'Create content',
+      'Mention Slowork clearly',
+      'Submit it for review',
+      'We review it manually',
+      'Earn credits',
     ],
+    creditsIntro: [
+      "Slowork creators don't earn cash per post. They earn credits that unlock the experience.",
+      'Each credit = $1 USD in value — redeemable for stays and experiences inside the platform. Credits are not withdrawable.',
+      "Credits feel like access, not payment. They bring you closer to the lifestyle you're representing.",
+    ],
+    whyBuiltHeading: 'Why we built this program',
+    whyBuiltIntro:
+      "Slowork is early stage. The goal right now isn't scale — it's clarity, visibility and identity.",
+    whyBuiltAims: [
+      'Build organic awareness',
+      'Shape how the brand is perceived',
+      'Understand what stories resonate',
+      'Attract the right creators early',
+      'Lay the foundation for community',
+    ],
+    whyBuiltClosing: 'This is storytelling before growth.',
     whatNextHeading: 'What happens after you apply',
     whatNextBody: [
-      'We read every profile with care, not as a volume funnel. We assess alignment, storytelling and quality against the Slowork creator brief.',
-      'Selected creators get early access, content guidelines and onboarding into the credit system.',
-      'You do not need to be a full-time digital nomad.'
+      "If your profile feels aligned, we'll review your application.",
+      'Selected creators may receive early access, content guidelines, onboarding into the credit system and future collaboration opportunities.',
+      "You don't need to be a full-time digital nomad. You just need to create content that genuinely fits this world.",
     ],
-    finalCtaHeading: 'If your content already reflects this way of life, you may be a fit',
-    finalCtaBody: 'Slowork is being built right now. The creators who join early will not just promote it—they will help define what it becomes. Create content that feels aligned. Earn your way into the experience. Help represent a better version of remote work.',
+    finalCtaHeading: 'If your content already reflects this way of life — you may be a fit.',
+    finalCtaParagraphs: [
+      "Slowork is being built right now. The creators who join early won't just promote it. They'll help define what it becomes.",
+      'Create content that feels aligned. Earn your way into the experience. Help represent a better version of remote work.',
+    ],
   },
   es: {
     cta: 'Solicitar unirme al programa de creadores',
-    ctaAria: 'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
+    ctaAria:
+      'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
     pageTitle: 'Slowork Creators | Una forma distinta de vivir y trabajar',
     videoAlt:
       'Vídeo del manifiesto Slowork — app de trabajo remoto, espacios en naturaleza y estilo de vida intencional',
@@ -176,59 +211,94 @@ const ui = {
     // New UI text for the 13 points (Spanish translations)
     storyHeading: 'El trabajo remoto debía sentirse más libre que esto',
     storyBody: [
-      'En algún momento, el trabajo remoto se convirtió en otra versión del mismo estilo de vida. Mismo estrés. Mismo ruido. Mismo agotamiento. Solo que con un portátil.',
-      'Slowork nació como respuesta a eso. Creemos que el trabajo remoto debería sentirse más humano: más conectado al lugar, a las personas y a la forma en que realmente quieres vivir.'
+      'En algún momento, el trabajo remoto se convirtió en el mismo estilo de vida de siempre. Mismo estrés. Mismo agotamiento. Solo que con un portátil.',
+      'Slowork nació como respuesta a eso.',
+      'Creemos que el trabajo remoto debería sentirse más humano — más ligado al lugar, a las personas y a la forma en que realmente quieres vivir.',
     ],
     whatIsHeading: '¿Qué es Slowork?',
     whatIsBody: [
       'Slowork no es solo otra app de reservas.',
-      'Es una plataforma para trabajadores remotos y nómadas digitales que buscan algo más que buen WiFi. Buscan lugares que favorezcan el trabajo profundo. Entornos naturales que mejoren cómo se sienten. Experiencias que les ayuden a desconectar bien. Y un sentido de comunidad mientras viajan.',
-      'En la práctica, Slowork ayuda a descubrir alojamientos preparados para el trabajo remoto, organizar el viaje, explorar experiencias cercanas y conectar con otros a través de la app.',
-      'Es una plataforma, sí. Pero sobre todo, es una propuesta de estilo de vida.'
+      'Es una plataforma para personas en remoto que quieren algo más que buen WiFi: espacios que favorezcan el trabajo profundo, entornos naturales que mejoren cómo te sientes, experiencias que te ayuden a desconectar y un sentido real de comunidad mientras viajas.',
+      'En la práctica: descubre estancias listas para el remoto, organiza tu viaje, explora experiencias locales y conéctate con otras personas desde la app.',
+      'Una plataforma, sí. Pero, sobre todo, una propuesta de estilo de vida.',
     ],
-    notTypicalHeading: 'Este no es el típico programa de creadores de viajes',
+    notTypicalHeading: 'Este no es un programa típico para creadores',
     notTypicalBody: [
-      'La mayoría de los programas de creadores se basan en campañas, entregables y promoción transaccional. Este es diferente.',
-      'Slowork no busca a los creadores que más publiquen. Buscamos creadores que puedan representar algo con significado.',
-      'Este programa existe para construir una capa de contenido orgánico y aspiracional en torno a una forma diferente de vivir y trabajar en remoto, moldeada por la naturaleza, el enfoque, la creatividad, el bienestar y la comunidad.',
-      'Si tu contenido se basa en promoción forzada, anuncios rápidos o estética de viajes genérica, probablemente esto no encaje.',
-      'Si tu contenido se siente reflexivo, visual, intencional y alineado con un ritmo de vida más pausado, eres exactamente para quien se diseñó esto.'
+      'La mayoría de programas giran en torno a campañas, entregables y promoción transaccional. Este es distinto.',
+      'No buscamos a quien más publica. Buscamos a quienes pueden representar algo con significado.',
+      'Si tu contenido se mueve por anuncios rápidos y estéticas de viaje genéricas, probablemente no encaje.',
+      'Si tu contenido se siente reflexivo, visual e intencionado, eres justo a quien va dirigido.',
     ],
-    whyBecomeHeading: 'Por qué ser creador Slowork',
-    whyBecomeIntro: '',
+    whyBecomeHeading: 'Por qué unirte como creador Slowork',
+    whyBecomeIntro:
+      'No toda colaboración te ayuda a crear un trabajo del que te sientas orgulloso. Los creadores Slowork no solo promocionan un producto: documentan un estilo de vida al que mucha gente ya aspira.',
     whoForHeading: 'Para quién es este programa',
     whoForBody: [
-      'Actualmente buscamos creadores en áreas como viajes, estilo de vida, nómadas digitales, trabajo remoto, vida intencional y bienestar.',
-      'El número de seguidores no es el filtro principal. Lo que más importa es si tu contenido se siente relevante, visualmente fuerte y genuinamente alineado con el mundo Slowork.',
-      'Nos interesan especialmente los creadores que crean en inglés o subtitulan en inglés, que ya documentan entornos significativos, saben contar historias (no solo publicar estética) y crean contenido nativo para Instagram, TikTok o YouTube.'
+      'Creadores en ámbitos como: viajes · estilo de vida · nómada digital · trabajo remoto · vida intencionada · bienestar',
+      'El número de seguidores no es el filtro principal.',
+      'Lo que importa: un contenido relevante, con fuerza visual y alineado de verdad con el universo Slowork.',
+      'Nos interesan especialmente perfiles que crean en inglés o subtitulan en inglés, ya documentan entornos con significado, cuentan historias y no solo enseñan estética, y publican de forma nativa en Instagram, TikTok o YouTube.',
     ],
-    greatContentHeading: 'Cómo es el gran contenido Slowork',
-    greatContentIntro: 'No buscamos contenido que venda agresivamente. Buscamos contenido que haga sentir algo a la gente.',
+    greatContentHeading: 'Cómo es el contenido Slowork que buscamos',
+    greatContentIntro:
+      'No buscamos contenido que venda a empujones. Buscamos contenido que haga sentir algo.',
     contentWeWant: {
       title: 'Contenido que queremos',
-      items: ['Puntos de vista aspiracionales', 'Trabajo remoto en la naturaleza', 'Contrastes ciudad vs naturaleza', 'Rutinas pausadas', 'Narrativa con significado', 'Reflexiones sobre trabajo, vida y entorno']
+      items: [
+        'Puntos de vista aspiracionales',
+        'Trabajo remoto en la naturaleza',
+        'Contrastes ciudad vs naturaleza',
+        'Rutinas pausadas',
+        'Narrativa con sentido',
+        'Reflexiones sobre trabajo, vida y entorno',
+      ],
     },
     contentNotApproved: {
-      title: 'Contenido que no se aprobará',
-      items: ['Promoción directa de la app', 'Montajes de viajes genéricos', 'Contenido spam', 'Publicaciones de bajo esfuerzo', 'Contenido tipo sorteo', 'Mensajes centrados en dinero']
+      title: 'Contenido que no aprobaremos',
+      items: [
+        'Promoción directa de la app',
+        'Montajes de viaje genéricos',
+        'Contenido spam o de bajo esfuerzo',
+        'Formatos tipo sorteo',
+        'Mensajes centrados solo en dinero',
+      ],
     },
-    howItWorksHeading: 'Cómo funciona el programa de creadores',
-    howItWorksIntro: 'El sistema es intencionadamente sencillo.',
-    howItWorksSteps: ['Crea contenido', 'Menciona a Slowork claramente', 'Envíalo para revisión', 'Lo revisamos manualmente', 'Gana créditos'],
-    creditsNote: 'Los créditos se sienten como acceso, no como pago',
-    whyBuiltHeading: 'Por qué creamos este programa',
-    whyBuiltBody: [
-      'Slowork está en su etapa inicial. Ahora mismo, el objetivo no es la escala. Es la claridad, la visibilidad y la identidad.',
-      'Esto es narrativa antes que crecimiento.'
+    howItWorksHeading: 'Cómo funciona',
+    howItWorksIntro: 'El sistema es deliberadamente sencillo.',
+    howItWorksSteps: [
+      'Crea contenido',
+      'Menciona Slowork con claridad',
+      'Envíalo a revisión',
+      'Lo revisamos manualmente',
+      'Ganas créditos',
     ],
+    creditsIntro: [
+      'Los creadores Slowork no cobran en efectivo por publicación. Ganan créditos que desbloquean la experiencia.',
+      'Cada crédito equivale a 1 USD en valor, canjeable por estancias y experiencias dentro de la plataforma. Los créditos no son retirables.',
+      'Los créditos se sienten como acceso, no como pago. Te acercan al estilo de vida que representas.',
+    ],
+    whyBuiltHeading: 'Por qué hemos creado este programa',
+    whyBuiltIntro:
+      'Slowork está en una etapa temprana. Ahora mismo el objetivo no es escalar: es claridad, visibilidad e identidad.',
+    whyBuiltAims: [
+      'Generar conciencia orgánica',
+      'Definir cómo se percibe la marca',
+      'Entender qué historias resuenan',
+      'Atraer a los creadores adecuados desde el principio',
+      'Sentar las bases de la comunidad',
+    ],
+    whyBuiltClosing: 'Esto es storytelling antes que crecimiento.',
     whatNextHeading: 'Qué pasa después de aplicar',
     whatNextBody: [
-      'Leemos cada perfil con cuidado, no como un embudo masivo. Evaluamos la alineación, la narrativa y la calidad frente al brief de creadores de Slowork.',
-      'Los creadores seleccionados obtienen acceso anticipado, pautas de contenido y entrada al sistema de créditos.',
-      'No necesitas ser un nómada digital a tiempo completo.'
+      'Si tu perfil encaja, revisamos tu solicitud.',
+      'Quienes resulten seleccionados pueden recibir acceso anticipado, guías de contenido, onboarding al sistema de créditos y oportunidades futuras de colaboración.',
+      'No hace falta ser nómada digital a tiempo completo: sí hace falta un contenido que encaje de verdad con este mundo.',
     ],
-    finalCtaHeading: 'Si tu contenido ya refleja esta forma de vida, podrías encajar',
-    finalCtaBody: 'Slowork se está construyendo ahora mismo. Los creadores que se unan pronto no solo lo promocionarán: ayudarán a definir en qué se convierte. Crea contenido que se sienta alineado. Gánate tu lugar en la experiencia. Ayuda a representar una mejor versión del trabajo remoto.',
+    finalCtaHeading: 'Si tu contenido ya refleja esta forma de vida, puede que encajes.',
+    finalCtaParagraphs: [
+      'Slowork se está construyendo ahora. Quienes se unan pronto no solo lo promocionarán: ayudarán a definir lo que será.',
+      'Crea contenido alineado. Gana tu acceso a la experiencia. Ayuda a representar una mejor versión del trabajo remoto.',
+    ],
   },
 } as const;
 
@@ -322,7 +392,7 @@ const getBgClass = (index: number) => {
             <h1 class="text-3xl font-bold leading-[1.12] tracking-[-0.02em] text-primary text-balance sm:text-[2rem] md:text-[2.15rem] lg:text-[2.25rem] xl:text-[2.4rem]">
               {title}
             </h1>
-            <p class="text-base leading-relaxed text-primary/90 text-balance md:text-lg">
+            <p class="max-w-prose text-base leading-relaxed text-primary/90 text-pretty md:text-lg">
               {subheadlineParagraphs[0]}
             </p>
             <div class="mt-1 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
@@ -334,7 +404,7 @@ const getBgClass = (index: number) => {
                 {t.cta}
               </a>
               {heroMicrocopyTrimmed && (
-                <p class="text-sm font-medium text-primary/70 text-balance sm:max-w-[16rem]">
+                <p class="max-w-prose text-sm font-medium text-primary/70 text-pretty sm:max-w-[18rem]">
                   {heroMicrocopyTrimmed}
                 </p>
               )}
@@ -361,8 +431,10 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.storyHeading}
           </h2>
-          <div class="space-y-6 text-lg md:text-xl text-primary/80 leading-relaxed text-balance">
-            {t.storyBody.map(p => <p>{p}</p>)}
+          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:text-xl md:leading-[1.7]">
+            {t.storyBody.map((p) => (
+              <p>{p}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -375,8 +447,10 @@ const getBgClass = (index: number) => {
             <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
               {t.whatIsHeading}
             </h2>
-            <div class="space-y-6 text-lg text-primary/80 leading-relaxed">
-              {t.whatIsBody.map(p => <p>{p}</p>)}
+            <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+              {t.whatIsBody.map((p) => (
+                <p>{p}</p>
+              ))}
             </div>
           </div>
           <figure class="m-0 flex justify-center md:justify-end perspective-1000">
@@ -410,8 +484,10 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.notTypicalHeading}
           </h2>
-          <div class="space-y-6 text-lg text-primary/80 leading-relaxed text-balance">
-            {t.notTypicalBody.map(p => <p>{p}</p>)}
+          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+            {t.notTypicalBody.map((p) => (
+              <p>{p}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -426,7 +502,7 @@ const getBgClass = (index: number) => {
             {t.whyBecomeHeading}
           </h2>
           {t.whyBecomeIntro.trim() ? (
-            <p class="mx-auto mb-16 w-full max-w-2xl text-lg text-primary/80 text-balance">{t.whyBecomeIntro}</p>
+            <p class="mx-auto mb-16 w-full max-w-prose text-lg text-primary/80 text-pretty">{t.whyBecomeIntro}</p>
           ) : null}
           
           <div class="grid w-full grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
@@ -436,7 +512,7 @@ const getBgClass = (index: number) => {
                   <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
                 </svg>
                 <h3 class="text-lg font-bold text-primary tracking-[-0.01em]">{block.title}</h3>
-                <p class="text-primary/70 leading-relaxed text-sm md:text-base">{block.text}</p>
+                <p class="text-pretty text-primary/70 leading-relaxed text-sm md:text-base">{block.text}</p>
               </div>
             ))}
           </div>
@@ -450,8 +526,10 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.whoForHeading}
           </h2>
-          <div class="space-y-6 text-lg text-primary/80 leading-relaxed text-balance">
-            {t.whoForBody.map(p => <p>{p}</p>)}
+          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+            {t.whoForBody.map((p) => (
+              <p>{p}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -463,7 +541,7 @@ const getBgClass = (index: number) => {
           <h2 class="text-center text-2xl font-bold tracking-[-0.02em] text-primary text-balance md:text-4xl mb-6">
             {t.greatContentHeading}
           </h2>
-          <p class="mx-auto mb-16 w-full max-w-2xl text-lg text-primary/80 text-balance">
+          <p class="mx-auto mb-16 w-full max-w-prose text-center text-lg text-primary/80 text-pretty md:text-left">
             {t.greatContentIntro}
           </p>
           
@@ -474,10 +552,10 @@ const getBgClass = (index: number) => {
                 {t.contentWeWant.title}
               </h3>
               <ul class="space-y-4">
-                {t.contentWeWant.items.map(item => (
-                  <li class="flex items-start gap-3 text-primary/80">
-                    <span class="text-success mt-1">•</span>
-                    {item}
+                {t.contentWeWant.items.map((item) => (
+                  <li class="flex items-start gap-3 text-pretty leading-relaxed text-primary/80">
+                    <span class="text-success mt-1 shrink-0">•</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -488,10 +566,10 @@ const getBgClass = (index: number) => {
                 {t.contentNotApproved.title}
               </h3>
               <ul class="space-y-4">
-                {t.contentNotApproved.items.map(item => (
-                  <li class="flex items-start gap-3 text-primary/80">
-                    <span class="text-error mt-1">•</span>
-                    {item}
+                {t.contentNotApproved.items.map((item) => (
+                  <li class="flex items-start gap-3 text-pretty leading-relaxed text-primary/80">
+                    <span class="text-error mt-1 shrink-0">•</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -507,7 +585,7 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
             {t.howItWorksHeading}
           </h2>
-          <p class="mx-auto mb-16 w-full max-w-2xl text-lg text-primary/80 text-balance">
+          <p class="mx-auto mb-16 w-full max-w-prose text-lg text-primary/80 text-pretty">
             {t.howItWorksIntro}
           </p>
           
@@ -539,9 +617,11 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
             {t.creditsHeading}
           </h2>
-          <p class="mx-auto mb-16 w-full max-w-2xl text-lg font-medium text-primary/80 text-balance">
-            {t.creditsNote}
-          </p>
+          <div class="mx-auto mb-16 w-full max-w-prose space-y-6 text-lg font-medium text-primary/80">
+            {t.creditsIntro.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
           
           <div class="w-full max-w-2xl rounded-3xl bg-primary/5 p-8 md:p-12">
             <CreditTable
@@ -561,10 +641,17 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.whyBuiltHeading}
           </h2>
-          <div class="space-y-6 text-lg text-primary/80 leading-relaxed text-balance">
-            {t.whyBuiltBody.map((p, idx) => (
-              <p class={idx === t.whyBuiltBody.length - 1 ? "font-bold text-primary text-xl mt-8" : ""}>{p}</p>
-            ))}
+          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+            <p>{t.whyBuiltIntro}</p>
+            <p class="font-medium text-primary">
+              {lang === 'es' ? 'Este programa existe para:' : 'This program exists to:'}
+            </p>
+            <ul class="list-disc space-y-3 pl-5 marker:text-primary/50">
+              {t.whyBuiltAims.map((item) => (
+                <li class="ps-1 leading-relaxed">{item}</li>
+              ))}
+            </ul>
+            <p class="text-xl font-bold text-primary text-pretty">{t.whyBuiltClosing}</p>
           </div>
         </div>
       </section>
@@ -581,7 +668,7 @@ const getBgClass = (index: number) => {
             {t.whatNextBody.map((text, idx) => (
               <div class="bg-primary/5 rounded-2xl p-8">
                 <span class="text-secondary font-mono text-sm font-bold block mb-4">0{idx + 1}</span>
-                <p class="text-primary/80 leading-relaxed">{text}</p>
+                <p class="text-pretty text-primary/80 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
@@ -605,9 +692,11 @@ const getBgClass = (index: number) => {
           <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
             {t.finalCtaHeading}
           </h2>
-          <p class="text-lg text-primary/80 leading-relaxed mb-12 text-balance">
-            {t.finalCtaBody}
-          </p>
+          <div class="mb-12 max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+            {t.finalCtaParagraphs.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
           <a
             href={ctaHref}
             class="btn btn-secondary creators-cta min-h-12 px-10 text-base font-semibold shadow-md rounded-full"
