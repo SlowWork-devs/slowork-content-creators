@@ -83,8 +83,8 @@
   }
 
   /**
-   * Cuerpo de página: color por defecto = primario SloWork (#013333).
-   * Justificación solo en párrafos (<p>), no en títulos ni otros bloques.
+   * Cuerpo: color primario. Párrafos alineados al inicio (mejor legibilidad web que justify).
+   * text-wrap: pretty reduce viudas/huérfanas donde el motor lo soporta.
    */
   main {
     color: var(--color-primary);
@@ -92,8 +92,13 @@
 
   main p,
   footer p {
-    text-align: justify;
-    hyphens: auto;
+    text-align: start;
+    hyphens: manual;
+    text-wrap: pretty;
+  }
+
+  main li {
+    text-wrap: pretty;
   }
 
   h1,
@@ -142,9 +147,9 @@
 
 /* Storytelling (v2 §2), CTA acento secondary — componentes página creators */
 @layer components {
-  /* Evitar justify en CTAs de una línea (interletras incómodas) */
   .btn {
     text-align: center;
+    text-wrap: balance;
   }
 
   /* Secondary (#e0bb44): texto #013333 en todos los estados (WCAG sobre amarillo) */
