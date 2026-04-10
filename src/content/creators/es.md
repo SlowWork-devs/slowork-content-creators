@@ -1,6 +1,6 @@
 ---
 locale: es
-title: 'Un programa para creadores que viven y trabajan de otra forma'
+title: 'Un programa para creadores que *viven y trabajan de otra forma*'
 subheadline: >-
   Slowork construye una nueva visión del trabajo remoto — arraigada en la naturaleza, el foco, la comunidad y la libertad. Este programa es para creadores cuyo contenido ya refleja ese mundo.
 heroMicrocopy: >-

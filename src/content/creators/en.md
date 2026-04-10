@@ -1,6 +1,6 @@
 ---
 locale: en
-title: 'A creator program for people who live and work differently'
+title: 'A creator program for people who *live and work differently*'
 subheadline: >-
   Slowork is building a new vision of remote work — rooted in nature, focus, community and freedom. This program is for creators whose content already reflects that world.
 heroMicrocopy: >-
