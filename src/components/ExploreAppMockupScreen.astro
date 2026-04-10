@@ -1,0 +1,200 @@
+---
+import { Image } from 'astro:assets';
+
+import logoImg from '../assets/logo-slowork.png';
+
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+
+/** Cabana de madera / montaña — ventanales y nieve (Unsplash) */
+const heroImageSrc =
+  'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=720&q=82';
+
+/** Interior acogedor / hogar — luz natural (Unsplash) */
+const secondaryImageSrc =
+  'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=720&q=82';
+
+const copy =
+  lang === 'es'
+    ? {
+        scoreBadge: '9.8 Deep Work Score',
+        title: 'Cabaña de montaña, Noruega',
+        price: '24 créditos · noche',
+        secondaryScoreBadge: '8.7 Deep Work Score',
+        secondaryTitle: 'Apartamento céntrico, Oporto',
+        secondaryPrice: '21 créditos · noche',
+        homeListingPills: ['Acogedor', 'WiFi rápido', 'Luz natural'],
+        tabBlog: 'Blog',
+        tabCategories: 'Categorías',
+        tabNotifications: 'Alertas',
+        tabCreators: 'Creators',
+      }
+    : {
+        scoreBadge: '9.8 Deep Work Score',
+        title: 'Mountain Cabin, Norway',
+        price: '24 credits · night',
+        secondaryScoreBadge: '8.7 Deep Work Score',
+        secondaryTitle: 'City apartment, Porto',
+        secondaryPrice: '21 credits · night',
+        homeListingPills: ['Cozy', 'Fast WiFi', 'Natural light'],
+        tabBlog: 'Blog',
+        tabCategories: 'Categories',
+        tabNotifications: 'Notifications',
+        tabCreators: 'Creators',
+      };
+---
+
+<div class="relative flex h-full min-h-0 w-full min-w-0 flex-1 touch-pan-y flex-col overflow-hidden bg-[#e2e8e5] font-sans text-[#013333]">
+  <header class="z-20 shrink-0 border-b border-primary/5 bg-white/82 px-3 pb-2.5 pt-9 backdrop-blur-md">
+    <div class="flex items-center justify-between">
+      <Image
+        src={logoImg}
+        alt=""
+        width={84}
+        height={20}
+        class="h-3.5 w-auto object-contain object-left opacity-95"
+        loading="lazy"
+        decoding="async"
+        densities={[1, 2]}
+      />
+      <div class="flex items-center gap-1.5 text-[#013333]/70">
+        <span class="flex h-6 w-6 items-center justify-center rounded-xl border border-primary/10 bg-[#e2e8e5]/75">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </span>
+        <span class="flex h-6 w-6 items-center justify-center rounded-xl border border-primary/10 bg-[#e2e8e5]/75">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+            <path d="M3.262 15.326A9 9 0 1 0 20.74 15.326a1 1 0 0 1-.468-.846V11a8 8 0 1 0-16 0v3.48a1 1 0 0 1-.47.846"></path>
+          </svg>
+        </span>
+        <span class="flex h-6 w-6 items-center justify-center rounded-full border border-primary/15 bg-[#013333]/8 text-[#013333]/80">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <div
+    class="min-h-0 flex-1 touch-pan-y overflow-y-auto px-3.5 pb-2 pt-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  >
+    <div class="flex flex-col gap-3">
+      <article class="relative shrink-0 overflow-hidden rounded-xl shadow-[0_12px_36px_-16px_rgba(1,51,51,0.35)] ring-1 ring-[#013333]/10">
+        <div class="aspect-4/3 w-full rounded-xl">
+          <Image
+            src={heroImageSrc}
+            alt=""
+            width={720}
+            height={540}
+            class="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+            densities={[1, 2]}
+          />
+        </div>
+        <div
+          class="pointer-events-none absolute left-2.5 top-2.5 rounded-xl bg-white/95 px-2.5 py-1 text-[9px] font-semibold leading-none tracking-wide text-[#013333] shadow-sm ring-1 ring-[#013333]/8 backdrop-blur-sm"
+        >
+          {copy.scoreBadge}
+        </div>
+        <div
+          class="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-xl bg-linear-to-t from-[#013333]/78 via-[#013333]/25 to-transparent px-3 pb-2.5 pt-10"
+        >
+          <h3 class="text-[12px] font-bold leading-tight tracking-[-0.02em] text-[#e2e8e5] text-pretty">
+            {copy.title}
+          </h3>
+          <p class="mt-0.5 text-[10px] font-medium text-[#e2e8e5]/88">{copy.price}</p>
+        </div>
+      </article>
+
+      <article class="shrink-0 overflow-hidden rounded-xl bg-[#e2e8e5]/90 shadow-[0_10px_28px_-14px_rgba(1,51,51,0.32)] ring-1 ring-[#013333]/8">
+        <div class="relative overflow-hidden rounded-t-xl">
+          <div class="aspect-video w-full">
+            <Image
+              src={secondaryImageSrc}
+              alt=""
+              width={720}
+              height={405}
+              class="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+              densities={[1, 2]}
+            />
+          </div>
+          <div
+            class="pointer-events-none absolute left-2.5 top-2.5 rounded-xl bg-white/95 px-2.5 py-1 text-[9px] font-semibold leading-none tracking-wide text-[#013333] shadow-sm ring-1 ring-[#013333]/8 backdrop-blur-sm"
+          >
+            {copy.secondaryScoreBadge}
+          </div>
+          <div
+            class="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-[#013333]/72 via-[#013333]/22 to-transparent px-3 pb-2 pt-8"
+          >
+            <h3 class="text-[11px] font-bold leading-tight tracking-[-0.02em] text-[#e2e8e5] text-pretty">
+              {copy.secondaryTitle}
+            </h3>
+            <p class="mt-0.5 text-[9px] font-medium text-[#e2e8e5]/88">{copy.secondaryPrice}</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1.5 px-2 pb-2.5 pt-2" aria-hidden="true">
+          {
+            copy.homeListingPills.map((label) => (
+              <span class="rounded-xl bg-[#013333] px-2.5 py-1 text-[9px] font-semibold tracking-wide text-[#e2e8e5] shadow-sm">
+                {label}
+              </span>
+            ))
+          }
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <nav
+    class="z-20 flex shrink-0 items-stretch justify-around gap-0.5 border-t border-primary/5 bg-[#e2e8e5]/96 px-1 pb-[env(safe-area-inset-bottom,0px)] pt-1.5 backdrop-blur-md"
+    aria-label={lang === 'es' ? 'Navegación principal (mockup)' : 'Main navigation (mockup)'}
+  >
+    <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[#013333]/48">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M8 6h13"></path>
+        <path d="M8 12h13"></path>
+        <path d="M8 18h13"></path>
+        <path d="M3 6h.01"></path>
+        <path d="M3 12h.01"></path>
+        <path d="M3 18h.01"></path>
+      </svg>
+      <span class="text-[7px] font-medium leading-none">{copy.tabBlog}</span>
+    </div>
+    <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl bg-white/62 py-1 text-[#013333] ring-1 ring-primary/8">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="7" height="7" x="3" y="3" rx="1.5"></rect>
+        <rect width="7" height="7" x="14" y="3" rx="1.5"></rect>
+        <rect width="7" height="7" x="3" y="14" rx="1.5"></rect>
+        <rect width="7" height="7" x="14" y="14" rx="1.5"></rect>
+      </svg>
+      <span class="text-[7px] font-semibold leading-none">{copy.tabCategories}</span>
+    </div>
+    <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[#013333]/48">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+        <path d="M3.262 15.326A9 9 0 1 0 20.74 15.326a1 1 0 0 1-.468-.846V11a8 8 0 1 0-16 0v3.48a1 1 0 0 1-.47.846"></path>
+      </svg>
+      <span class="text-[7px] font-medium leading-none">{copy.tabNotifications}</span>
+    </div>
+    <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[#013333]/48">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="6" width="15" height="12" rx="2"></rect>
+        <path d="m22 8-5 4 5 4V8Z"></path>
+        <path d="m11.5 11.5.8-1.6 1.6-.2-1.2-1.2.3-1.6-1.5.8-1.5-.8.3 1.6-1.2 1.2 1.6.2.8 1.6z"></path>
+      </svg>
+      <span class="text-[7px] font-medium leading-none">{copy.tabCreators}</span>
+    </div>
+  </nav>
+</div>
