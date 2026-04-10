@@ -2,13 +2,23 @@
 interface Props {
   num: number;
   text: string;
+  /** Centered layout (editorial sections); section 03 uses default start */
+  align?: 'start' | 'center';
+  /** Dark section (e.g. #1A1A1A background) */
+  tone?: 'default' | 'on-dark';
+  class?: string;
 }
 
-const { num, text } = Astro.props;
+const { num, text, align = 'start', tone = 'default', class: className } = Astro.props;
 ---
 
 <span
-  class="mb-4 block font-mono text-[0.65rem] font-semibold tracking-widest text-primary/40 uppercase"
+  class:list={[
+    'mb-4 block font-mono text-[0.65rem] font-semibold tracking-widest uppercase',
+    tone === 'on-dark' ? 'text-white/45' : 'text-primary/40',
+    align === 'center' && 'text-center',
+    className,
+  ]}
 >
   {String(num).padStart(2, '0')} / {text}
 </span>

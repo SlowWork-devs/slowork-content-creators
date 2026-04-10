@@ -13,10 +13,13 @@ interface Props {
   rows: Row[];
   /** Etiqueta junto al número (p. ej. "Credits" / "Créditos"). */
   creditsUnitLabel: string;
+  formatColumnLabel: string;
+  valueColumnLabel: string;
+  caption: string;
   footnote: string;
 }
 
-const { rates, rows, creditsUnitLabel, footnote } = Astro.props;
+const { rates, rows, creditsUnitLabel, formatColumnLabel, valueColumnLabel, caption, footnote } = Astro.props;
 
 const rowsWithCredits = rows.map((row) => ({
   ...row,
@@ -24,27 +27,53 @@ const rowsWithCredits = rows.map((row) => ({
 }));
 ---
 
-<div class="credit-table mt-8 w-full min-w-0 max-w-2xl">
-  <ul
-    class="divide-y divide-primary/10 rounded-xl border border-primary/10 bg-base-200/50 px-2 shadow-[0_2px_16px_-8px_rgba(1,51,51,0.05)] ring-1 ring-primary/10 sm:px-1 sm:shadow-[0_4px_22px_-10px_rgba(1,51,51,0.14),0_1px_3px_rgba(1,51,51,0.06)] sm:ring-primary/10"
-    role="list"
-  >
-    {
-      rowsWithCredits.map((row) => (
-        <li class="flex flex-col gap-2 px-5 py-4 first:pt-5 last:pb-5 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4 sm:gap-y-1 sm:px-5 md:py-[1.125rem]">
-          <span class="min-w-0 text-[0.9375rem] leading-snug text-primary sm:max-w-[min(100%,20rem)] md:text-base">
-            {row.label}
-          </span>
-          <span class="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5 tabular-nums sm:shrink-0 sm:justify-end">
-            <span class="text-lg font-semibold text-primary md:text-xl">{row.credits}</span>
-            <span class="text-sm font-medium text-primary/90 md:text-base">{creditsUnitLabel}</span>
-            <span class="text-sm text-primary/90 md:text-base">(${row.credits})</span>
-          </span>
-        </li>
-      ))
-    }
-  </ul>
-  <p class="mt-6 max-w-xl text-xs leading-relaxed text-primary md:text-[0.8125rem]">
+<div class="credit-table mx-auto w-full min-w-0 max-w-2xl text-center">
+  <div class="overflow-x-auto rounded-2xl [-webkit-overflow-scrolling:touch] text-left">
+    <table class="w-full min-w-[min(100%,20rem)] table-fixed border-collapse">
+      <caption class="sr-only">
+        {caption}
+      </caption>
+      <thead>
+        <tr class="border-b border-primary/15">
+          <th
+            scope="col"
+            class="w-[58%] pb-4 pt-1 text-start align-bottom text-[0.65rem] font-bold uppercase tracking-[0.16em] text-primary/55 md:w-[62%]"
+          >
+            {formatColumnLabel}
+          </th>
+          <th
+            scope="col"
+            class="w-[42%] pb-4 pt-1 text-end align-bottom text-[0.65rem] font-bold uppercase tracking-[0.16em] text-primary/55 md:w-[38%]"
+          >
+            {valueColumnLabel}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rowsWithCredits.map((row) => (
+            <tr class="border-b border-primary/8 transition-colors last:border-0 hover:bg-primary/[0.02]">
+              <td class="py-4 pe-4 align-middle text-base font-medium leading-snug text-primary/88 md:py-5 md:pe-6 md:text-lg text-pretty">
+                {row.label}
+              </td>
+              <td class="py-4 align-middle text-end md:py-5">
+                <div class="inline-flex flex-col items-end gap-0.5 sm:inline-flex">
+                  <span class="font-editorial-serif text-3xl italic leading-none text-primary tabular-nums md:text-4xl">
+                    {row.credits}
+                  </span>
+                  <span class="text-end text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary/50">
+                    {creditsUnitLabel}{' '}
+                    <span class="font-medium normal-case tracking-normal text-primary/75">(${row.credits})</span>
+                  </span>
+                </div>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="mx-auto mt-8 max-w-lg text-center text-sm leading-relaxed text-primary/65">
     {footnote}
   </p>
 </div>
