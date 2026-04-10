@@ -7,6 +7,11 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   /** Canonical y JSON-LD; ajusta si el sitio vive en otro dominio. */
   site: 'https://www.slowork.app',
+  image: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+    ],
+  },
   integrations: [sitemap()],
   trailingSlash: 'always',
   /** La home estática emite HTML de redirección; en muchos hosts también puedes duplicar la regla. */
