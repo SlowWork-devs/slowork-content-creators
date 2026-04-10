@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
+import { Bell, Globe, LayoutGrid, List, UserRound, Video } from '@lucide/astro';
 
 import logoImg from '../assets/logo-slowork.png';
 
@@ -63,13 +63,13 @@ const copy =
       />
       <div class="flex items-center gap-1.5 text-[#013333]/70">
         <span class="flex h-6 w-6 items-center justify-center rounded-xl border border-primary/10 bg-[#e2e8e5]/75">
-          <Icon name="lucide:globe" class="h-[13px] w-[13px] shrink-0 stroke-[1.6] text-current" aria-hidden="true" />
+          <Globe size={13} stroke-width={1.6} class="shrink-0 text-current" aria-hidden="true" />
         </span>
         <span class="flex h-6 w-6 items-center justify-center rounded-xl border border-primary/10 bg-[#e2e8e5]/75">
-          <Icon name="lucide:bell" class="h-[13px] w-[13px] shrink-0 stroke-[1.6] text-current" aria-hidden="true" />
+          <Bell size={13} stroke-width={1.6} class="shrink-0 text-current" aria-hidden="true" />
         </span>
         <span class="flex h-6 w-6 items-center justify-center rounded-full border border-primary/15 bg-[#013333]/8 text-[#013333]/80">
-          <Icon name="lucide:user-round" class="h-[13px] w-[13px] shrink-0 stroke-[1.6] text-current" aria-hidden="true" />
+          <UserRound size={13} stroke-width={1.6} class="shrink-0 text-current" aria-hidden="true" />
         </span>
       </div>
     </div>
@@ -153,19 +153,19 @@ const copy =
     aria-label={lang === 'es' ? 'Navegación principal (mockup)' : 'Main navigation (mockup)'}
   >
     <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[#013333]/48">
-      <Icon name="lucide:list" class="h-[18px] w-[18px] shrink-0 stroke-[1.5] text-current" aria-hidden="true" />
+      <List size={18} stroke-width={1.5} class="shrink-0 text-current" aria-hidden="true" />
       <span class="text-[7px] font-medium leading-none">{copy.tabBlog}</span>
     </div>
     <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl bg-white/62 py-1 text-[#013333] ring-1 ring-primary/8">
-      <Icon name="lucide:layout-grid" class="h-[18px] w-[18px] shrink-0 stroke-[1.55] text-current" aria-hidden="true" />
+      <LayoutGrid size={18} stroke-width={1.55} class="shrink-0 text-current" aria-hidden="true" />
       <span class="text-[7px] font-semibold leading-none">{copy.tabCategories}</span>
     </div>
     <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[#013333]/48">
-      <Icon name="lucide:bell" class="h-[18px] w-[18px] shrink-0 stroke-[1.5] text-current" aria-hidden="true" />
+      <Bell size={18} stroke-width={1.5} class="shrink-0 text-current" aria-hidden="true" />
       <span class="text-[7px] font-medium leading-none">{copy.tabNotifications}</span>
     </div>
     <div class="flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[#013333]/48">
-      <Icon name="lucide:video" class="h-[18px] w-[18px] shrink-0 stroke-[1.5] text-current" aria-hidden="true" />
+      <Video size={18} stroke-width={1.5} class="shrink-0 text-current" aria-hidden="true" />
       <span class="text-[7px] font-medium leading-none">{copy.tabCreators}</span>
     </div>
   </nav>

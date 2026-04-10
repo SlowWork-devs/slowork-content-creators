@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { ChevronDown } from '@lucide/astro';
 
 import type { CreatorFaqItem } from '../models/creator-landing-content.model';
 
@@ -35,7 +35,7 @@ const headingId = 'creators-faq-heading';
               class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-primary/10 text-primary/60 transition-transform duration-300 group-open:rotate-180"
               aria-hidden="true"
             >
-              <Icon name="lucide:chevron-down" class="h-[18px] w-[18px] shrink-0 stroke-2 text-current" aria-hidden="true" />
+              <ChevronDown size={18} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
             </span>
           </summary>
           <div class="border-t border-primary/6 bg-base-100/50 px-6 pb-6 pt-2">

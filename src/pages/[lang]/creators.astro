@@ -1,7 +1,21 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
-import { Icon } from 'astro-icon/components';
+import {
+  Award,
+  Camera,
+  Check,
+  CircleCheck,
+  CircleDollarSign,
+  CircleX,
+  ClipboardCheck,
+  CloudDownload,
+  Paintbrush,
+  Sparkles,
+  Table2,
+  TrendingUp,
+  X,
+} from '@lucide/astro';
 
 import CreditTable from '../../components/CreditTable.astro';
 import ExploreAppMockupScreen from '../../components/ExploreAppMockupScreen.astro';
@@ -424,7 +438,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             <span
               class="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-base-100/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85 shadow-sm backdrop-blur-sm"
             >
-              <Icon name="lucide:sparkles" class="h-[14px] w-[14px] shrink-0 stroke-2 text-secondary" aria-hidden="true" />
+              <Sparkles size={14} stroke-width={2} class="shrink-0 text-secondary" aria-hidden="true" />
               {t.heroBadge}
             </span>
           </div>
@@ -535,7 +549,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
           <div class="grid w-full max-w-5xl grid-cols-1 md:grid-cols-2">
             <div class="flex flex-col justify-center border-b border-white/10 bg-white/[0.02] p-10 text-left backdrop-blur-md md:border-b-0 md:border-r">
               <div class="mb-5 flex items-center gap-3 text-red-300/95">
-                <Icon name="lucide:circle-x" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                <CircleX size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                 <span class="text-sm font-bold uppercase tracking-widest text-white/90">
                   {t.comparisonWrongLabel}
                 </span>
@@ -544,7 +558,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             </div>
             <div class="flex flex-col justify-center border border-secondary/20 shadow-[0_0_30px_rgba(224,187,68,0.04)] bg-white/[0.02] p-10 text-left backdrop-blur-md relative z-10">
               <div class="mb-5 flex items-center gap-3 text-secondary">
-                <Icon name="lucide:circle-check" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                <CircleCheck size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                 <span class="text-sm font-bold uppercase tracking-widest text-white/90">
                   {t.comparisonRightLabel}
                 </span>
@@ -578,15 +592,15 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
                   class="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-secondary/35 bg-secondary/12 text-secondary transition-transform duration-300 group-hover:scale-110 group-hover:bg-secondary/20"
                 >
                   {index === 0 ? (
-                    <Icon name="lucide:sparkles" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <Sparkles size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : index === 1 ? (
-                    <Icon name="lucide:circle-dollar-sign" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <CircleDollarSign size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : index === 2 ? (
-                    <Icon name="lucide:paintbrush" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <Paintbrush size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : index === 3 ? (
-                    <Icon name="lucide:trending-up" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <TrendingUp size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : (
-                    <Icon name="lucide:award" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <Award size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   )}
                 </div>
                 <h3 class="font-editorial-serif text-2xl italic font-normal tracking-[-0.01em] text-primary">{block.title}</h3>
@@ -637,7 +651,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
           <div class="grid w-full grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
             <div class="rounded-3xl border border-success/20 bg-success/5 p-8 text-left shadow-sm md:p-12">
               <h3 class="mb-6 flex items-center justify-center gap-3 text-xl font-bold text-primary md:justify-start">
-                <Icon name="lucide:check" class="h-6 w-6 shrink-0 stroke-2 text-success" aria-hidden="true" />
+                <Check size={24} stroke-width={2} class="shrink-0 text-success" aria-hidden="true" />
                 {t.contentWeWant.title}
               </h3>
               <ul class="creators-text-start space-y-4">
@@ -651,7 +665,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             </div>
             <div class="rounded-3xl border border-error/20 bg-error/5 p-8 text-left shadow-sm md:p-12">
               <h3 class="mb-6 flex items-center justify-center gap-3 text-xl font-bold text-primary md:justify-start">
-                <Icon name="lucide:x" class="h-6 w-6 shrink-0 stroke-2 text-error" aria-hidden="true" />
+                <X size={24} stroke-width={2} class="shrink-0 text-error" aria-hidden="true" />
                 {t.contentNotApproved.title}
               </h3>
               <ul class="creators-text-start space-y-4">
@@ -691,15 +705,15 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
               <div class="group relative z-10 flex flex-col items-center bg-section-green-dark py-8 md:px-4 md:py-0">
                 <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/10 bg-white/40 text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-secondary/30 group-hover:bg-secondary/10 group-hover:text-secondary group-hover:shadow-md">
                   {idx === 0 ? (
-                    <Icon name="lucide:camera" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <Camera size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : idx === 1 ? (
-                    <Icon name="lucide:table-2" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <Table2 size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : idx === 2 ? (
-                    <Icon name="lucide:cloud-download" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <CloudDownload size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : idx === 3 ? (
-                    <Icon name="lucide:clipboard-check" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <ClipboardCheck size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   ) : (
-                    <Icon name="lucide:sparkles" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
+                    <Sparkles size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
                   )}
                 </div>
                 <p class="mt-5 max-w-[120px] text-center text-sm font-medium leading-snug text-primary transition-all duration-300 group-hover:font-bold md:text-[0.9375rem]">

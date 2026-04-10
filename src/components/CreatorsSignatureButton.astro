@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { ArrowRight } from '@lucide/astro';
 
 interface Props {
   href: string;
@@ -22,9 +22,10 @@ const { href, ariaLabel, size = 'default' } = Astro.props;
   aria-label={ariaLabel}
 >
   <span class="text-balance"><slot /></span>
-  <Icon
-    name="lucide:arrow-right"
-    class="h-4 w-4 shrink-0 stroke-2 transition-transform duration-300 group-hover:translate-x-0.5"
+  <ArrowRight
+    size={16}
+    stroke-width={2}
+    class="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
     aria-hidden="true"
   />
 </a>
