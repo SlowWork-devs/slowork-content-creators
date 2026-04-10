@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 
 import CreditTable from '../../components/CreditTable.astro';
 import ExploreAppMockupScreen from '../../components/ExploreAppMockupScreen.astro';
@@ -423,23 +424,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             <span
               class="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-base-100/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85 shadow-sm backdrop-blur-sm"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-secondary"
-                aria-hidden="true"
-              >
-                <path
-                  d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
-                ></path>
-              </svg>
+              <Icon name="lucide:sparkles" class="h-[14px] w-[14px] shrink-0 stroke-2 text-secondary" aria-hidden="true" />
               {t.heroBadge}
             </span>
           </div>
@@ -550,22 +535,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
           <div class="grid w-full max-w-5xl grid-cols-1 md:grid-cols-2">
             <div class="flex flex-col justify-center border-b border-white/10 bg-white/[0.02] p-10 text-left backdrop-blur-md md:border-b-0 md:border-r">
               <div class="mb-5 flex items-center gap-3 text-red-300/95">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="m15 9-6 6"></path>
-                  <path d="m9 9 6 6"></path>
-                </svg>
+                <Icon name="lucide:circle-x" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                 <span class="text-sm font-bold uppercase tracking-widest text-white/90">
                   {t.comparisonWrongLabel}
                 </span>
@@ -574,21 +544,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             </div>
             <div class="flex flex-col justify-center border border-secondary/20 shadow-[0_0_30px_rgba(224,187,68,0.04)] bg-white/[0.02] p-10 text-left backdrop-blur-md relative z-10">
               <div class="mb-5 flex items-center gap-3 text-secondary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="m9 12 2 2 4-4"></path>
-                </svg>
+                <Icon name="lucide:circle-check" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                 <span class="text-sm font-bold uppercase tracking-widest text-white/90">
                   {t.comparisonRightLabel}
                 </span>
@@ -622,92 +578,15 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
                   class="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-secondary/35 bg-secondary/12 text-secondary transition-transform duration-300 group-hover:scale-110 group-hover:bg-secondary/20"
                 >
                   {index === 0 ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
-                      ></path>
-                    </svg>
+                    <Icon name="lucide:sparkles" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : index === 1 ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="M16 8h-6a2 2 0 1 0 0 8h4a2 2 0 1 1 0 4H8"></path>
-                      <path d="M12 18V6"></path>
-                    </svg>
+                    <Icon name="lucide:circle-dollar-sign" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : index === 2 ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
-                      ></path>
-                      <path
-                        d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
-                      ></path>
-                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-                      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-                    </svg>
+                    <Icon name="lucide:paintbrush" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : index === 3 ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
-                      <path d="M16 7h6v6"></path>
-                    </svg>
+                    <Icon name="lucide:trending-up" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="8" r="6"></circle>
-                      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-                    </svg>
+                    <Icon name="lucide:award" class="h-7 w-7 shrink-0 stroke-2 text-current" aria-hidden="true" />
                   )}
                 </div>
                 <h3 class="font-editorial-serif text-2xl italic font-normal tracking-[-0.01em] text-primary">{block.title}</h3>
@@ -758,21 +637,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
           <div class="grid w-full grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
             <div class="rounded-3xl border border-success/20 bg-success/5 p-8 text-left shadow-sm md:p-12">
               <h3 class="mb-6 flex items-center justify-center gap-3 text-xl font-bold text-primary md:justify-start">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="text-success"
-                  aria-hidden="true"
-                >
-                  <path d="M20 6 9 17l-5-5"></path>
-                </svg>
+                <Icon name="lucide:check" class="h-6 w-6 shrink-0 stroke-2 text-success" aria-hidden="true" />
                 {t.contentWeWant.title}
               </h3>
               <ul class="creators-text-start space-y-4">
@@ -786,22 +651,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             </div>
             <div class="rounded-3xl border border-error/20 bg-error/5 p-8 text-left shadow-sm md:p-12">
               <h3 class="mb-6 flex items-center justify-center gap-3 text-xl font-bold text-primary md:justify-start">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="text-error"
-                  aria-hidden="true"
-                >
-                  <path d="M18 6 6 18"></path>
-                  <path d="m6 6 12 12"></path>
-                </svg>
+                <Icon name="lucide:x" class="h-6 w-6 shrink-0 stroke-2 text-error" aria-hidden="true" />
                 {t.contentNotApproved.title}
               </h3>
               <ul class="creators-text-start space-y-4">
@@ -841,15 +691,15 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
               <div class="group relative z-10 flex flex-col items-center bg-section-green-dark py-8 md:px-4 md:py-0">
                 <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/10 bg-white/40 text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-secondary/30 group-hover:bg-secondary/10 group-hover:text-secondary group-hover:shadow-md">
                   {idx === 0 ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                    <Icon name="lucide:camera" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : idx === 1 ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
+                    <Icon name="lucide:table-2" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : idx === 2 ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+                    <Icon name="lucide:cloud-download" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : idx === 3 ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+                    <Icon name="lucide:clipboard-check" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
                   ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                    <Icon name="lucide:sparkles" class="h-[26px] w-[26px] shrink-0 stroke-2 text-current" aria-hidden="true" />
                   )}
                 </div>
                 <p class="mt-5 max-w-[120px] text-center text-sm font-medium leading-snug text-primary transition-all duration-300 group-hover:font-bold md:text-[0.9375rem]">
