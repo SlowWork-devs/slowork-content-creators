@@ -3,11 +3,15 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 
 import CreditTable from '../../components/CreditTable.astro';
+import ExploreAppMockupScreen from '../../components/ExploreAppMockupScreen.astro';
 import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
+import CreatorsSignatureButton from '../../components/CreatorsSignatureButton.astro';
+import EditorialHeading from '../../components/EditorialHeading.astro';
 import Header from '../../components/Header.astro';
 import SectionEyebrow from '../../components/SectionEyebrow.astro';
 import VideoFacade from '../../components/VideoFacade.astro';
+import { parseEditorialHeading } from '../../utils/editorial-heading';
 import type { CreatorCreditRates } from '../../models/creator-credits.model';
 import { MAIN_SLOWORK_ORIGIN, manifestoYoutubeId } from '../../constants/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -39,9 +43,10 @@ const subheadlineParagraphs = subheadline
 
 const ui = {
   en: {
-    cta: 'Apply to join the creators program',
+    cta: 'Apply now',
     ctaAria:
       'Apply to join the Slowork creators program — opens the contact section on slowork.app in this window',
+    heroBadge: 'Slowork creators',
     pageTitle: 'Slowork Creators | A different way of living and working',
     videoAlt:
       'Slowork manifesto video — remote work app, nature workspace and intentional lifestyle storytelling',
@@ -51,6 +56,9 @@ const ui = {
     faqHeading: 'Frequently asked questions',
     creditsHeading: 'How credits work',
     creditsUnitLabel: 'Credits',
+    creditsTableFormatCol: 'Content type',
+    creditsTableValueCol: 'Reward',
+    creditsTableCaption: 'Credits by content type',
     creditsFootnote: '1 Credit = 1 USD. Not redeemable for cash.',
     creditRows: [
       { key: 'story', label: 'Instagram Story' },
@@ -78,7 +86,7 @@ const ui = {
       },
     ],
     // New UI text for the 13 points
-    storyHeading: 'Remote work was supposed to feel freer than this',
+    storyHeading: 'Remote work was supposed to feel *freer* than this',
     storyBody: [
       'Somewhere along the way, remote work became the same old lifestyle. Same stress. Same burnout. Just with a laptop.',
       'Slowork was built as a response to that.',
@@ -92,6 +100,8 @@ const ui = {
       'A platform, yes. But more importantly — a lifestyle proposition.',
     ],
     notTypicalHeading: 'This is not a typical creator program',
+    comparisonWrongLabel: 'The wrong fit',
+    comparisonRightLabel: 'The perfect fit',
     notTypicalBody: [
       'Most programs are built around campaigns, deliverables and transactional promotion. This one is different.',
       "We're not looking for creators who post the most. We're looking for creators who can represent something meaningful.",
@@ -102,8 +112,8 @@ const ui = {
     whyBecomeIntro:
       "Not every collaboration helps you create work you're proud of. Slowork creators don't just promote a product — they document a lifestyle people already aspire to.",
     whoForHeading: 'Who this program is for',
+    whoForNiches: ['travel', 'lifestyle', 'digital nomad', 'remote work', 'intentional living', 'wellbeing'],
     whoForBody: [
-      'Creators in spaces like: travel · lifestyle · digital nomad · remote work · intentional living · wellbeing',
       'Follower count is not the main filter.',
       'What matters: content that feels relevant, visually strong and genuinely aligned with the Slowork world.',
       "We're especially looking for creators who create in English or subtitle in English, already document meaningful environments, tell stories — not just post aesthetics — and are native to Instagram, TikTok or YouTube.",
@@ -132,7 +142,7 @@ const ui = {
         'Money-first messaging',
       ],
     },
-    howItWorksHeading: 'How it works',
+    howItWorksHeading: 'How it *works*',
     howItWorksIntro: 'The system is intentionally simple.',
     howItWorksSteps: [
       'Create content',
@@ -148,7 +158,7 @@ const ui = {
     ],
     whyBuiltHeading: 'Why we built this program',
     whyBuiltIntro:
-      "Slowork is early stage. The goal right now isn't scale — it's clarity, visibility and identity.",
+      'Slowork is in its early stage. Right now, the goal is not scale. It is clarity, visibility and identity.',
     whyBuiltAims: [
       'Build organic awareness',
       'Shape how the brand is perceived',
@@ -156,23 +166,24 @@ const ui = {
       'Attract the right creators early',
       'Lay the foundation for community',
     ],
-    whyBuiltClosing: 'This is storytelling before growth.',
+    whyBuiltClosing: 'This is storytelling before *growth*.',
     whatNextHeading: 'What happens after you apply',
     whatNextBody: [
       "If your profile feels aligned, we'll review your application.",
       'Selected creators may receive early access, content guidelines, onboarding into the credit system and future collaboration opportunities.',
       "You don't need to be a full-time digital nomad. You just need to create content that genuinely fits this world.",
     ],
-    finalCtaHeading: 'If your content already reflects this way of life — you may be a fit.',
+    finalCtaHeading: 'If your content already reflects this way of life — you may be a *fit*.',
     finalCtaParagraphs: [
       "Slowork is being built right now. The creators who join early won't just promote it. They'll help define what it becomes.",
       'Create content that feels aligned. Earn your way into the experience. Help represent a better version of remote work.',
     ],
   },
   es: {
-    cta: 'Solicitar unirme al programa de creadores',
+    cta: 'Solicitar acceso',
     ctaAria:
       'Solicitar unirme al programa de creadores de Slowork — abre la sección de contacto en slowork.app en esta ventana',
+    heroBadge: 'Creadores Slowork',
     pageTitle: 'Slowork Creators | Una forma distinta de vivir y trabajar',
     videoAlt:
       'Vídeo del manifiesto Slowork — app de trabajo remoto, espacios en naturaleza y estilo de vida intencional',
@@ -182,6 +193,9 @@ const ui = {
     faqHeading: 'Preguntas frecuentes',
     creditsHeading: 'Cómo funcionan los créditos',
     creditsUnitLabel: 'Créditos',
+    creditsTableFormatCol: 'Tipo de contenido',
+    creditsTableValueCol: 'Recompensa',
+    creditsTableCaption: 'Créditos por tipo de contenido',
     creditsFootnote: '1 crédito = 1 USD. No canjeable en efectivo.',
     creditRows: [
       { key: 'story', label: 'Historia de Instagram' },
@@ -209,7 +223,7 @@ const ui = {
       },
     ],
     // New UI text for the 13 points (Spanish translations)
-    storyHeading: 'El trabajo remoto debía sentirse más libre que esto',
+    storyHeading: 'El trabajo remoto debía sentirse más *libre* que esto',
     storyBody: [
       'En algún momento, el trabajo remoto se convirtió en el mismo estilo de vida de siempre. Mismo estrés. Mismo agotamiento. Solo que con un portátil.',
       'Slowork nació como respuesta a eso.',
@@ -223,6 +237,8 @@ const ui = {
       'Una plataforma, sí. Pero, sobre todo, una propuesta de estilo de vida.',
     ],
     notTypicalHeading: 'Este no es un programa típico para creadores',
+    comparisonWrongLabel: 'No encaja',
+    comparisonRightLabel: 'Encaja de verdad',
     notTypicalBody: [
       'La mayoría de programas giran en torno a campañas, entregables y promoción transaccional. Este es distinto.',
       'No buscamos a quien más publica. Buscamos a quienes pueden representar algo con significado.',
@@ -233,8 +249,8 @@ const ui = {
     whyBecomeIntro:
       'No toda colaboración te ayuda a crear un trabajo del que te sientas orgulloso. Los creadores Slowork no solo promocionan un producto: documentan un estilo de vida al que mucha gente ya aspira.',
     whoForHeading: 'Para quién es este programa',
+    whoForNiches: ['viajes', 'estilo de vida', 'nómada digital', 'trabajo remoto', 'vida intencionada', 'bienestar'],
     whoForBody: [
-      'Creadores en ámbitos como: viajes · estilo de vida · nómada digital · trabajo remoto · vida intencionada · bienestar',
       'El número de seguidores no es el filtro principal.',
       'Lo que importa: un contenido relevante, con fuerza visual y alineado de verdad con el universo Slowork.',
       'Nos interesan especialmente perfiles que crean en inglés o subtitulan en inglés, ya documentan entornos con significado, cuentan historias y no solo enseñan estética, y publican de forma nativa en Instagram, TikTok o YouTube.',
@@ -263,7 +279,7 @@ const ui = {
         'Mensajes centrados solo en dinero',
       ],
     },
-    howItWorksHeading: 'Cómo funciona',
+    howItWorksHeading: 'Cómo *funciona*',
     howItWorksIntro: 'El sistema es deliberadamente sencillo.',
     howItWorksSteps: [
       'Crea contenido',
@@ -279,7 +295,7 @@ const ui = {
     ],
     whyBuiltHeading: 'Por qué hemos creado este programa',
     whyBuiltIntro:
-      'Slowork está en una etapa temprana. Ahora mismo el objetivo no es escalar: es claridad, visibilidad e identidad.',
+      'Slowork está en una etapa temprana. Ahora mismo, el objetivo no es escalar. Es claridad, visibilidad e identidad.',
     whyBuiltAims: [
       'Generar conciencia orgánica',
       'Definir cómo se percibe la marca',
@@ -287,14 +303,14 @@ const ui = {
       'Atraer a los creadores adecuados desde el principio',
       'Sentar las bases de la comunidad',
     ],
-    whyBuiltClosing: 'Esto es storytelling antes que crecimiento.',
+    whyBuiltClosing: 'Esto es storytelling antes que *crecimiento*.',
     whatNextHeading: 'Qué pasa después de aplicar',
     whatNextBody: [
       'Si tu perfil encaja, revisamos tu solicitud.',
       'Quienes resulten seleccionados pueden recibir acceso anticipado, guías de contenido, onboarding al sistema de créditos y oportunidades futuras de colaboración.',
       'No hace falta ser nómada digital a tiempo completo: sí hace falta un contenido que encaje de verdad con este mundo.',
     ],
-    finalCtaHeading: 'Si tu contenido ya refleja esta forma de vida, puede que encajes.',
+    finalCtaHeading: 'Si tu contenido ya refleja esta forma de vida, puede que *encajes*.',
     finalCtaParagraphs: [
       'Slowork se está construyendo ahora. Quienes se unan pronto no solo lo promocionarán: ayudarán a definir lo que será.',
       'Crea contenido alineado. Gana tu acceso a la experiencia. Ayuda a representar una mejor versión del trabajo remoto.',
@@ -364,10 +380,15 @@ const structuredJsonLd = {
   ],
 };
 
-// Helper for alternating backgrounds
-const getBgClass = (index: number) => {
-  return index % 2 === 0 ? 'bg-(--color-bg-landing)' : 'bg-[color-mix(in_srgb,var(--color-bg-landing),white_15%)]';
-};
+const titleSegments = parseEditorialHeading(title);
+const storyHeadingSegments = parseEditorialHeading(t.storyHeading);
+const howItWorksHeadingSegments = parseEditorialHeading(t.howItWorksHeading);
+const finalCtaHeadingSegments = parseEditorialHeading(t.finalCtaHeading);
+const whyBuiltClosingSegments = parseEditorialHeading(t.whyBuiltClosing);
+
+const notTypicalIntro = t.notTypicalBody.slice(0, 2);
+const notTypicalWrong = t.notTypicalBody[2] ?? '';
+const notTypicalRight = t.notTypicalBody[3] ?? '';
 ---
 
 <BaseLayout title={t.pageTitle} lang={lang} seoDescription={seoDescription} canonicalUrl={canonicalURL}>
@@ -383,35 +404,65 @@ const getBgClass = (index: number) => {
     <Header lang={lang} />
     
     <main class="flex w-full flex-col">
-      
-      {/* 01 / HERO — horizontal desktop, compact type, left-weighted */}
-      <section class={`creators-reveal w-full py-16 md:py-20 lg:py-24 px-6 md:px-10 ${getBgClass(0)}`}>
-        <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 pt-14 md:pt-16 lg:grid-cols-2 lg:gap-12 xl:max-w-7xl xl:gap-14">
-          <div class="flex min-w-0 w-full flex-col gap-5 lg:max-w-lg xl:max-w-xl">
-            <SectionEyebrow num={1} text="HERO" />
-            <h1 class="text-3xl font-bold leading-[1.12] tracking-[-0.02em] text-primary text-balance sm:text-[2rem] md:text-[2.15rem] lg:text-[2.25rem] xl:text-[2.4rem]">
-              {title}
-            </h1>
-            <p class="max-w-prose text-base leading-relaxed text-primary/90 text-pretty md:text-lg">
-              {subheadlineParagraphs[0]}
-            </p>
-            <div class="mt-1 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <a
-                href={ctaHref}
-                class="btn btn-secondary creators-cta inline-flex min-h-11 shrink-0 px-8 text-sm font-semibold shadow-md sm:text-base rounded-full"
-                aria-label={t.ctaAria}
+      {/* 01 / HERO — editorial centered, video below CTA */}
+      <section
+        class="creators-reveal relative w-full overflow-hidden bg-section-green-light px-6 py-32 text-center md:px-10"
+      >
+        <div
+          class="pointer-events-none absolute -left-28 top-16 h-80 w-80 rounded-full bg-primary/8 blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="pointer-events-none absolute -right-20 bottom-24 h-96 w-96 rounded-full bg-secondary/10 blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center pt-24 md:pt-28">
+          <div class="mb-6 flex justify-center">
+            <span
+              class="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-base-100/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85 shadow-sm backdrop-blur-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-secondary"
+                aria-hidden="true"
               >
-                {t.cta}
-              </a>
-              {heroMicrocopyTrimmed && (
-                <p class="max-w-prose text-sm font-medium text-primary/70 text-pretty sm:max-w-[18rem]">
-                  {heroMicrocopyTrimmed}
-                </p>
-              )}
-            </div>
+                <path
+                  d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                ></path>
+              </svg>
+              {t.heroBadge}
+            </span>
           </div>
-
-          <div class="w-full min-w-0 rounded-xl shadow-xl lg:rounded-2xl lg:shadow-2xl">
+          <SectionEyebrow num={1} text="HERO" align="center" />
+          <EditorialHeading
+            segments={titleSegments}
+            as="h1"
+            class="mx-auto max-w-4xl text-6xl font-bold leading-[1.05] tracking-[-0.03em] text-primary text-balance md:text-8xl"
+          />
+          <div class="creators-text-center mx-auto mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-primary/85 md:text-xl">
+            {subheadlineParagraphs.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+          <div class="mt-10 flex flex-col items-center gap-4">
+            <CreatorsSignatureButton href={ctaHref} ariaLabel={t.ctaAria}>
+              {t.cta}
+            </CreatorsSignatureButton>
+            {heroMicrocopyTrimmed ? (
+              <p class="max-w-xl text-sm font-medium text-primary/70 text-pretty">{heroMicrocopyTrimmed}</p>
+            ) : null}
+          </div>
+          <div class="mx-auto mt-14 w-full max-w-4xl rounded-[40px] shadow-[0_20px_60px_-15px_rgba(1,51,51,0.3)] ring-1 ring-primary/10 overflow-hidden">
             <VideoFacade
               youtubeId={manifestoYoutubeId}
               alt={t.videoAlt}
@@ -425,24 +476,32 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 02 / STORY */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(1)}`}>
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
-          <SectionEyebrow num={2} text="STORY" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
-            {t.storyHeading}
-          </h2>
-          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:text-xl md:leading-[1.7]">
-            {t.storyBody.map((p) => (
-              <p>{p}</p>
-            ))}
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
+          <SectionEyebrow num={2} text="STORY" align="center" />
+          <EditorialHeading
+            segments={storyHeadingSegments}
+            as="h2"
+            class="mb-10 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl"
+          />
+          <div
+            class="w-full max-w-2xl rounded-2xl border border-primary/8 bg-[color-mix(in_srgb,var(--color-bg-landing),white_35%)] px-6 py-10 text-left shadow-sm md:px-10 md:py-12"
+          >
+            <div class="creators-text-start border-l-4 border-secondary pl-6 md:pl-8">
+              <div class="space-y-6 text-lg leading-[1.7] text-primary/80 md:text-xl">
+                {t.storyBody.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 03 / WHAT IS SLOWORK */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(2)}`}>
-        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div class="flex min-w-0 w-full flex-col">
+      {/* 03 / WHAT IS SLOWORK — layout retained (text left, mockup right) */}
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+        <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-16 md:grid-cols-2">
+          <div class="creators-text-start flex min-w-0 w-full flex-col">
             <SectionEyebrow num={3} text="WHAT IS SLOWORK" />
             <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
               {t.whatIsHeading}
@@ -453,9 +512,9 @@ const getBgClass = (index: number) => {
               ))}
             </div>
           </div>
-          <figure class="m-0 flex justify-center md:justify-end perspective-1000">
+          <figure class="m-0 flex touch-pan-y justify-center md:justify-end perspective-1000">
             <div
-              class="mockup-phone border-primary/10 shadow-2xl transform rotate-3 transition-transform duration-500 hover:rotate-0 bg-base-100"
+              class="mockup-phone border-primary/10 shadow-[0_0_40px_rgba(224,187,68,0.15)] transform rotate-3 transition-transform duration-500 hover:rotate-0 bg-base-100"
               role="img"
               aria-label={
                 lang === 'es'
@@ -463,13 +522,10 @@ const getBgClass = (index: number) => {
                   : 'Slowork app mockup — remote work app, nature stays and workspace discovery for digital nomads'
               }
             >
-              <div class="camera"></div>
-              <div class="display">
-                <div class="artboard artboard-demo phone-1 bg-base-200 flex flex-col items-center justify-center p-6">
-                  <div class="w-full h-48 bg-primary/5 rounded-xl mb-6 animate-pulse"></div>
-                  <div class="w-3/4 h-4 bg-primary/10 rounded mb-3"></div>
-                  <div class="w-1/2 h-4 bg-primary/10 rounded"></div>
-                  <p class="mt-8 text-primary font-medium text-sm">Explore Screen UI</p>
+              <div class="mockup-phone-camera"></div>
+              <div class="mockup-phone-display !flex !h-full !min-h-0 !max-h-full !w-full !flex-col !p-0">
+                <div class="relative flex min-h-0 flex-1 flex-col overflow-hidden">
+                  <ExploreAppMockupScreen lang={lang} />
                 </div>
               </div>
             </div>
@@ -477,42 +533,189 @@ const getBgClass = (index: number) => {
         </div>
       </section>
 
-      {/* 04 / NOT A TYPICAL PROGRAM */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(3)}`}>
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
-          <SectionEyebrow num={4} text="PROGRAM" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+      {/* 04 / NOT A TYPICAL PROGRAM — dark editorial */}
+      <section class="creators-reveal w-full bg-[#1A1A1A] px-6 py-32 text-center md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
+          <SectionEyebrow num={4} text="PROGRAM" align="center" tone="on-dark" />
+          <h2
+            class="mb-10 text-3xl font-bold tracking-[-0.02em] text-white text-balance md:text-5xl"
+          >
             {t.notTypicalHeading}
           </h2>
-          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
-            {t.notTypicalBody.map((p) => (
+          <div class="mx-auto mb-14 max-w-2xl space-y-6 text-lg leading-relaxed text-white/75 md:text-xl">
+            {notTypicalIntro.map((p) => (
               <p>{p}</p>
             ))}
+          </div>
+          <div class="grid w-full max-w-5xl grid-cols-1 md:grid-cols-2">
+            <div class="flex flex-col justify-center border-b border-white/10 bg-white/[0.02] p-10 text-left backdrop-blur-md md:border-b-0 md:border-r">
+              <div class="mb-5 flex items-center gap-3 text-red-300/95">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m15 9-6 6"></path>
+                  <path d="m9 9 6 6"></path>
+                </svg>
+                <span class="text-sm font-bold uppercase tracking-widest text-white/90">
+                  {t.comparisonWrongLabel}
+                </span>
+              </div>
+              <p class="text-base leading-relaxed text-white/80 text-pretty md:text-lg">{notTypicalWrong}</p>
+            </div>
+            <div class="flex flex-col justify-center border border-secondary/20 shadow-[0_0_30px_rgba(224,187,68,0.04)] bg-white/[0.02] p-10 text-left backdrop-blur-md relative z-10">
+              <div class="mb-5 flex items-center gap-3 text-secondary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+                <span class="text-sm font-bold uppercase tracking-widest text-white/90">
+                  {t.comparisonRightLabel}
+                </span>
+              </div>
+              <p class="text-base leading-relaxed text-white/80 text-pretty md:text-lg">{notTypicalRight}</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* 05 / WHY BECOME A CREATOR */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(4)}`}>
-        <div class="mx-auto flex w-full max-w-5xl flex-col items-stretch">
-          <SectionEyebrow num={5} text="BENEFITS" />
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-6xl flex-col items-center">
+          <SectionEyebrow num={5} text="BENEFITS" align="center" />
           <h2
-            class={`text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] text-balance ${t.whyBecomeIntro.trim() ? 'mb-6' : 'mb-16'}`}
+            class:list={[
+              'max-w-3xl text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl',
+              t.whyBecomeIntro.trim() ? 'mb-6' : 'mb-16',
+            ]}
           >
             {t.whyBecomeHeading}
           </h2>
           {t.whyBecomeIntro.trim() ? (
-            <p class="mx-auto mb-16 w-full max-w-prose text-lg text-primary/80 text-pretty">{t.whyBecomeIntro}</p>
+            <p class="mx-auto mb-16 max-w-2xl text-lg text-primary/80 text-pretty">{t.whyBecomeIntro}</p>
           ) : null}
-          
-          <div class="grid w-full grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+
+          <div class="grid w-full grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
             {benefitBlocks.map((block, index) => (
-              <div class="flex flex-col gap-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary w-8 h-8">
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-                </svg>
-                <h3 class="text-lg font-bold text-primary tracking-[-0.01em]">{block.title}</h3>
-                <p class="text-pretty text-primary/70 leading-relaxed text-sm md:text-base">{block.text}</p>
+              <div class="group flex flex-col items-center rounded-3xl border border-primary/10 bg-base-100/40 p-8 text-center shadow-sm transition-shadow duration-300 hover:shadow-lg md:p-10">
+                <div
+                  class="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-secondary/35 bg-secondary/12 text-secondary transition-transform duration-300 group-hover:scale-110 group-hover:bg-secondary/20"
+                >
+                  {index === 0 ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                      ></path>
+                    </svg>
+                  ) : index === 1 ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M16 8h-6a2 2 0 1 0 0 8h4a2 2 0 1 1 0 4H8"></path>
+                      <path d="M12 18V6"></path>
+                    </svg>
+                  ) : index === 2 ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                      ></path>
+                      <path
+                        d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                      ></path>
+                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                    </svg>
+                  ) : index === 3 ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                      <path d="M16 7h6v6"></path>
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="8" r="6"></circle>
+                      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                    </svg>
+                  )}
+                </div>
+                <h3 class="font-editorial-serif text-2xl italic font-normal tracking-[-0.01em] text-primary">{block.title}</h3>
+                <p
+                  class="mt-4 max-w-sm border-l-4 border-secondary pl-5 text-left text-pretty text-base leading-relaxed text-primary/75"
+                >
+                  {block.text}
+                </p>
               </div>
             ))}
           </div>
@@ -520,13 +723,20 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 06 / WHO THIS IS FOR */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(5)}`}>
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
-          <SectionEyebrow num={6} text="AUDIENCE" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
+          <SectionEyebrow num={6} text="AUDIENCE" align="center" />
+          <h2 class="mb-10 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
             {t.whoForHeading}
           </h2>
-          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+          <div class="mb-10 flex flex-wrap justify-center gap-3">
+            {t.whoForNiches.map((niche) => (
+              <span class="rounded-full border border-primary/10 bg-white/40 px-4 py-1.5 text-sm font-medium text-primary/80 shadow-sm backdrop-blur-sm">
+                {niche}
+              </span>
+            ))}
+          </div>
+          <div class="mx-auto max-w-prose space-y-6 text-lg leading-relaxed text-primary/80 md:text-xl">
             {t.whoForBody.map((p) => (
               <p>{p}</p>
             ))}
@@ -535,40 +745,69 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 07 / WHAT GREAT CONTENT LOOKS LIKE */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(6)}`}>
-        <div class="mx-auto flex w-full max-w-5xl flex-col items-stretch">
-          <SectionEyebrow num={7} text="CONTENT" />
-          <h2 class="text-center text-2xl font-bold tracking-[-0.02em] text-primary text-balance md:text-4xl mb-6">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
+          <SectionEyebrow num={7} text="CONTENT" align="center" />
+          <h2 class="mb-6 max-w-3xl text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
             {t.greatContentHeading}
           </h2>
-          <p class="mx-auto mb-16 w-full max-w-prose text-center text-lg text-primary/80 text-pretty md:text-left">
+          <p class="mx-auto mb-16 max-w-2xl text-lg text-primary/80 text-pretty md:text-xl">
             {t.greatContentIntro}
           </p>
-          
-          <div class="grid w-full grid-cols-1 gap-12 md:grid-cols-2">
-            <div class="bg-primary/5 rounded-3xl p-8 md:p-12">
-              <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><path d="M20 6 9 17l-5-5"/></svg>
+
+          <div class="grid w-full grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
+            <div class="rounded-3xl border border-success/20 bg-success/5 p-8 text-left shadow-sm md:p-12">
+              <h3 class="mb-6 flex items-center justify-center gap-3 text-xl font-bold text-primary md:justify-start">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-success"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
                 {t.contentWeWant.title}
               </h3>
-              <ul class="space-y-4">
+              <ul class="creators-text-start space-y-4">
                 {t.contentWeWant.items.map((item) => (
                   <li class="flex items-start gap-3 text-pretty leading-relaxed text-primary/80">
-                    <span class="text-success mt-1 shrink-0">•</span>
+                    <span class="mt-1 shrink-0 text-success">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div class="bg-primary/5 rounded-3xl p-8 md:p-12">
-              <h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-error"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            <div class="rounded-3xl border border-error/20 bg-error/5 p-8 text-left shadow-sm md:p-12">
+              <h3 class="mb-6 flex items-center justify-center gap-3 text-xl font-bold text-primary md:justify-start">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-error"
+                  aria-hidden="true"
+                >
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
                 {t.contentNotApproved.title}
               </h3>
-              <ul class="space-y-4">
+              <ul class="creators-text-start space-y-4">
                 {t.contentNotApproved.items.map((item) => (
                   <li class="flex items-start gap-3 text-pretty leading-relaxed text-primary/80">
-                    <span class="text-error mt-1 shrink-0">•</span>
+                    <span class="mt-1 shrink-0 text-error">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -579,31 +818,43 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 08 / HOW IT WORKS */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(7)}`}>
-        <div class="mx-auto flex w-full max-w-4xl flex-col items-stretch">
-          <SectionEyebrow num={8} text="PROCESS" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
-            {t.howItWorksHeading}
-          </h2>
-          <p class="mx-auto mb-16 w-full max-w-prose text-lg text-primary/80 text-pretty">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
+          <SectionEyebrow num={8} text="PROCESS" align="center" />
+          <EditorialHeading
+            as="h2"
+            segments={howItWorksHeadingSegments}
+            class="mb-6 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl"
+          />
+          <p class="mx-auto mb-16 max-w-2xl text-lg text-primary/80 text-pretty">
             {t.howItWorksIntro}
           </p>
-          
-          <div class="flex w-full flex-col items-stretch justify-center gap-4 md:flex-row md:gap-8">
+
+          <div class="relative mt-4 flex w-full max-w-5xl flex-col items-center md:flex-row md:justify-between md:px-8">
+            <!-- Background Line -->
+            <div class="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-primary/10 md:left-8 md:right-8 md:top-1/2 md:h-px md:w-auto md:-translate-x-0 md:-translate-y-1/2"></div>
+            <!-- Active Line (Scroll driven) -->
+            <div class="timeline-scroll-y absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-secondary md:hidden"></div>
+            <div class="timeline-scroll-x absolute left-8 right-8 top-1/2 hidden h-px -translate-y-1/2 bg-secondary md:block"></div>
+
             {t.howItWorksSteps.map((step, idx) => (
-              <div class="flex flex-col items-stretch gap-4 md:flex-row md:items-stretch md:gap-8">
-                <div class="flex w-full min-w-0 flex-col items-stretch md:max-w-[7rem]">
-                  <div class="mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 font-mono text-sm font-bold text-primary">
-                    {idx + 1}
-                  </div>
-                  <h3 class="m-0 text-sm font-medium text-primary">{step}</h3>
+              <div class="group relative z-10 flex flex-col items-center bg-section-green-dark py-8 md:px-4 md:py-0">
+                <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/10 bg-white/40 text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-secondary/30 group-hover:bg-secondary/10 group-hover:text-secondary group-hover:shadow-md">
+                  {idx === 0 ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                  ) : idx === 1 ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
+                  ) : idx === 2 ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+                  ) : idx === 3 ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                  )}
                 </div>
-                {idx < t.howItWorksSteps.length - 1 && (
-                  <div class="hidden md:block w-8 h-px bg-primary/20"></div>
-                )}
-                {idx < t.howItWorksSteps.length - 1 && (
-                  <div class="md:hidden h-8 w-px bg-primary/20 my-2"></div>
-                )}
+                <p class="mt-5 max-w-[120px] text-center text-sm font-medium leading-snug text-primary transition-all duration-300 group-hover:font-bold md:text-[0.9375rem]">
+                  {step}
+                </p>
               </div>
             ))}
           </div>
@@ -611,23 +862,28 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 09 / CREDITS SYSTEM */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(8)}`}>
-        <div class="mx-auto flex w-full max-w-4xl flex-col items-stretch">
-          <SectionEyebrow num={9} text="CREDITS" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-6 text-balance">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
+          <SectionEyebrow num={9} text="CREDITS" align="center" />
+          <h2 class="mb-6 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
             {t.creditsHeading}
           </h2>
-          <div class="mx-auto mb-16 w-full max-w-prose space-y-6 text-lg font-medium text-primary/80">
+          <div class="mx-auto mb-16 max-w-prose space-y-6 text-lg leading-relaxed text-primary/80 text-pretty">
             {t.creditsIntro.map((p) => (
               <p>{p}</p>
             ))}
           </div>
-          
-          <div class="w-full max-w-2xl rounded-3xl bg-primary/5 p-8 md:p-12">
+
+          <div
+            class="mx-auto w-full max-w-2xl rounded-3xl border border-primary/12 bg-white/60 p-6 shadow-[0_12px_40px_-18px_rgba(1,51,51,0.12)] backdrop-blur-sm md:p-12"
+          >
             <CreditTable
               rates={creditRates}
               rows={[...t.creditRows]}
               creditsUnitLabel={t.creditsUnitLabel}
+              formatColumnLabel={t.creditsTableFormatCol}
+              valueColumnLabel={t.creditsTableValueCol}
+              caption={t.creditsTableCaption}
               footnote={t.creditsFootnote}
             />
           </div>
@@ -635,40 +891,49 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 10 / WHY WE BUILT THIS */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(9)}`}>
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
-          <SectionEyebrow num={10} text="VISION" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
+          <SectionEyebrow num={10} text="VISION" align="center" />
+          <h2 class="mb-10 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
             {t.whyBuiltHeading}
           </h2>
-          <div class="max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
-            <p>{t.whyBuiltIntro}</p>
-            <p class="font-medium text-primary">
-              {lang === 'es' ? 'Este programa existe para:' : 'This program exists to:'}
-            </p>
-            <ul class="list-disc space-y-3 pl-5 marker:text-primary/50">
+          <div class="mx-auto w-full max-w-5xl space-y-12 text-lg leading-relaxed text-primary/80 md:text-xl">
+            <div class="space-y-6">
+              <p class="mx-auto max-w-2xl text-balance">
+                {lang === 'es' ? 'Slowork está en una etapa temprana. Ahora mismo, el objetivo no es escalar. Es ' : 'Slowork is in its early stage. Right now, the goal is not scale. It is '}<span class="font-editorial-serif italic text-primary">clarity</span>{lang === 'es' ? ', ' : ', '}<span class="font-editorial-serif italic text-primary">{lang === 'es' ? 'visibilidad' : 'visibility'}</span>{lang === 'es' ? ' e ' : ' and '}<span class="font-editorial-serif italic text-primary">{lang === 'es' ? 'identidad' : 'identity'}</span>.
+              </p>
+              <p class="font-semibold text-primary/90">
+                {lang === 'es' ? 'Este programa existe para:' : 'This program exists to:'}
+              </p>
+            </div>
+            <ul class="mx-auto flex w-full max-w-4xl flex-wrap justify-center gap-4 lg:gap-6">
               {t.whyBuiltAims.map((item) => (
-                <li class="ps-1 leading-relaxed">{item}</li>
+                <li class="flex w-full items-start gap-4 rounded-2xl border border-primary/5 bg-white/40 px-6 py-6 text-left shadow-[0_8px_30px_-12px_rgba(1,51,51,0.04)] backdrop-blur-sm transition-colors hover:bg-white/60 md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)]">
+                  <span class="mt-1.5 h-5 w-0.5 shrink-0 rounded-full bg-secondary/90" aria-hidden="true"></span>
+                  <span class="text-pretty text-lg font-medium leading-relaxed text-primary/85">{item}</span>
+                </li>
               ))}
             </ul>
-            <p class="text-xl font-bold text-primary text-pretty">{t.whyBuiltClosing}</p>
+            <p class="mt-20 text-center font-editorial-serif text-3xl italic leading-tight text-primary text-balance md:text-5xl">
+              {lang === 'es' ? 'Esto es storytelling antes que crecimiento.' : 'This is storytelling before growth.'}
+            </p>
           </div>
         </div>
       </section>
 
       {/* 11 / WHAT HAPPENS NEXT */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(10)}`}>
-        <div class="mx-auto flex w-full max-w-4xl flex-col items-stretch">
-          <SectionEyebrow num={11} text="NEXT STEPS" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-16 text-balance">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
+          <SectionEyebrow num={11} text="NEXT STEPS" align="center" />
+          <h2 class="mb-16 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
             {t.whatNextHeading}
           </h2>
-          
-          <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+
+          <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-3">
             {t.whatNextBody.map((text, idx) => (
-              <div class="bg-primary/5 rounded-2xl p-8">
-                <span class="text-secondary font-mono text-sm font-bold block mb-4">0{idx + 1}</span>
-                <p class="text-pretty text-primary/80 leading-relaxed">{text}</p>
+              <div class="rounded-2xl border border-primary/5 bg-white/40 p-8 text-center shadow-[0_8px_30px_-12px_rgba(1,51,51,0.04)] backdrop-blur-sm transition-colors hover:bg-white/60">
+                <span class="mb-6 block font-editorial-serif text-4xl italic text-secondary/90">0{idx + 1}</span>
+                <p class="text-pretty leading-relaxed text-primary/80">{text}</p>
               </div>
             ))}
           </div>
@@ -676,34 +941,37 @@ const getBgClass = (index: number) => {
       </section>
 
       {/* 12 / FAQ */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(11)}`}>
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
-          <SectionEyebrow num={12} text="FAQ" />
-          <div class="w-full">
-            <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
-          </div>
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-center">
+          <SectionEyebrow num={12} text="FAQ" align="center" />
+          <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
         </div>
       </section>
 
       {/* 13 / FINAL CTA */}
-      <section class={`creators-reveal w-full py-24 md:py-32 px-6 ${getBgClass(12)}`}>
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-stretch">
-          <SectionEyebrow num={13} text="JOIN US" />
-          <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
-            {t.finalCtaHeading}
-          </h2>
-          <div class="mb-12 max-w-prose space-y-6 text-lg text-primary/80 leading-[1.65] md:leading-[1.7]">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+        <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
+          <SectionEyebrow num={13} text="JOIN US" align="center" />
+          <EditorialHeading
+            as="h2"
+            segments={finalCtaHeadingSegments}
+            class="mx-auto max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.03em] text-primary text-balance md:text-6xl"
+          />
+          <div class="mx-auto mb-12 mt-10 max-w-prose space-y-6 text-lg leading-relaxed text-primary/80 md:text-xl">
             {t.finalCtaParagraphs.map((p) => (
               <p>{p}</p>
             ))}
           </div>
-          <a
-            href={ctaHref}
-            class="btn btn-secondary creators-cta min-h-12 px-10 text-base font-semibold shadow-md rounded-full"
-            aria-label={t.ctaAria}
-          >
-            {t.cta}
-          </a>
+          <EditorialHeading
+            as="p"
+            segments={whyBuiltClosingSegments}
+            class="mx-auto max-w-4xl text-5xl font-bold leading-[1.05] tracking-[-0.03em] text-primary text-balance md:text-8xl"
+          />
+          <div class="mt-12">
+            <CreatorsSignatureButton href={ctaHref} ariaLabel={t.ctaAria} size="large">
+              {t.cta}
+            </CreatorsSignatureButton>
+          </div>
         </div>
       </section>
 
