@@ -1,0 +1,39 @@
+---
+interface Props {
+  href: string;
+  /** Accessible name when label is not fully descriptive */
+  ariaLabel?: string;
+  /** Larger final-CTA style */
+  size?: 'default' | 'large';
+}
+
+const { href, ariaLabel, size = 'default' } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    'creators-signature-btn group inline-flex items-center gap-2 rounded-full bg-secondary font-sans font-bold uppercase tracking-widest text-secondary-content shadow-lg transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100',
+    size === 'default' && 'px-6 py-3 text-[11px]',
+    size === 'large' && 'px-10 py-4 text-xs md:px-14 md:py-5 md:text-sm',
+  ]}
+  aria-label={ariaLabel}
+>
+  <span class="text-balance"><slot /></span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14"></path>
+    <path d="m12 5 7 7-7 7"></path>
+  </svg>
+</a>

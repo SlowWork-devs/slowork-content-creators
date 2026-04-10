@@ -1,0 +1,25 @@
+---
+import type { EditorialSegment } from '../utils/editorial-heading';
+
+type Seg = EditorialSegment;
+
+interface Props {
+  segments: EditorialSegment[];
+  as?: 'h1' | 'h2' | 'p' | 'div';
+  class?: string;
+}
+
+const { segments, as: Tag = 'h1', class: className = '' } = Astro.props;
+---
+
+<Tag class:list={[className]}>
+  {
+    segments.map((seg: Seg) =>
+      seg.kind === 'serif' ? (
+        <span class="font-editorial-serif font-normal italic">{seg.text}</span>
+      ) : (
+        <span class="font-bold">{seg.text}</span>
+      ),
+    )
+  }
+</Tag>
