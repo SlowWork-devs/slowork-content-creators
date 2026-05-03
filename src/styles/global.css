@@ -195,37 +195,6 @@
     }
   }
 
-  @keyframes draw-line-vertical {
-    from {
-      transform: translateX(-50%) scaleY(0);
-    }
-    to {
-      transform: translateX(-50%) scaleY(1);
-    }
-  }
-
-  @keyframes draw-line-horizontal {
-    from {
-      transform: translateY(-50%) scaleX(0);
-    }
-    to {
-      transform: translateY(-50%) scaleX(1);
-    }
-  }
-
-  .timeline-scroll-y {
-    animation: draw-line-vertical linear both;
-    animation-timeline: view();
-    animation-range: entry 20% cover 50%;
-    transform-origin: top;
-  }
-
-  .timeline-scroll-x {
-    animation: draw-line-horizontal linear both;
-    animation-timeline: view();
-    animation-range: entry 20% cover 50%;
-    transform-origin: left;
-  }
 }
 
 /* Storytelling (v2 §2), CTA acento secondary — componentes página creators */
