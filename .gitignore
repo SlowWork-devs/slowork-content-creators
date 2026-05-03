@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Hero encodes (generate locally; see public/videos/README.md)
+public/videos/*.mp4
+public/videos/*.webm

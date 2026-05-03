@@ -71,6 +71,8 @@ Para editar textos y bloques de la página, el **origen de verdad** son los fich
 
 - **`astro.config.mjs`**: `site` canónico (`https://www.slowork.app`), `trailingSlash: 'always'`, redirección `'/' → '/es/creators/'`, integración de sitemap.
 - **`PUBLIC_OG_IMAGE`** (opcional): URL absoluta de imagen Open Graph. Si no se define, se usa la ruta por defecto configurada en el layout (p. ej. imagen bajo `public/images/`).
+- **`PUBLIC_CREATORS_HERO_VIDEO`** (opcional): ruta **pública** del MP4 del hero (p. ej. `/videos/creators-hero.mp4`). Si no se define, se usa por defecto `/videos/creators-hero.mp4`. El hero usa `<video>` nativo con fachada (no se descarga el vídeo hasta que el usuario pulse play). Coloca el fichero bajo `public/` y convierte el master a **MP4 H.264 + AAC**; ver `public/videos/README.md`.
+- **`PUBLIC_CREATORS_HERO_VIDEO_WEBM`** (opcional): WebM VP9 del **mismo** vídeo (p. ej. `/videos/creators-hero.webm`). Navegadores compatibles suelen preferirlo al MP4; Safari sigue usando el MP4.
 
 ## Despliegue
 
