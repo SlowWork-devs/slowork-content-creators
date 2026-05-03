@@ -2,6 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import {
+  ArrowDown,
+  ArrowRight,
   Award,
   Camera,
   Check,
@@ -28,7 +30,7 @@ import SectionEyebrow from '../../components/SectionEyebrow.astro';
 import VideoFacade from '../../components/VideoFacade.astro';
 import { parseEditorialHeading } from '../../utils/editorial-heading';
 import type { CreatorCreditRates } from '../../models/creator-credits.model';
-import { MAIN_SLOWORK_ORIGIN, manifestoYoutubeId } from '../../constants/site';
+import { creatorsHeroVideoSrc, creatorsHeroVideoWebmSrc, MAIN_SLOWORK_ORIGIN } from '../../constants/site';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -64,9 +66,9 @@ const ui = {
     heroBadge: 'Slowork creators',
     pageTitle: 'Slowork Creators | A different way of living and working',
     videoAlt:
-      'Slowork manifesto video — remote work app, nature workspace and intentional lifestyle storytelling',
-    playLabel: 'Play the Slowork manifesto video — loads the YouTube player in this frame when activated',
-    iframeTitle: 'Slowork Manifesto',
+      'Slowork program video — remote work app, nature workspace and intentional lifestyle storytelling',
+    playLabel: 'Play the Slowork video — starts playback when you tap',
+    videoTitle: 'Slowork program video',
     videoMoodLine: 'Watch now to see how it works',
     faqHeading: 'Frequently asked questions',
     creditsHeading: 'How credits work',
@@ -79,7 +81,7 @@ const ui = {
       { key: 'story', label: 'Instagram Story' },
       { key: 'carousel', label: 'Carousel (Instagram or similar)' },
       { key: 'reel', label: 'Reel / short vertical video (Instagram, TikTok)' },
-      { key: 'longFormVideo', label: 'Long-form video (e.g. YouTube, typically 40+ min)' },
+      { key: 'longFormVideo', label: 'Long-form video (typically 40+ min)' },
       { key: 'blogPost', label: 'Blog article' },
     ] satisfies CreditRow[],
     onboardingHeading: 'What happens after you apply',
@@ -201,9 +203,9 @@ const ui = {
     heroBadge: 'Creadores Slowork',
     pageTitle: 'Slowork Creators | Una forma distinta de vivir y trabajar',
     videoAlt:
-      'Vídeo del manifiesto Slowork — app de trabajo remoto, espacios en naturaleza y estilo de vida intencional',
-    playLabel: 'Reproducir el vídeo del manifiesto Slowork — carga el reproductor de YouTube en este espacio al activarlo',
-    iframeTitle: 'Manifiesto Slowork',
+      'Vídeo del programa Slowork — app de trabajo remoto, espacios en naturaleza y estilo de vida intencional',
+    playLabel: 'Reproducir el vídeo de Slowork — inicia la reproducción al pulsar',
+    videoTitle: 'Vídeo del programa Slowork',
     videoMoodLine: 'Echa un vistazo para ver cómo funciona',
     faqHeading: 'Preguntas frecuentes',
     creditsHeading: 'Cómo funcionan los créditos',
@@ -216,7 +218,7 @@ const ui = {
       { key: 'story', label: 'Historia de Instagram' },
       { key: 'carousel', label: 'Carrusel (Instagram o similar)' },
       { key: 'reel', label: 'Reel / vídeo corto vertical (Instagram, TikTok)' },
-      { key: 'longFormVideo', label: 'Vídeo largo (p. ej. YouTube, típicamente +40 min)' },
+      { key: 'longFormVideo', label: 'Vídeo largo (típicamente +40 min)' },
       { key: 'blogPost', label: 'Artículo de blog' },
     ] satisfies CreditRow[],
     onboardingHeading: 'Qué pasa después de aplicar',
@@ -421,7 +423,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
     <main class="flex w-full flex-col">
       {/* 01 / HERO — editorial centered, video below CTA */}
       <section
-        class="creators-reveal relative w-full overflow-hidden bg-section-green-light px-6 py-32 text-center md:px-10"
+        class="creators-reveal relative w-full overflow-hidden bg-section-green-light px-6 py-20 text-center md:px-10 md:py-24"
       >
         <div
           class="pointer-events-none absolute -left-28 top-16 h-80 w-80 rounded-full bg-primary/8 blur-3xl"
@@ -433,7 +435,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
           aria-hidden="true"
         >
         </div>
-        <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center pt-24 md:pt-28">
+        <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center pt-16 md:pt-20">
           <div class="mb-6 flex justify-center">
             <span
               class="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-base-100/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85 shadow-sm backdrop-blur-sm"
@@ -461,11 +463,12 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
               <p class="max-w-xl text-sm font-medium text-primary/70 text-pretty">{heroMicrocopyTrimmed}</p>
             ) : null}
           </div>
-          <div class="mx-auto mt-14 w-full max-w-4xl rounded-[40px] shadow-[0_20px_60px_-15px_rgba(1,51,51,0.3)] ring-1 ring-primary/10 overflow-hidden">
+          <div class="mx-auto mt-14 w-full max-w-4xl">
             <VideoFacade
-              youtubeId={manifestoYoutubeId}
+              hostedVideoSrc={creatorsHeroVideoSrc}
+              hostedVideoWebmSrc={creatorsHeroVideoWebmSrc}
               alt={t.videoAlt}
-              iframeTitle={t.iframeTitle}
+              videoTitle={t.videoTitle}
               playLabel={t.playLabel}
               moodLine={t.videoMoodLine}
               posterPriority
@@ -475,7 +478,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 02 / STORY */}
-      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
           <SectionEyebrow num={2} text="STORY" align="center" />
           <EditorialHeading
@@ -498,8 +501,8 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 03 / WHAT IS SLOWORK — layout retained (text left, mockup right) */}
-      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
-        <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-16 md:grid-cols-2">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-20 md:px-10 md:py-24">
+        <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
           <div class="creators-text-start flex min-w-0 w-full flex-col">
             <SectionEyebrow num={3} text="WHAT IS SLOWORK" />
             <h2 class="text-2xl md:text-4xl font-bold text-primary tracking-[-0.02em] mb-8 text-balance">
@@ -533,7 +536,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 04 / NOT A TYPICAL PROGRAM — dark editorial */}
-      <section class="creators-reveal w-full bg-[#1A1A1A] px-6 py-32 text-center md:px-10">
+      <section class="creators-reveal w-full bg-[#1A1A1A] px-6 py-20 text-center md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
           <SectionEyebrow num={4} text="PROGRAM" align="center" tone="on-dark" />
           <h2
@@ -570,7 +573,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 05 / WHY BECOME A CREATOR */}
-      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-6xl flex-col items-center">
           <SectionEyebrow num={5} text="BENEFITS" align="center" />
           <h2
@@ -616,7 +619,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 06 / WHO THIS IS FOR */}
-      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
           <SectionEyebrow num={6} text="AUDIENCE" align="center" />
           <h2 class="mb-10 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
@@ -638,7 +641,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 07 / WHAT GREAT CONTENT LOOKS LIKE */}
-      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
           <SectionEyebrow num={7} text="CONTENT" align="center" />
           <h2 class="mb-6 max-w-3xl text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
@@ -682,7 +685,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 08 / HOW IT WORKS */}
-      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
           <SectionEyebrow num={8} text="PROCESS" align="center" />
           <EditorialHeading
@@ -694,39 +697,51 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             {t.howItWorksIntro}
           </p>
 
-          <div class="relative mt-4 flex w-full max-w-5xl flex-col items-center md:flex-row md:justify-between md:px-8">
-            <!-- Background Line -->
-            <div class="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-primary/10 md:left-8 md:right-8 md:top-1/2 md:h-px md:w-auto md:-translate-x-0 md:-translate-y-1/2"></div>
-            <!-- Active Line (Scroll driven) -->
-            <div class="timeline-scroll-y absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-secondary md:hidden"></div>
-            <div class="timeline-scroll-x absolute left-8 right-8 top-1/2 hidden h-px -translate-y-1/2 bg-secondary md:block"></div>
-
+          <div
+            class="relative mt-4 flex w-full max-w-5xl flex-col items-center gap-1 md:flex-row md:items-start md:justify-between md:gap-0 md:px-4"
+            role="list"
+            aria-label={lang === 'es' ? 'Pasos del proceso' : 'Process steps'}
+          >
             {t.howItWorksSteps.map((step, idx) => (
-              <div class="group relative z-10 flex flex-col items-center bg-section-green-dark py-8 md:px-4 md:py-0">
-                <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/10 bg-white/40 text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-secondary/30 group-hover:bg-secondary/10 group-hover:text-secondary group-hover:shadow-md">
-                  {idx === 0 ? (
-                    <Camera size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
-                  ) : idx === 1 ? (
-                    <Table2 size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
-                  ) : idx === 2 ? (
-                    <CloudDownload size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
-                  ) : idx === 3 ? (
-                    <ClipboardCheck size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
-                  ) : (
-                    <Sparkles size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
-                  )}
+              <>
+                <div
+                  class="group relative z-10 flex w-full max-w-xs flex-col items-center bg-section-green-dark py-6 md:w-auto md:max-w-none md:flex-1 md:px-2 md:py-0 lg:px-3"
+                  role="listitem"
+                >
+                  <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/10 bg-white/40 text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-secondary/30 group-hover:bg-secondary/10 group-hover:text-secondary group-hover:shadow-md">
+                    {idx === 0 ? (
+                      <Camera size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+                    ) : idx === 1 ? (
+                      <Table2 size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+                    ) : idx === 2 ? (
+                      <CloudDownload size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+                    ) : idx === 3 ? (
+                      <ClipboardCheck size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+                    ) : (
+                      <Sparkles size={26} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+                    )}
+                  </div>
+                  <p class="mt-5 max-w-[120px] text-center text-sm font-medium leading-snug text-primary transition-all duration-300 group-hover:font-bold md:text-[0.9375rem]">
+                    {step}
+                  </p>
                 </div>
-                <p class="mt-5 max-w-[120px] text-center text-sm font-medium leading-snug text-primary transition-all duration-300 group-hover:font-bold md:text-[0.9375rem]">
-                  {step}
-                </p>
-              </div>
+                {idx < t.howItWorksSteps.length - 1 ? (
+                  <div
+                    class="flex shrink-0 items-center justify-center py-2 text-secondary md:h-16 md:py-0 md:pt-0"
+                    aria-hidden="true"
+                  >
+                    <ArrowDown size={26} stroke-width={2.25} class="md:hidden" />
+                    <ArrowRight size={26} stroke-width={2.25} class="hidden md:block opacity-90" />
+                  </div>
+                ) : null}
+              </>
             ))}
           </div>
         </div>
       </section>
 
       {/* 09 / CREDITS SYSTEM */}
-      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
           <SectionEyebrow num={9} text="CREDITS" align="center" />
           <h2 class="mb-6 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
@@ -755,7 +770,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 10 / WHY WE BUILT THIS */}
-      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
           <SectionEyebrow num={10} text="VISION" align="center" />
           <h2 class="mb-10 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
@@ -786,7 +801,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 11 / WHAT HAPPENS NEXT */}
-      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
           <SectionEyebrow num={11} text="NEXT STEPS" align="center" />
           <h2 class="mb-16 text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl">
@@ -805,7 +820,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 12 / FAQ */}
-      <section class="creators-reveal w-full bg-section-green-dark px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-dark px-6 py-20 md:px-10 md:py-24">
         <div class="mx-auto flex w-full max-w-3xl flex-col items-center">
           <SectionEyebrow num={12} text="FAQ" align="center" />
           <CreatorsFaqSection heading={t.faqHeading} items={faqItems} />
@@ -813,7 +828,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
       </section>
 
       {/* 13 / FINAL CTA */}
-      <section class="creators-reveal w-full bg-section-green-light px-6 py-32 md:px-10">
+      <section class="creators-reveal w-full bg-section-green-light px-6 py-20 md:px-10 md:py-24">
         <div class="creators-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
           <SectionEyebrow num={13} text="JOIN US" align="center" />
           <EditorialHeading
