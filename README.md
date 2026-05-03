@@ -1,6 +1,6 @@
-# SloWork Content Creators — Landing
+# Slowork Content Creators (landing)
 
-Sitio estático **bilingüe (ES/EN)** para el programa de creadores de contenido de SloWork. Está pensado como landing de conversión con copy en Markdown, SEO (meta, Open Graph, JSON-LD), accesibilidad y un stack moderno centrado en poco JavaScript en cliente.
+Sitio estático **bilingüe (ES/EN)** para el programa de creadores de contenido de Slowork. Está pensado como landing de conversión con copy en Markdown, SEO (meta, Open Graph, JSON-LD), accesibilidad y un stack moderno centrado en poco JavaScript en cliente.
 
 ## Stack
 
@@ -26,8 +26,8 @@ npm run dev
 
 Por defecto el servidor de desarrollo suele estar en `http://localhost:4321`. Las rutas públicas de la landing son:
 
-- `/es/creators/` — español (por defecto tras redirección desde `/`)
-- `/en/creators/` — inglés
+- `/es/creators/`: español (por defecto tras redirección desde `/`)
+- `/en/creators/`: inglés
 
 La raíz `/` redirige a `/es/creators/` (configuración en `astro.config.mjs` y `src/pages/index.astro`).
 
@@ -80,5 +80,5 @@ Tras `npm run build`, publicar el contenido de **`dist/`** en tu hosting estáti
 
 ## Documentación adicional
 
-- [Astro — Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
 - [Tailwind CSS v4](https://tailwindcss.com/docs)

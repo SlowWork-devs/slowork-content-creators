@@ -1,5 +1,5 @@
 ---
-description: Astro 6 Content Layer — usar getCollection, no Astro.glob para markdown de colecciones
+description: Astro 6 Content Layer; usar getCollection, no Astro.glob para markdown de colecciones
 alwaysApply: true
 ---
 

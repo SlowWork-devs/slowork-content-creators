@@ -2,9 +2,9 @@
 locale: es
 title: 'Un programa para creadores que *viven y trabajan de otra forma*'
 subheadline: >-
-  Slowork construye una nueva visión del trabajo remoto — arraigada en la naturaleza, el foco, la comunidad y la libertad. Este programa es para creadores cuyo contenido ya refleja ese mundo.
+  Slowork construye una nueva visión del trabajo remoto, arraigada en la naturaleza, el foco, la comunidad y la libertad. Este programa es para creadores cuyo contenido ya refleja ese mundo.
 heroMicrocopy: >-
-  Para creadores de viaje, estilo de vida, trabajo remoto y nómadas digitales — contenido en inglés o subtítulos en inglés.
+  Para creadores de viaje, estilo de vida, trabajo remoto y nómadas digitales: contenido en inglés o subtítulos en inglés.
 seoDescription: >-
   Únete al programa Slowork Creators. Crea contenido alineado con trabajo remoto intencional y vida ligada a la naturaleza. Gana créditos para estancias y experiencias dentro de la plataforma.
 benefitBlocks:
@@ -42,7 +42,7 @@ faqItems:
       No. Los creadores Slowork ganan créditos, no un pago directo. Los créditos se usan dentro de la plataforma y pueden cubrir hasta el 50% de una transacción.
   - question: ¿Cómo gano créditos en el programa de creadores Slowork?
     answer: >-
-      Ganas créditos publicando contenido en Instagram, TikTok o YouTube, enviándolo a revisión y logrando su aprobación según calidad, alineación y narrativa.
+      Ganas créditos publicando contenido en Instagram, TikTok u otras redes de vídeo, enviándolo a revisión y logrando su aprobación según calidad, alineación y narrativa.
   - question: ¿Qué tipo de contenido aprueba Slowork?
     answer: >-
       Slowork aprueba contenido que represente su estilo de vida: calma, foco, naturaleza, comunidad y trabajo remoto intencional. No aprueba promoción genérica, publicaciones spam o contenido de bajo esfuerzo.
@@ -51,7 +51,7 @@ faqItems:
       En muchos casos sí. Lo que importa no es la etiqueta, sino que tu contenido y tu forma de vida encajen de verdad con el ethos de Slowork.
   - question: ¿Qué plataformas puedo usar?
     answer: >-
-      En el programa de creadores están admitidos actualmente Instagram, TikTok y YouTube.
+      En el programa de creadores están admitidas actualmente Instagram, TikTok y otras plataformas de vídeo compatibles.
   - question: ¿Qué pasa si borro contenido ya aprobado?
     answer: >-
       Si el contenido aprobado se elimina antes de tres meses, los créditos asignados pueden retirarse.
@@ -88,7 +88,7 @@ El número de seguidores no es el filtro principal.
 
 Lo que importa: un contenido relevante, con fuerza visual y alineado de verdad con el universo Slowork.
 
-Nos interesan especialmente perfiles que crean en inglés o subtitulan en inglés, ya documentan entornos con significado, cuentan historias y no solo enseñan estética, y publican de forma nativa en Instagram, TikTok o YouTube.
+Nos interesan especialmente perfiles que crean en inglés o subtitulan en inglés, ya documentan entornos con significado, cuentan historias y no solo enseñan estética, y publican de forma nativa en Instagram, TikTok u otras redes de vídeo.
 
 ## Cómo es el contenido Slowork que buscamos
 

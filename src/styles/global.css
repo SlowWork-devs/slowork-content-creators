@@ -197,7 +197,7 @@
 
 }
 
-/* Storytelling (v2 §2), CTA acento secondary — componentes página creators */
+/* Storytelling (v2 §2), CTA acento secondary; componentes página creators */
 @layer components {
   .btn {
     text-align: center;

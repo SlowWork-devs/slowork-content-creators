@@ -19,7 +19,7 @@
 
 ---
 
-## **2\. Story section — Why this exists**
+## **2\. Story section: why this exists**
 
 **H2**  
  **Remote work was supposed to feel freer than this**
@@ -220,7 +220,7 @@ Earn credits
 
 Each credit has an internal value of $1 USD, but credits are not withdrawable.
 
-### **(mantienes exactamente tu sistema actual — está bien definido)**
+### **(mantienes exactamente tu sistema actual; está bien definido)**
 
 **Extra note (importante UX)**  
  Credits feel like access, not payment.  

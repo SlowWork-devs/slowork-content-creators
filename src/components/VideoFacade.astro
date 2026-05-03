@@ -16,7 +16,7 @@ interface Props {
   /** Título accesible del elemento `<video>` al reproducir. */
   videoTitle?: string;
   playLabel?: string;
-  /** Línea de intención visual (v2): calm, intentional, real — debajo del facade. */
+  /** Línea de intención visual (v2): calm, intentional, real; debajo del facade. */
   moodLine?: string;
   /** LCP / above-the-fold: poster con eager + fetchpriority high (p. ej. creators sin imagen hero). */
   posterPriority?: boolean;
@@ -26,7 +26,7 @@ const {
   hostedVideoSrc: hostedVideoSrcProp,
   hostedVideoWebmSrc: hostedVideoWebmSrcProp,
   poster = defaultPoster,
-  alt = 'Vídeo Slowork — previsualización',
+  alt = 'Vídeo Slowork, previsualización',
   videoTitle = 'Slowork',
   playLabel = 'Reproducir vídeo Slowork',
   moodLine,

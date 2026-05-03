@@ -14,7 +14,7 @@ import { creatorCreditRatesSchema } from './models/creator-credits.model';
  * `src/content/config.ts` está deprecado y rompe el build (LegacyContentConfigError).
  *
  * En páginas: cargar entradas con `getCollection('creators')` / `render` desde `astro:content`.
- * No usar `Astro.glob()` para este markdown — queda fuera del esquema y del Content Layer.
+ * No usar `Astro.glob()` para este markdown; queda fuera del esquema y del Content Layer.
  *
  * Copy y estructura narrativa (SSOT): `docs/Slowork Creators Program Landing Page - v3 Revisado .md`
  */

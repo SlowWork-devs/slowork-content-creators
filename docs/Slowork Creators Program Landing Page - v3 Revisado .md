@@ -4,15 +4,15 @@
 
 **H1** A creator program for people who live and work differently
 
-**Subheadline** Slowork is building a new vision of remote work — rooted in nature, focus, community and freedom. This program is for creators whose content already reflects that world.
+**Subheadline** Slowork is building a new vision of remote work, rooted in nature, focus, community and freedom. This program is for creators whose content already reflects that world.
 
 **Primary CTA** Apply to join the creators program
 
-**Microcopy** For travel, lifestyle, remote work and digital nomad creators — content in English or English subtitles.
+**Microcopy** For travel, lifestyle, remote work and digital nomad creators: content in English or English subtitles.
 
 ---
 
-## **2\. Story section — Why this exists**
+## **2\. Story section: why this exists**
 
 **H2** Remote work was supposed to feel freer than this
 
@@ -20,7 +20,7 @@
 
 Slowork was built as a response to that.
 
-We believe remote work should feel more human — more connected to place, to people, and to the way you actually want to live.
+We believe remote work should feel more human: more connected to place, to people, and to the way you actually want to live.
 
 ---
 
@@ -30,11 +30,11 @@ We believe remote work should feel more human — more connected to place, to pe
 
 **Body** Slowork is not just another booking app.
 
-It's a platform for remote workers who want more than good WiFi — places that support deep work, natural environments that improve how you feel, experiences that help you disconnect, and a real sense of community while you travel.
+It's a platform for remote workers who want more than good WiFi: places that support deep work, natural environments that improve how you feel, experiences that help you disconnect, and a real sense of community while you travel.
 
 In practical terms: discover remote-ready stays, organise your trip, explore local experiences and connect with others through the app.
 
-**Closing line** A platform, yes. But more importantly — a lifestyle proposition.
+**Closing line** A platform, yes. Above all, a lifestyle proposition.
 
 ---
 
@@ -46,9 +46,9 @@ In practical terms: discover remote-ready stays, organise your trip, explore loc
 
 We're not looking for creators who post the most. We're looking for creators who can represent something meaningful.
 
-If your content is driven by fast ads and generic travel aesthetics — this probably won't fit.
+If your content is driven by fast ads and generic travel aesthetics, this probably won't fit.
 
-If your content feels thoughtful, visual and intentional — you're exactly who this was designed for.
+If your content feels thoughtful, visual and intentional, you're exactly who this was designed for.
 
 ---
 
@@ -56,7 +56,7 @@ If your content feels thoughtful, visual and intentional — you're exactly who 
 
 **H2** Why become a Slowork creator
 
-**Intro** Not every collaboration helps you create work you're proud of. Slowork creators don't just promote a product — they document a lifestyle people already aspire to.
+**Intro** Not every collaboration helps you create work you're proud of. Slowork creators don't just promote a product: they document a lifestyle people already aspire to.
 
 **Benefit blocks**
 
@@ -86,8 +86,8 @@ We're especially looking for creators who:
 
 * Create in English or subtitle in English  
 * Already document meaningful environments  
-* Tell stories — not just post aesthetics  
-* Are native to Instagram, TikTok or YouTube
+* Tell stories (not just post aesthetics)  
+* Publish natively on Instagram, TikTok or other video-first platforms
 
 ---
 
@@ -123,7 +123,7 @@ We're especially looking for creators who:
 
 **Body** Slowork creators don't earn cash per post. They earn credits that unlock the experience.
 
-Each credit \= $1 USD in value — redeemable for stays and experiences inside the platform. Credits are not withdrawable.
+Each credit \= $1 USD in value, redeemable for stays and experiences inside the platform. Credits are not withdrawable.
 
 Credits feel like access, not payment. They bring you closer to the lifestyle you're representing.
 
@@ -133,7 +133,7 @@ Credits feel like access, not payment. They bring you closer to the lifestyle yo
 
 **H2** Why we built this program
 
-**Body** Slowork is early stage. The goal right now isn't scale — it's clarity, visibility and identity.
+**Body** Slowork is early stage. The goal right now isn't scale: it's clarity, visibility and identity.
 
 This program exists to:
 
@@ -169,7 +169,7 @@ You don't need to be a full-time digital nomad. You just need to create content 
 
 *H3 How do I earn credits in the Slowork creator program?*
 
-*You earn credits by publishing content on Instagram, TikTok or YouTube, submitting it for review, and getting it approved based on quality, alignment and storytelling .*
+*You earn credits by publishing content on Instagram, TikTok or other video-first platforms, submitting it for review, and getting it approved based on quality, alignment and storytelling .*
 
 *H3 What kind of content does Slowork approve?*
 
@@ -181,7 +181,7 @@ You don't need to be a full-time digital nomad. You just need to create content 
 
 *H3 Which platforms can I use?*
 
-*Instagram, TikTok and YouTube are currently supported in the creator program .*
+*Instagram, TikTok and other supported video-based platforms are currently accepted in the creator program .*
 
 *H3 What happens if I delete approved content?*
 
@@ -194,7 +194,7 @@ No. Alignment, storytelling and content quality matter more than follower count.
 
 ## **13\. Final CTA**
 
-**H2** If your content already reflects this way of life — you may be a fit.
+**H2** If your content already reflects this way of life, you may be a fit.
 
 **Body** Slowork is being built right now. The creators who join early won't just promote it. They'll help define what it becomes.
 
