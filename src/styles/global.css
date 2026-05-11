@@ -99,6 +99,21 @@
     @apply bg-base-100 font-sans text-base-content;
   }
 
+  /** Botones nativos y DaisyUI `.btn`: puntero al pasar el cursor (salvo deshabilitados). */
+  button:not(:disabled),
+  [type='button']:not(:disabled),
+  [type='submit']:not(:disabled),
+  [type='reset']:not(:disabled),
+  .btn:not(:disabled):not(.btn-disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  .btn.btn-disabled,
+  .btn:disabled {
+    cursor: not-allowed;
+  }
+
   /**
    * Cuerpo: color primario. Párrafos alineados al inicio (mejor legibilidad web que justify).
    * text-wrap: pretty reduce viudas/huérfanas donde el motor lo soporta.
