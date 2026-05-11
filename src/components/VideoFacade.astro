@@ -6,25 +6,18 @@ import { Play } from '@lucide/astro';
 import defaultPoster from '../assets/creators-hero-poster.png';
 
 interface Props {
-  /** Ruta pública del MP4 (H.264 + AAC recomendado), p. ej. `/videos/creators-hero.mp4`. */
-  hostedVideoSrc: string;
-  /** WebM VP9 opcional (misma pieza que el MP4); p. ej. `/videos/creators-hero.webm`. */
-  hostedVideoWebmSrc?: string | null;
-  /** Sustituye el poster por uno de alta resolución cuando lo tengas en `src/assets`. */
+  /** YouTube video ID (e.g. `dQw4w9WgXcQ`). */
+  youtubeId: string;
   poster?: ImageMetadata;
   alt?: string;
-  /** Título accesible del elemento `<video>` al reproducir. */
   videoTitle?: string;
   playLabel?: string;
-  /** Línea de intención visual (v2): calm, intentional, real; debajo del facade. */
   moodLine?: string;
-  /** LCP / above-the-fold: poster con eager + fetchpriority high (p. ej. creators sin imagen hero). */
   posterPriority?: boolean;
 }
 
 const {
-  hostedVideoSrc: hostedVideoSrcProp,
-  hostedVideoWebmSrc: hostedVideoWebmSrcProp,
+  youtubeId,
   poster = defaultPoster,
   alt = 'Vídeo Slowork, previsualización',
   videoTitle = 'Slowork',
@@ -33,18 +26,10 @@ const {
   posterPriority = false,
 } = Astro.props;
 
-const hostedVideoSrc = hostedVideoSrcProp.trim();
-const hostedVideoWebmSrc = hostedVideoWebmSrcProp?.trim() ?? '';
-
-if (!hostedVideoSrc) {
-  throw new Error('[VideoFacade] `hostedVideoSrc` no puede estar vacío.');
-}
-
 const facadeId = `vf-${crypto.randomUUID()}`;
 ---
 
 <div class="video-facade-root w-full max-w-4xl">
-  <!-- Marco único: bisel suave + sombras en capas (elevación sin doble ring del padre) -->
   <div
     class="relative rounded-[1.125rem] p-[3px] shadow-[0_2px_8px_-2px_rgba(1,51,51,0.08),0_24px_56px_-20px_rgba(1,51,51,0.22),0_48px_80px_-36px_rgba(1,51,51,0.12)] sm:rounded-3xl sm:p-1"
     style="background: linear-gradient(145deg, color-mix(in srgb, white 55%, transparent) 0%, color-mix(in srgb, var(--color-base-200) 92%, var(--color-primary) 8%) 45%, color-mix(in srgb, var(--color-base-300) 88%, var(--color-primary) 12%) 100%);"
@@ -69,24 +54,19 @@ const facadeId = `vf-${crypto.randomUUID()}`;
           decoding="async"
           fetchpriority={posterPriority ? 'high' : 'low'}
         />
-        <!-- Naturaleza + calidez / comunidad: capas muy suaves sobre el poster -->
         <div
           class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-secondary/[0.12]"
           aria-hidden="true"
-        >
-        </div>
+        />
         <div
           class="pointer-events-none absolute inset-0 bg-gradient-to-t from-base-100/45 via-transparent to-primary/[0.08]"
           aria-hidden="true"
-        >
-        </div>
+        />
         <div
           class="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay"
           style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');"
           aria-hidden="true"
-        >
-        </div>
-        <!-- Play: intencional, menos «alarma» que el amarillo puro -->
+        />
         <span
           class="pointer-events-none absolute flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-content shadow-[0_4px_14px_rgba(1,51,51,0.25),0_12px_32px_-4px_rgba(1,51,51,0.35)] ring-2 ring-base-100/45 backdrop-blur-[2px] transition-[transform,box-shadow] duration-300 ease-out group-hover:scale-[1.07] group-hover:shadow-[0_6px_20px_rgba(1,51,51,0.28),0_16px_40px_-6px_rgba(1,51,51,0.38)] group-focus-visible:scale-[1.07] md:h-[4.25rem] md:w-[4.25rem]"
           aria-hidden="true"
@@ -112,7 +92,7 @@ const facadeId = `vf-${crypto.randomUUID()}`;
   }
 </div>
 
-<script define:vars={{ facadeId, videoTitle, hostedVideoSrc, hostedVideoWebmSrc }}>
+<script define:vars={{ facadeId, youtubeId, videoTitle }}>
   (() => {
     const root = document.getElementById(facadeId);
     if (!root) return;
@@ -126,25 +106,14 @@ const facadeId = `vf-${crypto.randomUUID()}`;
       trigger.hidden = true;
       host.hidden = false;
 
-      const video = document.createElement('video');
-      video.controls = true;
-      video.playsInline = true;
-      video.preload = 'auto';
-      video.setAttribute('title', videoTitle);
-      video.className =
-        'absolute inset-0 box-border h-full w-full max-h-full max-w-full border-0 object-contain bg-base-300';
-      if (hostedVideoWebmSrc) {
-        const webm = document.createElement('source');
-        webm.src = hostedVideoWebmSrc;
-        webm.type = 'video/webm';
-        video.appendChild(webm);
-      }
-      const mp4 = document.createElement('source');
-      mp4.src = hostedVideoSrc;
-      mp4.type = 'video/mp4';
-      video.appendChild(mp4);
-      host.appendChild(video);
-      void video.play().catch(() => {});
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('title', videoTitle);
+      iframe.className =
+        'absolute inset-0 box-border h-full w-full max-h-full max-w-full border-0';
+      host.appendChild(iframe);
     });
   })();
 </script>

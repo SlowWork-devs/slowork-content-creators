@@ -21,6 +21,7 @@ import {
 
 import CreditTable from '../../components/CreditTable.astro';
 import ExploreAppMockupScreen from '../../components/ExploreAppMockupScreen.astro';
+import CreatorApplyDialog from '../../components/CreatorApplyDialog.astro';
 import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
 import CreatorsSignatureButton from '../../components/CreatorsSignatureButton.astro';
@@ -30,7 +31,8 @@ import SectionEyebrow from '../../components/SectionEyebrow.astro';
 import VideoFacade from '../../components/VideoFacade.astro';
 import { parseEditorialHeading } from '../../utils/editorial-heading';
 import type { CreatorCreditRates } from '../../models/creator-credits.model';
-import { creatorsHeroVideoSrc, creatorsHeroVideoWebmSrc, MAIN_SLOWORK_ORIGIN } from '../../constants/site';
+import { CREATORS_HERO_YOUTUBE_ID, MAIN_SLOWORK_ORIGIN } from '../../constants/site';
+import { getCreatorApplyFormCopy } from '../../models/creator-apply-form.copy';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -60,9 +62,8 @@ const subheadlineParagraphs = subheadline
 
 const ui = {
   en: {
-    cta: 'Apply now',
-    ctaAria:
-      'Apply to join the Slowork creators program. Opens the contact section on slowork.app in this window',
+    cta: 'Register as a creator',
+    ctaAria: 'Opens a form to share your details for the Slowork creators program',
     heroBadge: 'Slowork creators',
     pageTitle: 'Slowork Creators | A different way of living and working',
     videoAlt:
@@ -195,11 +196,11 @@ const ui = {
       "Slowork is being built right now. The creators who join early won't just promote it. They'll help define what it becomes.",
       'Create content that feels aligned. Earn your way into the experience. Help represent a better version of remote work.',
     ],
+    applyDialog: getCreatorApplyFormCopy('en'),
   },
   es: {
-    cta: 'Solicitar acceso',
-    ctaAria:
-      'Solicitar unirme al programa de creadores de Slowork. Abre la sección de contacto en slowork.app en esta ventana',
+    cta: 'Registrarme como creador',
+    ctaAria: 'Abre un formulario para dejar tus datos del programa de creadores Slowork',
     heroBadge: 'Creadores Slowork',
     pageTitle: 'Slowork Creators | Una forma distinta de vivir y trabajar',
     videoAlt:
@@ -332,6 +333,7 @@ const ui = {
       'Slowork se está construyendo ahora. Quienes se unan pronto no solo lo promocionarán: ayudarán a definir lo que será.',
       'Crea contenido alineado. Gana tu acceso a la experiencia. Ayuda a representar una mejor versión del trabajo remoto.',
     ],
+    applyDialog: getCreatorApplyFormCopy('es'),
   },
 } as const;
 
@@ -348,8 +350,6 @@ const alternates = [
   { hreflang: 'en', href: enCreatorsURL },
   { hreflang: 'x-default', href: esCreatorsURL },
 ] as const;
-
-const ctaHref = `${MAIN_SLOWORK_ORIGIN}/${lang}/#contact`;
 
 const creditOfferDescription =
   lang === 'es'
@@ -419,6 +419,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
 
   <div class="relative flex min-h-dvh flex-col text-base-content bg-(--color-bg-landing)">
     <Header lang={lang} />
+    <CreatorApplyDialog lang={lang} copy={t.applyDialog} />
     
     <main class="flex w-full flex-col">
       {/* 01 / HERO: editorial centered, video below CTA */}
@@ -456,7 +457,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             ))}
           </div>
           <div class="mt-10 flex flex-col items-center gap-4">
-            <CreatorsSignatureButton href={ctaHref} ariaLabel={t.ctaAria}>
+            <CreatorsSignatureButton asButton ariaLabel={t.ctaAria}>
               {t.cta}
             </CreatorsSignatureButton>
             {heroMicrocopyTrimmed ? (
@@ -465,8 +466,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
           </div>
           <div class="mx-auto mt-14 w-full max-w-4xl">
             <VideoFacade
-              hostedVideoSrc={creatorsHeroVideoSrc}
-              hostedVideoWebmSrc={creatorsHeroVideoWebmSrc}
+              youtubeId={CREATORS_HERO_YOUTUBE_ID}
               alt={t.videoAlt}
               videoTitle={t.videoTitle}
               playLabel={t.playLabel}
@@ -847,7 +847,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
             class="mx-auto max-w-4xl text-5xl font-bold leading-[1.05] tracking-[-0.03em] text-primary text-balance md:text-8xl"
           />
           <div class="mt-12">
-            <CreatorsSignatureButton href={ctaHref} ariaLabel={t.ctaAria} size="large">
+            <CreatorsSignatureButton asButton ariaLabel={t.ctaAria} size="large">
               {t.cta}
             </CreatorsSignatureButton>
           </div>
