@@ -1,0 +1,217 @@
+---
+import { X } from '@lucide/astro';
+
+import type { CreatorApplyFormCopy } from '../models/creator-apply-form.copy';
+import { CREATORS_PORTAL_LOGIN_URL, MAIN_SLOWORK_ORIGIN } from '../constants/site';
+
+import '../styles/creator-apply-dialog.css';
+
+interface Props {
+  lang: 'en' | 'es';
+  copy: CreatorApplyFormCopy;
+}
+
+const { lang, copy } = Astro.props;
+
+const privacyUrl = `${MAIN_SLOWORK_ORIGIN}/${lang}/privacy-policy/`;
+
+const applyApiUrl =
+  typeof import.meta.env.PUBLIC_CREATORS_APPLY_URL === 'string'
+    ? import.meta.env.PUBLIC_CREATORS_APPLY_URL.trim()
+    : '';
+
+const fieldClass =
+  'w-full rounded-xl border border-primary/15 bg-base-100/90 px-4 py-3 text-sm text-primary shadow-sm outline-none transition placeholder:text-primary/40 focus:border-secondary focus:ring-2 focus:ring-secondary/25';
+const labelClass = 'mb-1.5 block text-left text-xs font-bold uppercase tracking-widest text-primary/75';
+const fieldErrorClass = 'creator-apply-field-error mt-1 hidden text-xs leading-snug text-error';
+---
+
+<script type="application/json" id="creator-apply-json" set:html={JSON.stringify(copy)} />
+<script type="application/json" id="creator-apply-runtime" set:html={JSON.stringify({ applyApiUrl, portalUrl: CREATORS_PORTAL_LOGIN_URL })} />
+
+<dialog
+  id="creator-apply-dialog"
+  class="creator-apply-dialog overflow-y-auto overscroll-y-contain rounded-3xl border border-primary/10 bg-base-100 p-0 text-primary shadow-2xl outline-none backdrop:bg-primary/40"
+  aria-labelledby="creator-apply-dialog-title"
+>
+  <div class="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-primary/10 bg-base-100/95 px-6 py-4 backdrop-blur-sm">
+    <div class="min-w-0 text-left">
+      <h2 id="creator-apply-dialog-title" class="text-lg font-bold leading-snug tracking-tight text-primary md:text-xl">
+        {copy.dialogTitle}
+      </h2>
+      <p class="mt-1 text-sm leading-relaxed text-primary/70">{copy.dialogLead}</p>
+    </div>
+    <button
+      type="button"
+      class="btn btn-circle btn-ghost btn-sm shrink-0 text-primary"
+      aria-label={copy.closeFormAria}
+      data-creator-apply-close
+    >
+      <X size={20} stroke-width={2} aria-hidden="true" />
+    </button>
+  </div>
+
+  <form id="creator-apply-form" class="space-y-5 px-6 py-6" novalidate>
+    <p id="creator-apply-form-error" class="hidden rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-sm text-error" role="alert"></p>
+
+    <div>
+      <label class={labelClass} for="creator-apply-fullName">{copy.fieldFullName}</label>
+      <input id="creator-apply-fullName" name="fullName" type="text" autocomplete="name" class={fieldClass} maxlength="120" />
+      <p class={fieldErrorClass} data-field-error="fullName" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-email">{copy.fieldEmail}</label>
+      <input id="creator-apply-email" name="email" type="email" autocomplete="email" class={fieldClass} maxlength="254" />
+      <p class={fieldErrorClass} data-field-error="email" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-country">{copy.fieldCountry}</label>
+      <input
+        id="creator-apply-country"
+        name="country"
+        type="text"
+        autocomplete="country-name"
+        class={fieldClass}
+        maxlength="80"
+        placeholder={copy.fieldCountryHint}
+      />
+      <p class={fieldErrorClass} data-field-error="country" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-platform">{copy.fieldPlatform}</label>
+      <select id="creator-apply-platform" name="primaryPlatform" class={fieldClass}>
+        <option value="instagram">{copy.optInstagram}</option>
+        <option value="tiktok">{copy.optTiktok}</option>
+        <option value="youtube">{copy.optYoutube}</option>
+        <option value="other">{copy.optOther}</option>
+      </select>
+      <p class={fieldErrorClass} data-field-error="primaryPlatform" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-profile">{copy.fieldProfile}</label>
+      <input
+        id="creator-apply-profile"
+        name="profileOrHandle"
+        type="text"
+        class={fieldClass}
+        maxlength="300"
+        placeholder={copy.fieldProfileHint}
+      />
+      <p class={fieldErrorClass} data-field-error="profileOrHandle" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-audience">{copy.fieldAudience}</label>
+      <select id="creator-apply-audience" name="audienceBand" class={fieldClass}>
+        <option value="lt5k">{copy.audLt5k}</option>
+        <option value="5k25k">{copy.aud5k25k}</option>
+        <option value="25k100k">{copy.aud25k100k}</option>
+        <option value="100kplus">{copy.aud100kplus}</option>
+        <option value="prefer_not">{copy.audPreferNot}</option>
+      </select>
+      <p class={fieldErrorClass} data-field-error="audienceBand" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-languages">{copy.fieldLanguages}</label>
+      <select id="creator-apply-languages" name="contentLanguages" class={fieldClass}>
+        <option value="en">{copy.langEn}</option>
+        <option value="es">{copy.langEs}</option>
+        <option value="both">{copy.langBoth}</option>
+      </select>
+      <p class={fieldErrorClass} data-field-error="contentLanguages" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-pitch">{copy.fieldPitch}</label>
+      <textarea
+        id="creator-apply-pitch"
+        name="contentPitch"
+        class:list={[fieldClass, 'min-h-[120px] resize-y']}
+        maxlength="2500"
+        placeholder={copy.fieldPitchHint}></textarea>
+      <p class={fieldErrorClass} data-field-error="contentPitch" role="alert"></p>
+    </div>
+
+    <div>
+      <label class={labelClass} for="creator-apply-samples">{copy.fieldSamples}</label>
+      <textarea
+        id="creator-apply-samples"
+        name="sampleLinks"
+        class:list={[fieldClass, 'min-h-[88px] resize-y']}
+        maxlength="2000"
+        placeholder={copy.fieldSamplesHint}></textarea>
+      <p class={fieldErrorClass} data-field-error="sampleLinks" role="alert"></p>
+    </div>
+
+    <div class="rounded-2xl border border-primary/10 bg-primary/3 px-4 py-4 text-left text-sm leading-relaxed text-primary/85">
+      <label class="flex cursor-pointer items-start gap-3">
+        <input
+          type="checkbox"
+          name="agreePrivacy"
+          value="yes"
+          class="checkbox checkbox-sm mt-0.5 shrink-0 border-primary/25 [--chkfg:var(--color-secondary-content)] [--chkbg:var(--color-secondary)]"
+        />
+        <span>
+          {copy.consentPrefix}
+          <a
+            href={privacyUrl}
+            class="font-semibold text-primary underline decoration-secondary/80 underline-offset-2 hover:text-primary"
+            target="_blank"
+            rel="noopener noreferrer">{copy.consentLinkLabel}</a>
+        </span>
+      </label>
+      <p class:list={[fieldErrorClass, 'pl-1']} data-field-error="agreePrivacy" role="alert"></p>
+    </div>
+
+    <div class="flex flex-col gap-3 pt-2 sm:flex-row-reverse sm:justify-end">
+      <button
+        type="submit"
+        id="creator-apply-submit"
+        class="btn rounded-full border-0 bg-secondary font-bold uppercase tracking-widest text-secondary-content hover:bg-secondary/90"
+      >
+        {copy.submit}
+      </button>
+      <button type="button" class="btn btn-ghost rounded-full text-primary" data-creator-apply-close>
+        {copy.cancel}
+      </button>
+    </div>
+  </form>
+</dialog>
+
+<dialog
+  id="creator-apply-success-dialog"
+  class="creator-apply-dialog rounded-3xl border border-primary/10 bg-base-100 p-0 text-primary shadow-2xl outline-none backdrop:bg-primary/40"
+  aria-labelledby="creator-apply-success-title"
+>
+  <div class="relative px-8 pb-10 pt-12 text-center">
+    <button
+      type="button"
+      class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3 text-primary"
+      aria-label={copy.closeSuccessAria}
+      data-creator-success-close
+    >
+      <X size={20} stroke-width={2} aria-hidden="true" />
+    </button>
+    <h2 id="creator-apply-success-title" class="text-xl font-bold tracking-tight text-primary md:text-2xl">
+      {copy.successTitle}
+    </h2>
+    <p class="mt-4 text-sm leading-relaxed text-primary/80 md:text-base">{copy.successBody}</p>
+    <button
+      type="button"
+      id="creator-apply-success-portal"
+      class="btn mt-8 w-full max-w-xs rounded-full border-0 bg-secondary font-bold uppercase tracking-widest text-secondary-content hover:bg-secondary/90"
+    >
+      {copy.successButton}
+    </button>
+  </div>
+</dialog>
+
+<script>
+  import { mountCreatorApplyForm } from '../utils/creator-apply-form.mount';
+  mountCreatorApplyForm();
+</script>
