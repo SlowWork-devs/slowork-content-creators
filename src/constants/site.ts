@@ -13,5 +13,5 @@ export const CREATORS_HERO_YOUTUBE_ID = (() => {
     typeof import.meta.env.PUBLIC_CREATORS_HERO_YOUTUBE_ID === 'string'
       ? import.meta.env.PUBLIC_CREATORS_HERO_YOUTUBE_ID.trim()
       : '';
-  return raw.length > 0 ? raw : 'myR9xwywQDs';
+  return raw.length > 0 ? raw : 'szxPP62VLZg';
 })();
