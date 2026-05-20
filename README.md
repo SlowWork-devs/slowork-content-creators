@@ -20,8 +20,8 @@ Salida de build: **HTML estático** en `dist/` (ideal para CDN o hosting estáti
 ## Puesta en marcha
 
 ```bash
-npm install
-npm run dev
+npm install && npm run dev
+# o: corepack enable && pnpm install && pnpm dev
 ```
 
 Por defecto el servidor de desarrollo suele estar en `http://localhost:4321`. Las rutas públicas de la landing son:
@@ -35,9 +35,9 @@ La raíz `/` redirige a `/es/creators/` (configuración en `astro.config.mjs` y 
 
 | Comando | Descripción |
 |--------|-------------|
-| `npm run dev` | Servidor de desarrollo |
-| `npm run build` | Genera el sitio en `./dist/` |
-| `npm run preview` | Previsualiza el build localmente |
+| `npm run dev` / `pnpm dev` | Servidor de desarrollo |
+| `npm run build` / `pnpm build` | Genera el sitio en `./dist/` |
+| `npm run preview` / `pnpm preview` | Previsualiza el build localmente |
 
 ## Estructura relevante
 
@@ -75,7 +75,7 @@ Para editar textos y bloques de la página, el **origen de verdad** son los fich
 
 ## Despliegue
 
-Tras `npm run build`, publicar el contenido de **`dist/`** en tu hosting estático o CDN. Asegura que las reglas de redirección del host sean coherentes con la redirección de `/` si aplica.
+Tras `pnpm build`, publicar el contenido de **`dist/`** en tu hosting estático o CDN. Asegura que las reglas de redirección del host sean coherentes con la redirección de `/` si aplica.
 
 ## Documentación adicional
 
