@@ -1,23 +1,91 @@
 import { z } from 'astro/zod';
 
-export const creatorPrimaryPlatformSchema = z.enum(['instagram', 'tiktok', 'youtube', 'other']);
+export const creatorPlatformSchema = z.enum([
+  'instagram',
+  'tiktok',
+  'youtube',
+  'linkedin',
+  'other',
+]);
 
-export const creatorAudienceBandSchema = z.enum(['lt5k', '5k25k', '25k100k', '100kplus', 'prefer_not']);
+export const creatorMainNicheSchema = z.enum([
+  'travel',
+  'lifestyle',
+  'remote_work',
+  'digital_nomad',
+  'wellbeing',
+  'intentional_living',
+  'other',
+]);
 
-export const creatorContentLanguagesSchema = z.enum(['en', 'es', 'both']);
+const trimmedToNull = z
+  .union([z.string(), z.null(), z.undefined()])
+  .transform((v) => {
+    if (v == null) return null;
+    const t = v.trim();
+    return t.length > 0 ? t : null;
+  });
 
-/** Payload enviado a `PUBLIC_CREATORS_APPLY_URL` (JSON) o cuerpo de mailto. */
-export const creatorApplicationPayloadSchema = z.object({
-  fullName: z.string().trim().min(2).max(120),
+const yesNoToBoolean = z
+  .union([z.boolean(), z.string(), z.null(), z.undefined()])
+  .transform((v) => {
+    if (v === true || v === 'true' || v === 'yes') return true;
+    if (v === false || v === 'false' || v === 'no') return false;
+    return null;
+  });
+
+/** Payload JSON para POST /api/creator-applications (camelCase, alineado con API). */
+export const creatorApplicationCreateBodySchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  surname: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254),
-  country: z.string().trim().max(80).optional(),
-  primaryPlatform: creatorPrimaryPlatformSchema,
-  profileOrHandle: z.string().trim().min(2).max(300),
-  audienceBand: creatorAudienceBandSchema,
-  contentLanguages: creatorContentLanguagesSchema,
-  contentPitch: z.string().trim().min(30).max(2500),
-  sampleLinks: z.string().trim().max(2000).optional(),
-  agreePrivacy: z.literal('yes'),
+  countryOfResidence: trimmedToNull,
+  mainLanguage: trimmedToNull,
+  phone: trimmedToNull,
+  dobAgeConfirmed: z.literal(true),
+  usualTravelLocation: trimmedToNull,
+  nickname: trimmedToNull,
+  platforms: z.array(creatorPlatformSchema).min(1),
+  profileUrls: trimmedToNull,
+  mainNiche: trimmedToNull,
+  contentRegions: trimmedToNull,
+  contentLanguage: trimmedToNull,
+  englishCapability: yesNoToBoolean,
+  postLink1: trimmedToNull,
+  postLink2: trimmedToNull,
+  postLink3: trimmedToNull,
+  whyJoin: z.string().trim().min(30).max(10000),
+  availabilityToVisit: yesNoToBoolean,
+  willingnessCreatePhases: yesNoToBoolean,
+  livingDifferently: trimmedToNull,
+  agreeTerms: z.literal(true),
+  agreePrivacy: z.literal(true),
+  lang: z.enum(['en', 'es']).optional(),
 });
 
-export type CreatorApplicationPayload = z.infer<typeof creatorApplicationPayloadSchema>;
+export type CreatorApplicationCreateInput = z.infer<typeof creatorApplicationCreateBodySchema>;
+
+export type CreatorApplicationFormValidationMessages = {
+  nameRequired: string;
+  surnameRequired: string;
+  emailRequired: string;
+  emailInvalid: string;
+  dobRequired: string;
+  platformsRequired: string;
+  whyJoinMin: string;
+  agreeTerms: string;
+  agreePrivacy: string;
+  sendFailed: string;
+};
+
+export const createCreatorApplicationFormSchema = (m: CreatorApplicationFormValidationMessages) =>
+  creatorApplicationCreateBodySchema.extend({
+    name: z.string().trim().min(1, m.nameRequired).max(120),
+    surname: z.string().trim().min(1, m.surnameRequired).max(120),
+    email: z.string().trim().min(1, m.emailRequired).email(m.emailInvalid).max(254),
+    dobAgeConfirmed: z.literal(true, { message: m.dobRequired }),
+    platforms: z.array(creatorPlatformSchema).min(1, m.platformsRequired),
+    whyJoin: z.string().trim().min(30, m.whyJoinMin).max(10000),
+    agreeTerms: z.literal(true, { message: m.agreeTerms }),
+    agreePrivacy: z.literal(true, { message: m.agreePrivacy }),
+  });
