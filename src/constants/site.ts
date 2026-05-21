@@ -1,7 +1,10 @@
 /** Origen del sitio principal Slowork (legal, CTA, canonical de producción). */
 export const MAIN_SLOWORK_ORIGIN = 'https://www.slowork.app';
 
-/** Tras enviar la solicitud de creador, redirección al login del portal Slowork. */
+/** Tras enviar la solicitud de creador, redirección al registro del portal Slowork. */
+export const CREATORS_PORTAL_REGISTER_URL = 'https://portal.slowork.app/register';
+
+/** @deprecated Use CREATORS_PORTAL_REGISTER_URL */
 export const CREATORS_PORTAL_LOGIN_URL = 'https://portal.slowork.app/login';
 
 /**

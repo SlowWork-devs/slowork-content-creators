@@ -21,7 +21,7 @@ import {
 
 import CreditTable from '../../components/CreditTable.astro';
 import ExploreAppMockupScreen from '../../components/ExploreAppMockupScreen.astro';
-import CreatorApplyDialog from '../../components/CreatorApplyDialog.astro';
+import CreatorApplicationModal from '../../components/CreatorApplicationModal.astro';
 import CreatorsFaqSection from '../../components/CreatorsFaqSection.astro';
 import CreatorsLegalFooter from '../../components/CreatorsLegalFooter.astro';
 import CreatorsSignatureButton from '../../components/CreatorsSignatureButton.astro';
@@ -32,8 +32,10 @@ import VideoFacade from '../../components/VideoFacade.astro';
 import { parseEditorialHeading } from '../../utils/editorial-heading';
 import type { CreatorCreditRates } from '../../models/creator-credits.model';
 import { CREATORS_HERO_YOUTUBE_ID, MAIN_SLOWORK_ORIGIN } from '../../constants/site';
-import { getCreatorApplyFormCopy } from '../../models/creator-apply-form.copy';
+import { getCreatorApplicationModalCopy } from '../../models/creator-application-modal.copy';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
   const items = await getCollection('creators');
@@ -196,7 +198,7 @@ const ui = {
       "Slowork is being built right now. The creators who join early won't just promote it. They'll help define what it becomes.",
       'Create content that feels aligned. Earn your way into the experience. Help represent a better version of remote work.',
     ],
-    applyDialog: getCreatorApplyFormCopy('en'),
+    applicationModal: getCreatorApplicationModalCopy('en'),
   },
   es: {
     cta: 'Registrarme como creador',
@@ -333,7 +335,7 @@ const ui = {
       'Slowork se está construyendo ahora. Quienes se unan pronto no solo lo promocionarán: ayudarán a definir lo que será.',
       'Crea contenido alineado. Gana tu acceso a la experiencia. Ayuda a representar una mejor versión del trabajo remoto.',
     ],
-    applyDialog: getCreatorApplyFormCopy('es'),
+    applicationModal: getCreatorApplicationModalCopy('es'),
   },
 } as const;
 
@@ -419,7 +421,7 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
 
   <div class="relative flex min-h-dvh flex-col text-base-content bg-(--color-bg-landing)">
     <Header lang={lang} />
-    <CreatorApplyDialog lang={lang} copy={t.applyDialog} />
+    <CreatorApplicationModal lang={lang} copy={t.applicationModal} />
     
     <main class="flex w-full flex-col">
       {/* 01 / HERO: editorial centered, video below CTA */}

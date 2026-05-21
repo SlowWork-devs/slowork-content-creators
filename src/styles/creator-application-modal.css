@@ -1,0 +1,61 @@
+.creator-application-dialog:modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.creator-application-dialog::backdrop {
+  background: color-mix(in srgb, var(--color-primary) 35%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.creator-application-dialog[data-phase='redirecting']::backdrop {
+  pointer-events: none;
+}
+
+.creator-application-panel {
+  display: flex;
+  max-height: min(92dvh, 720px);
+  width: min(100% - 2rem, 640px);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 12%, transparent);
+  background-color: #e2e8e5;
+  color: #013333;
+  box-shadow: 0 24px 48px -12px rgba(1, 51, 51, 0.2);
+}
+
+.creator-application-dialog[data-phase='redirecting'] .creator-application-close {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.creator-application-fieldset[data-active='false'] {
+  display: none;
+}
+
+.creator-application-fieldset[data-active='true'] {
+  display: block;
+}
+
+.creator-application-thank-you[data-visible='false'] {
+  display: none;
+}
+
+.creator-application-form-wrap[data-visible='false'] {
+  display: none;
+}
+
+#creator-application-actions[data-visible='false'] {
+  display: none;
+}
