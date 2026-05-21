@@ -13,11 +13,17 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/vercel": "^10.0.4",
     "@lucide/astro": "^1.8.0",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.2",
     "daisyui": "^5.5.19",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "zod": "^4.3.6"
   },
-  "packageManager": "pnpm@10.12.1"
+  "packageManager": "pnpm@10.12.1",
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
+  }
 }
