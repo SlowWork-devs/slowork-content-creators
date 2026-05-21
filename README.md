@@ -11,7 +11,7 @@ Sitio estático **bilingüe (ES/EN)** para el programa de creadores de contenido
 | Contenido | Astro Content Layer (`src/content.config.ts`, colección `creators`) |
 | Validación de frontmatter | Esquemas Zod en `src/models/` |
 
-Salida de build: **HTML estático** en `dist/` (ideal para CDN o hosting estático).
+Salida de build: páginas de la landing **pre-renderizadas** + ruta serverless **`POST /api/creator-applications/`** (adapter Vercel, `output: 'server'`).
 
 ## Requisitos
 
@@ -72,10 +72,11 @@ Para editar textos y bloques de la página, el **origen de verdad** son los fich
 - **`astro.config.mjs`**: `site` canónico (`https://www.slowork.app`), `trailingSlash: 'always'`, redirección `'/' → '/es/creators/'`, integración de sitemap.
 - **`PUBLIC_OG_IMAGE`** (opcional): URL absoluta de imagen Open Graph. Si no se define, se usa la ruta por defecto configurada en el layout (p. ej. imagen bajo `public/images/`).
 - **`PUBLIC_CREATORS_HERO_YOUTUBE_ID`** (opcional): ID del vídeo de YouTube para el hero (p. ej. `dQw4w9WgXcQ`). Se incrusta vía `youtube-nocookie.com` al pulsar play sobre el poster. Si no se define, el fallback está configurado en `src/constants/site.ts`.
+- **`SLOWORK_API_URL`** (servidor, obligatoria en producción): URL base de `sloWorkApi` sin `/graphql`. El BFF reenvía las solicitudes de creadores a `${SLOWORK_API_URL}/api/creator-applications`.
 
 ## Despliegue
 
-Tras `pnpm build`, publicar el contenido de **`dist/`** en tu hosting estático o CDN. Asegura que las reglas de redirección del host sean coherentes con la redirección de `/` si aplica.
+Despliega en **Vercel** (o compatible con `@astrojs/vercel`). Configura `SLOWORK_API_URL` en el proyecto. Ejecuta el SQL de `sloWorkApi/DBLanding/sql/creator_applications.sql` en la base de datos landing antes de recibir solicitudes.
 
 ## Documentación adicional
 
