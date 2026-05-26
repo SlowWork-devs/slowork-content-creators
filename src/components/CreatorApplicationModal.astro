@@ -140,16 +140,6 @@ const checkClass =
                 class={fieldClass}
               />
             </div>
-            <label class="flex cursor-pointer items-start gap-3 text-sm">
-              <input
-                type="checkbox"
-                name="dobAgeConfirmed"
-                value="yes"
-                class={checkClass}
-                required
-              />
-              <span>{copy.fieldDobConfirm}</span>
-            </label>
             <div>
               <label class={labelClass} for="ca-travel">{copy.fieldUsualTravel}</label>
               <input id="ca-travel" name="usualTravelLocation" type="text" class={fieldClass} />
@@ -300,6 +290,16 @@ const checkClass =
 
           <fieldset class="creator-application-fieldset space-y-4" data-step="4" data-active="false">
             <div class="space-y-3 rounded-2xl border border-primary/10 bg-white/40 px-4 py-4 text-sm">
+              <label class="flex cursor-pointer items-start gap-3">
+                <input
+                  type="checkbox"
+                  name="dobAgeConfirmed"
+                  value="yes"
+                  class={checkClass}
+                  required
+                />
+                <span>{copy.fieldDobConfirm}</span>
+              </label>
               <label class="flex cursor-pointer items-start gap-3">
                 <input
                   type="checkbox"
