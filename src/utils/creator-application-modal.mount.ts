@@ -110,19 +110,36 @@ export const mountCreatorApplicationModal = (): void => {
     statusEl.classList.add('hidden');
   };
 
-  const validateCurrentStep = (): boolean => {
-    const active = fieldsets().find((fs) => Number(fs.dataset.step) === currentStep);
-    if (!active) return false;
+  const STEP_FIELDS: Record<number, string[]> = {
+    1: ['name', 'surname', 'email', 'countryOfResidence', 'mainLanguage', 'phone', 'usualTravelLocation'],
+    2: ['nickname', 'platforms', 'profileUrls', 'mainNiche', 'contentRegions', 'contentLanguage', 'englishCapability'],
+    3: ['postLink1', 'postLink2', 'postLink3', 'whyJoin', 'availabilityToVisit', 'willingnessCreatePhases', 'livingDifferently'],
+    4: ['dobAgeConfirmed', 'agreeTerms', 'agreePrivacy'],
+  };
 
-    if (currentStep === 2) {
-      const checked = form.querySelectorAll<HTMLInputElement>('input[name="platforms"]:checked');
-      if (checked.length === 0) {
-        showStatusError(copy.validation.platformsRequired);
-        return false;
+  const validateCurrentStep = (): boolean => {
+    const raw = formDataToCreatorApplicationPayload(new FormData(form), lang);
+    const result = formSchema.safeParse(raw);
+
+    if (result.success) return true;
+
+    const stepFields = STEP_FIELDS[currentStep] ?? [];
+    const stepIssues = result.error.issues.filter(
+      (issue) => typeof issue.path[0] === 'string' && stepFields.includes(issue.path[0]),
+    );
+
+    if (stepIssues.length === 0) return true;
+
+    const firstIssue = stepIssues[0];
+    if (firstIssue) {
+      showStatusError(firstIssue.message);
+      const path = firstIssue.path[0];
+      if (typeof path === 'string') {
+        const el = form.querySelector<HTMLElement>(`[name="${path}"]`);
+        el?.focus();
       }
     }
-
-    return active.checkValidity();
+    return false;
   };
 
   const enterSuccessLockedState = () => {
@@ -186,10 +203,7 @@ export const mountCreatorApplicationModal = (): void => {
 
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      if (!validateCurrentStep()) {
-        form.reportValidity();
-        return;
-      }
+      if (!validateCurrentStep()) return;
       clearStatus();
       if (currentStep < TOTAL_STEPS) {
         currentStep += 1;
@@ -211,10 +225,7 @@ export const mountCreatorApplicationModal = (): void => {
     ev.preventDefault();
     clearStatus();
 
-    if (!validateCurrentStep()) {
-      form.reportValidity();
-      return;
-    }
+    if (!validateCurrentStep()) return;
 
     const raw = formDataToCreatorApplicationPayload(new FormData(form), lang);
     const parsedForm = formSchema.safeParse(raw);
