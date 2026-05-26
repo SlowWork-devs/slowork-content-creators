@@ -10,6 +10,9 @@ export default defineConfig({
   adapter: vercel(),
   /** Canonical y JSON-LD; ajusta si el sitio vive en otro dominio. */
   site: 'https://www.slowork.app',
+  build: {
+    assets: '_creators-assets',
+  },
   image: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
