@@ -166,14 +166,15 @@ const ui = {
     howItWorksIntro: 'The system is intentionally simple.',
     howItWorksSteps: [
       'Create content',
-      'Mention Slowork clearly',
       'Submit it for review',
       'We review it manually',
+      'Post on your social media',
+      'Mention Slowork clearly',
       'Earn credits',
     ],
     creditsIntro: [
       "Slowork creators don't earn cash per post. They earn credits that unlock the experience.",
-      'Each credit = $1 USD in value, redeemable for stays and experiences inside the platform. Credits are not withdrawable.',
+      'Each credit = $1 USD in value, redeemable for stays and experiences inside the platform, with Huge Discounts for stays and experiences. Credits are not withdrawable.',
       "Credits feel like access, not payment. They bring you closer to the lifestyle you're representing.",
     ],
     whyBuiltHeading: 'Why we built this program',
@@ -303,9 +304,10 @@ const ui = {
     howItWorksIntro: 'El sistema es deliberadamente sencillo.',
     howItWorksSteps: [
       'Crea contenido',
-      'Menciona Slowork con claridad',
       'Envíalo a revisión',
       'Lo revisamos manualmente',
+      'Publícalo en tus redes sociales',
+      'Menciona Slowork con claridad',
       'Ganas créditos',
     ],
     creditsIntro: [
@@ -739,6 +741,9 @@ const notTypicalRight = t.notTypicalBody[3] ?? '';
               </>
             ))}
           </div>
+          <p class="mt-14 text-center font-editorial-serif text-3xl italic leading-tight text-primary text-balance md:text-5xl">
+            {lang === 'es' ? 'Usa tus créditos para viajar.' : 'Use credits to travel.'}
+          </p>
         </div>
       </section>
 
