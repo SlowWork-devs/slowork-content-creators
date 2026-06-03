@@ -39,7 +39,7 @@ creditRates:
 faqItems:
   - question: ¿Slowork paga en efectivo a los creadores de contenido?
     answer: >-
-      No. Los creadores Slowork ganan créditos, no un pago directo. Los créditos se usan dentro de la plataforma y pueden cubrir hasta el 50% de una transacción.
+      No. Los creadores Slowork ganan créditos, no un pago directo. Hasta el lanzamiento oficial de la app, tus créditos pueden cubrir hasta el 100% de cualquier estancia o experiencia que reserves; después del lanzamiento, los créditos cubrirán como máximo el 50% de una reserva. Así que, si quieres maximizar cuántas estancias podrás cubrir por completo más adelante, intenta acumular el máximo de créditos posible antes del lanzamiento.
   - question: ¿Cómo gano créditos en el programa de creadores Slowork?
     answer: >-
       Ganas créditos publicando contenido en Instagram, TikTok u otras redes de vídeo, enviándolo a revisión y logrando su aprobación según calidad, alineación y narrativa.

@@ -39,7 +39,7 @@ creditRates:
 faqItems:
   - question: Do content creators get paid by Slowork?
     answer: >-
-      No. Slowork creators earn credits, not direct payment. Credits can be used within the platform and cover up to 50% of a transaction.
+      No. Slowork creators earn credits, not direct payment. Until the official app launch, your credits can cover up to 100% of any stay or experience you book; after launch, credits will cover a maximum of 50% of a booking. So, if you want to maximize how many stays you can fully cover later, try to accumulate as many credits as possible before launch.
   - question: How do I earn credits in the Slowork creator program?
     answer: >-
       You earn credits by publishing content on Instagram, TikTok or other video-first platforms, submitting it for review, and getting it approved based on quality, alignment and storytelling.
